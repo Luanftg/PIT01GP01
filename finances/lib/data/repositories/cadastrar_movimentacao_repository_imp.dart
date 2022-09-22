@@ -6,6 +6,7 @@ class CadastrarMovimentacaoRepositoryImp
     implements CadastrarMovimentacaoRepository {
   final CadastrarMovimentacaoDatasource _cadastrarMovimentacaoDatasource;
   CadastrarMovimentacaoRepositoryImp(this._cadastrarMovimentacaoDatasource);
+
   @override
   Future<bool> call(Movimentacao movimentacao) async {
     return await _cadastrarMovimentacaoDatasource(movimentacao);
