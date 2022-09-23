@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'view/home_page.dart';
+import 'package:system_finances/view/pages/home_page.dart';
+import 'package:system_finances/view/pages/login_page.dart';
+import 'package:system_finances/view/pages/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
-      theme: ThemeData(primaryColor: Colors.green),
+      initialRoute: '/splash',
+      routes: {
+        '/splash': (_) => const SplashPage(),
+        '/login': (_) => LoginPage(),
+        '/home': (_) => const HomePage(),
+      },
+      theme: ThemeData(primaryColor: Colors.amber),
     );
   }
 }
