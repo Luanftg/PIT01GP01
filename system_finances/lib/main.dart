@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:system_finances/view/pages/home_page.dart';
+import 'package:system_finances/view/pages/home_page_v2.dart';
 import 'package:system_finances/view/pages/login_page.dart';
 import 'package:system_finances/view/pages/splash_page.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (_) => const SplashPage(),
         '/login': (_) => LoginPage(),
-        '/home': (_) => const HomePage(),
+        '/home': (_) => const HomePageV2(),
       },
       theme: ThemeData(primaryColor: Colors.amber),
     );
