@@ -15,3 +15,8 @@
 [Sized Box](https://api.flutter.dev/flutter/widgets/SizedBox-class.html)
 [Stack](https://api.flutter.dev/flutter/widgets/Stack-class.html)
 [Text Field](https://api.flutter.dev/flutter/material/TextField-class.html)
+
+## Dependências Utilizadas
+
+[dio 4.0.6](https://pub.dev/packages/dio)
+[shared_preferences 2.0.15](https://pub.dev/packages/shared_preferences)
