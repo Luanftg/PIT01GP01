@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/login': (_) => LoginPage(),
         '/home': (_) => const HomePageV2(),
       },
-      theme: ThemeData(primaryColor: Colors.amber),
+      theme: ThemeData(primaryColor: Colors.green),
     );
   }
 }

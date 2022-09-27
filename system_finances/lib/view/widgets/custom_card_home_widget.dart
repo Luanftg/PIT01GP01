@@ -37,7 +37,7 @@ class _CustomCardHomeWidgetState extends State<CustomCardHomeWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const VerticalDivider(
-                      color: Colors.lightGreenAccent,
+                      color: Colors.green,
                       indent: 8,
                       endIndent: 200,
                       thickness: 5,
@@ -77,7 +77,7 @@ class _CustomCardHomeWidgetState extends State<CustomCardHomeWidget> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                fixedSize: const Size(300, 20), primary: Colors.lightGreen),
+                fixedSize: const Size(300, 20), primary: Colors.green.shade100),
             onPressed: () {},
             child: const Text('Gerenciar Contas'),
           ),

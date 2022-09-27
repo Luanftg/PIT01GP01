@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:system_finances/services/prefs_services.dart';
 
 class LoginController {
   ValueNotifier<bool> inLoader = ValueNotifier<bool>(false);
@@ -13,6 +14,10 @@ class LoginController {
     inLoader.value = true;
     await Future.delayed(const Duration(seconds: 2));
     inLoader.value = false;
-    return _login == 'luanftg' && _pass == '123';
+    if (_login == 'luanftg' && _pass == '123') {
+      PrefsService.save(_login!);
+      return true;
+    }
+    return false;
   }
 }

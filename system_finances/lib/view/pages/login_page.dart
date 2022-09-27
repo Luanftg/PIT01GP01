@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:system_finances/components/login/custom_login_button_component.dart';
+
 import 'package:system_finances/controllers/login_controller.dart';
-import 'package:system_finances/widgets/custom_text_field_widget.dart';
+
+import '../components/login/custom_login_button_component.dart';
+import '../widgets/custom_text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});

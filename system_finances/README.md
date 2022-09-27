@@ -2,7 +2,19 @@
 
 ![Modelo de Aplicativo](../finances/modelos_app.png)
 
-## Widgets Utilizados
+## Soluções Implementadas
+
+![Abstração do Aplicativo](assets/abstraction_App_System_finances.png)
+
+- :star: Navegação por Rotas
+  - [x] Splash
+  - [x] Login
+  - [x] Home
+
+- :star: fake:"API"  fornecida em:
+  - [x] [Git Hub Pages - https://luanftg.github.io/teste-git/finances_api.json](https://luanftg.github.io/teste-git/finances_api.json)
+
+### Widgets Utilizados
 
 [Row](https://api.flutter.dev/flutter/widgets/Row-class.html)
 [Column](https://api.flutter.dev/flutter/widgets/Column-class.html)
@@ -16,7 +28,7 @@
 [Stack](https://api.flutter.dev/flutter/widgets/Stack-class.html)
 [Text Field](https://api.flutter.dev/flutter/material/TextField-class.html)
 
-## Dependências Utilizadas
+### Dependências Utilizadas
 
 [dio 4.0.6](https://pub.dev/packages/dio)
 [shared_preferences 2.0.15](https://pub.dev/packages/shared_preferences)

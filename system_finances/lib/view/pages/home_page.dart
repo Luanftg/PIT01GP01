@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:system_finances/components/home/custom_linear_home_contact.dart';
+
 import 'package:system_finances/controllers/home_controller.dart';
 import 'package:system_finances/models/user_model.dart';
 import 'package:system_finances/repositories/home_repository_imp.dart';
-import 'package:system_finances/widgets/custom_card_home_widget.dart';
+
+import '../components/home/custom_linear_home_contact.dart';
+import '../widgets/custom_card_home_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

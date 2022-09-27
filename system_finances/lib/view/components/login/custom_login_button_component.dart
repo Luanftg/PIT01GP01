@@ -12,6 +12,8 @@ class CustomLoginButtonComponent extends StatelessWidget {
       builder: (_, inLoader, __) => inLoader
           ? const CircularProgressIndicator()
           : ElevatedButton(
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.green)),
               onPressed: () {
                 loginControler.auth().then(
                   (result) {
