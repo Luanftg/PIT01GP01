@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:system_finances/view/pages/home_page_v2.dart';
 import 'package:system_finances/view/pages/login_page.dart';
 import 'package:system_finances/view/pages/splash_page.dart';
@@ -20,7 +21,14 @@ class MyApp extends StatelessWidget {
         '/login': (_) => LoginPage(),
         '/home': (_) => const HomePageV2(),
       },
-      theme: ThemeData(primaryColor: Colors.green),
+      theme: ThemeData(
+        primaryColor: Colors.green,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          unselectedLabelStyle: TextStyle(color: Colors.green),
+        ),
+      ),
     );
   }
 }

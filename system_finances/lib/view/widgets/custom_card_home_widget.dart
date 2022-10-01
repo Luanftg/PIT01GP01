@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:system_finances/view/components/home/custom_linear_accounts.dart';
 
-class CustomCardHomeWidget extends StatefulWidget {
-  const CustomCardHomeWidget({Key? key}) : super(key: key);
+class CustomCardHomeWidget extends StatelessWidget {
+  final double saldo;
+  final String caminhoDaImagem;
+  final String nomeDaConta;
+  final String tipoDeConta;
 
-  @override
-  State<CustomCardHomeWidget> createState() => _CustomCardHomeWidgetState();
-}
+  const CustomCardHomeWidget(
+      {Key? key,
+      required this.saldo,
+      required this.caminhoDaImagem,
+      required this.nomeDaConta,
+      required this.tipoDeConta})
+      : super(key: key);
 
-class _CustomCardHomeWidgetState extends State<CustomCardHomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 350,
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
@@ -36,11 +43,10 @@ class _CustomCardHomeWidgetState extends State<CustomCardHomeWidget> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const VerticalDivider(
+                    Container(
+                      width: 8,
                       color: Colors.green,
-                      indent: 8,
-                      endIndent: 200,
-                      thickness: 5,
+                      height: 50,
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
@@ -75,9 +81,34 @@ class _CustomCardHomeWidgetState extends State<CustomCardHomeWidget> {
               ],
             ),
           ),
+          //const Spacer(),
+          ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              const SizedBox(height: 8),
+              Text('Minhas Contas',
+                  style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 8),
+              CustomLinearAccounts(
+                caminhoDaImagem: '$caminhoDaImagem',
+                nomeDaConta: '$nomeDaConta',
+                tipoDeConta: '$tipoDeConta',
+                valor: '$saldo',
+              ),
+              const Divider(),
+              const CustomLinearAccounts(
+                  caminhoDaImagem:
+                      'https://play-lh.googleusercontent.com/pTvc9kCumx_24eJDwGUpvcBwljcIBkrsL3qHwhBW2NalMQ-XxTtHRV9YAJanBxkV0Rw',
+                  nomeDaConta: 'PicPay',
+                  tipoDeConta: 'Conta-Corrente',
+                  valor: '3.252,44'),
+            ],
+          ),
+          const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                fixedSize: const Size(300, 20), primary: Colors.green.shade100),
+                fixedSize: const Size(300, 20), primary: Colors.green),
             onPressed: () {},
             child: const Text('Gerenciar Contas'),
           ),

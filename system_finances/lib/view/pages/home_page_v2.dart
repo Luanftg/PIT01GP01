@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:system_finances/controllers/home_controller.dart';
-import 'package:system_finances/models/user_model.dart';
 import 'package:system_finances/repositories/home_repository_imp.dart';
 import 'package:system_finances/services/prefs_services.dart';
+import 'package:system_finances/state/user_state.dart';
+import 'package:system_finances/stores/user_store.dart';
+
+import 'package:system_finances/view/widgets/custom_card_credit_widget.dart';
 
 import '../components/home/custom_linear_home_contact.dart';
 import '../widgets/custom_card_home_widget.dart';
@@ -15,73 +17,110 @@ class HomePageV2 extends StatefulWidget {
 }
 
 class _HomePageV2State extends State<HomePageV2> {
-  final HomeController _controller = HomeController(HomeRepositoryImp());
+  //final HomeController _controller = HomeController(HomeRepositoryImp());
+  final UserStore _store = UserStore(HomeRepositoryImp());
 
   @override
   void initState() {
     super.initState();
-    _controller.fetch();
+    //_controller.fetch();
+    _store.fetchUsers();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.loose,
-      clipBehavior: Clip.none,
-      children: [
-        Scaffold(
-          backgroundColor: Colors.white54,
-          appBar: AppBar(
-            toolbarHeight: 200,
-            backgroundColor: Colors.green,
-            title: const CustomLinearContactWidget(
-                contactName: 'Luan',
-                pathContactImage:
-                    "https://avatars.githubusercontent.com/u/51548623?s=400&u=6c03bee3e53d430785828694d2a80c498d8607d4&v=4"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  PrefsService.logout();
-                  Navigator.of(context)
-                      .pushNamedAndRemoveUntil('/login', (_) => true);
-                },
-                icon: const Icon(Icons.logout),
-                alignment: Alignment.topRight,
+    return ValueListenableBuilder(
+        valueListenable: _store,
+        builder: (context, state, _) {
+          if (state is LoadindUserState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is ErrorUserState) {
+            return Center(
+              child: Text(state.message),
+            );
+          }
+
+          if (state is SucessUserState) {
+            return Scaffold(
+              backgroundColor: Colors.white54,
+              appBar: AppBar(
+                toolbarHeight: 110,
+                backgroundColor: Colors.green,
+                title: CustomLinearContactWidget(
+                  contactName: state.users.first.name,
+                  pathContactImage: state.users.first.image,
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      PrefsService.logout();
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/login', (_) => true);
+                    },
+                    icon: const Icon(Icons.logout),
+                    alignment: Alignment.topRight,
+                  ),
+                ],
               ),
-            ],
-          ),
-          body: ValueListenableBuilder<List<UserModel>>(
-            valueListenable: _controller.users,
-            builder: (_, list, __) {
-              return ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (_, idx) {
-                  return Container();
-                },
-              );
-            },
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            selectedIconTheme: const IconThemeData(color: Colors.black54),
-            unselectedItemColor: Colors.black26,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home_filled), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.compare_arrows), label: 'Transfers'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bar_chart_outlined), label: 'Chart'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.settings), label: 'Settings'),
-            ],
-          ),
-        ),
-        Positioned(
-          top: 170,
-          width: MediaQuery.of(context).size.width,
-          child: const CustomCardHomeWidget(),
-        ),
-      ],
-    );
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomCardHomeWidget(
+                        caminhoDaImagem: state.users.first.accountList.first
+                            .bandeira.caminhoDaImagem,
+                        nomeDaConta:
+                            state.users.first.accountList.first.bandeira.nome,
+                        tipoDeConta: 'Conta-Corrente',
+                        saldo: state.users.first.accountList.first
+                            .listaDeMovimentacao.first.valor),
+                    const CustomCreditCard(),
+                  ],
+                ),
+              ),
+              bottomNavigationBar: BottomAppBar(
+                color: Colors.white,
+                child: IconTheme(
+                  data: const IconThemeData(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.home),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.compare_arrows),
+                        ),
+                        FloatingActionButton.small(
+                          backgroundColor: Colors.green,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                          onPressed: (() {}),
+                          child: const Icon(Icons.add),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.bar_chart_outlined),
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.settings),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+          return Container();
+        });
   }
 }

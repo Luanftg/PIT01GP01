@@ -15,7 +15,7 @@ class CustomCircularContactImage extends StatelessWidget {
       height: 60,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.blueAccent,
+        color: Colors.green,
         image: DecorationImage(
           image: NetworkImage(pathContactImage),
         ),
