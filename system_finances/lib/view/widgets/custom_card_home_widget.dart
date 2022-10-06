@@ -18,7 +18,7 @@ class CustomCardHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: 360,
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
@@ -33,6 +33,7 @@ class CustomCardHomeWidget extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -86,14 +87,14 @@ class CustomCardHomeWidget extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              const SizedBox(height: 8),
+              //const SizedBox(height: 8),
               Text('Minhas Contas',
                   style: Theme.of(context).textTheme.titleMedium),
-              const SizedBox(height: 8),
+              //const SizedBox(height: 8),
               CustomLinearAccounts(
-                caminhoDaImagem: '$caminhoDaImagem',
-                nomeDaConta: '$nomeDaConta',
-                tipoDeConta: '$tipoDeConta',
+                caminhoDaImagem: caminhoDaImagem,
+                nomeDaConta: nomeDaConta,
+                tipoDeConta: tipoDeConta,
                 valor: '$saldo',
               ),
               const Divider(),
@@ -105,7 +106,7 @@ class CustomCardHomeWidget extends StatelessWidget {
                   valor: '3.252,44'),
             ],
           ),
-          const Spacer(),
+          //const Spacer(),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 fixedSize: const Size(300, 20), primary: Colors.green),
