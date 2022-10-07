@@ -3,6 +3,7 @@ import 'package:shelf/shelf.dart';
 import 'api/accounts_api.dart';
 import 'api/login_api.dart';
 import 'core/custom_server.dart';
+import 'core/middlewares/middleware_interception.dart';
 import 'service/account_service.dart';
 import 'utils/custom_env.dart';
 
@@ -13,8 +14,10 @@ void main() async {
       .add(AccountsApi(AccountService()).handler)
       .handler;
 
-  var handler =
-      Pipeline().addMiddleware(logRequests()).addHandler(cascadeHandler);
+  var handler = Pipeline()
+      .addMiddleware(logRequests())
+      .addMiddleware(MiddlewareInterception().middleware)
+      .addHandler(cascadeHandler);
 
   await CustomServer().initialize(
     handler: handler,

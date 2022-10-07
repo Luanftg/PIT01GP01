@@ -18,8 +18,7 @@ class AccountsApi {
     router.get('/accounts', (Request req) {
       List<AccountModel> accounts = _service.findAll();
       List<Map> accountsMap = accounts.map((e) => e.toMap()).toList();
-      return Response.ok(jsonEncode(accountsMap),
-          headers: {'content-type': 'application/json'});
+      return Response.ok(jsonEncode(accountsMap));
     });
 
     router.post('/accounts', (Request req) async {
