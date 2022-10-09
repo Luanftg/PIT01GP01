@@ -6,13 +6,15 @@ import 'package:shelf_router/shelf_router.dart';
 
 import '../models/account_model.dart';
 import '../service/generic_service.dart';
+import 'api.dart';
 
-class AccountsApi {
+class AccountsApi extends Api {
   final GenericService<AccountModel> _service;
 
   AccountsApi(this._service);
 
-  Handler get handler {
+  @override
+  Handler getHandler({List<Middleware>? middlewares}) {
     Router router = Router();
 
     router.get('/accounts', (Request req) {
@@ -39,6 +41,6 @@ class AccountsApi {
       return Response.ok('Deletou a rota [account]');
     });
 
-    return router;
+    return createHandler(router: router, middlewares: middlewares);
   }
 }
