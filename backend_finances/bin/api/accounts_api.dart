@@ -14,7 +14,10 @@ class AccountsApi extends Api {
   AccountsApi(this._service);
 
   @override
-  Handler getHandler({List<Middleware>? middlewares}) {
+  Handler getHandler({
+    List<Middleware>? middlewares,
+    bool isSecurity = false,
+  }) {
     Router router = Router();
 
     router.get('/accounts', (Request req) {
@@ -41,6 +44,7 @@ class AccountsApi extends Api {
       return Response.ok('Deletou a rota [account]');
     });
 
-    return createHandler(router: router, middlewares: middlewares);
+    return createHandler(
+        router: router, isSecurity: isSecurity, middlewares: middlewares);
   }
 }

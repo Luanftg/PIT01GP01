@@ -3,24 +3,19 @@ import 'package:shelf/shelf.dart';
 import 'api/accounts_api.dart';
 import 'api/login_api.dart';
 import 'core/custom_server.dart';
+import 'core/dependency_injector/injects.dart';
 import 'core/middlewares/middleware_interception.dart';
-import 'core/security/security_service_imp.dart';
-import 'service/account_service.dart';
+
 import 'utils/custom_env.dart';
 
 void main() async {
   //CustomEnv.fromFile('.env-dev');
 
-  var _securityService = SecurityServiceImp();
+  final _di = Injects.initialize();
 
   var cascadeHandler = Cascade()
-      .add(LoginApi(_securityService).getHandler())
-      .add(AccountsApi(AccountService()).getHandler(
-        middlewares: [
-          _securityService.authorization,
-          _securityService.verifyJWT
-        ],
-      ))
+      .add(_di.get<LoginApi>().getHandler())
+      .add(_di.get<AccountsApi>().getHandler(isSecurity: true))
       .handler;
 
   var handler = Pipeline()
