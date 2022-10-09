@@ -19,6 +19,7 @@ void main() async {
       .addMiddleware(logRequests())
       .addMiddleware(MiddlewareInterception().middleware)
       .addMiddleware(SecurityServiceImp().authorization)
+      .addMiddleware(SecurityServiceImp().verifyJWT)
       .addHandler(cascadeHandler);
 
   await CustomServer().initialize(
