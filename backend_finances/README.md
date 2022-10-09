@@ -7,3 +7,4 @@
 - Dependências utilizadas
   - [shelf](https://pub.dev/packages/shelf)
   - [shelf_router](https://pub.dev/packages/shelf_router)
+  - [dart-jsonwebtoken](https://pub.dev/packages/dart_jsonwebtoken)
