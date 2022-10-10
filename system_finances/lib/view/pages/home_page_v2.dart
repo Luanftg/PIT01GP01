@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +18,6 @@ class HomePageV2 extends StatefulWidget {
 }
 
 class _HomePageV2State extends State<HomePageV2> {
-
   @override
   void initState() {
     super.initState();

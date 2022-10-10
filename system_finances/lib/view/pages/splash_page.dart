@@ -21,10 +21,6 @@ class _SplashPageState extends State<SplashPage> {
           ? Navigator.of(context).pushReplacementNamed('/home')
           : Navigator.of(context).pushReplacementNamed('/login'),
     );
-
-    // Future.delayed(const Duration(seconds: 3)).then(
-    //   (_) => Navigator.of(context).pushReplacementNamed('/login'),
-    // );
   }
 
   @override
