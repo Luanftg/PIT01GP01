@@ -6,7 +6,7 @@
 
 ### Integrantes
 
-- [Caio Malassise](hhttps://github.com/cmalassise)
+- [Caio Malassise](https://github.com/cmalassise)
 - [Lucas Dantas](https://github.com/ldantascruz)
 - [Luan Fonseca](https://github.com/Luanftg)
 - [Nicolas Kormann](https://github.com/nicolasKormann)
