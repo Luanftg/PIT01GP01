@@ -1,4 +1,4 @@
-import 'package:finances_group/src/view/components/user.dart';
+import 'package:finances_group/src/models/user.dart';
 import 'package:flutter/material.dart';
 
 class BalanceSection extends StatelessWidget {
