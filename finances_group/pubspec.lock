@@ -55,6 +55,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_credit_card_brazilian:
+    dependency: "direct main"
+    description:
+      name: flutter_credit_card_brazilian
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -62,6 +69,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_statusbarcolor_ns:
+    dependency: "direct main"
+    description:
+      name: flutter_statusbarcolor_ns
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -157,4 +171,5 @@ packages:
     source: hosted
     version: "2.1.2"
 sdks:
-  dart: ">=2.18.2 <3.0.0"
+  dart: ">=2.17.0 <3.0.0"
+  flutter: ">=1.10.0"
