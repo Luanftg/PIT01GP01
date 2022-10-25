@@ -50,10 +50,22 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_credit_card_brazilian",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_credit_card_brazilian-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_statusbarcolor_ns",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_test",
@@ -143,10 +155,10 @@
       "name": "finances_group",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-25T02:09:11.630861Z",
+  "generated": "2022-10-25T03:28:54.250845Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
