@@ -28,12 +28,12 @@ class CustomBottomAppBar extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.settings),
-            tooltip: 'Busca',
+            tooltip: 'Configurações',
           ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.monetization_on),
-            tooltip: 'Favoritos',
+            tooltip: 'Estatísticas',
           ),
         ],
       ),
