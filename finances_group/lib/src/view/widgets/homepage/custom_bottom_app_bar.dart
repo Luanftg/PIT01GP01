@@ -19,22 +19,24 @@ class CustomBottomAppBar extends StatelessWidget {
       shape: shape,
       child: Row(
         children: [
+          const SizedBox(width: 16),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.home_filled),
+            icon: const Icon(Icons.home),
             tooltip: 'Abre o menu de navegação',
           ),
           if (centerLocations.contains(fabLocation)) const Spacer(),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.settings),
-            tooltip: 'Configurações',
-          ),
-          IconButton(
-            onPressed: () {},
             icon: const Icon(Icons.monetization_on),
             tooltip: 'Estatísticas',
           ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.settings),
+            tooltip: 'Configurações',
+          ),
+          const SizedBox(width: 16),
         ],
       ),
     );
