@@ -30,6 +30,9 @@ class _HomePageState extends State<HomePage> {
           Bodytest(),
         ],
       ),
+      bottomNavigationBar: bottomAppBAr,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
