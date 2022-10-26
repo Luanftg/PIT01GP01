@@ -16,7 +16,7 @@ class User {
   final String? phoneNumber;
   String? photoURL;
   final String uid;
-  final double? balance;
+  final double balance;
 
   User(
     this.emailVerified, {
@@ -25,6 +25,6 @@ class User {
     this.phoneNumber,
     this.photoURL,
     required this.uid,
-    this.balance,
+    this.balance = 0.0,
   });
 }

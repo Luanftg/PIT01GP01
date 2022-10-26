@@ -33,7 +33,7 @@ class BalanceSection extends StatelessWidget {
                           color: Colors.black,
                         )),
                     Text(
-                        'R\$ ${users[0].balance!.toStringAsFixed(2).replaceFirst('.', ',')}',
+                        'R\$ ${users[0].balance.toStringAsFixed(2).replaceFirst('.', ',')}',
                         style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 22.0,
