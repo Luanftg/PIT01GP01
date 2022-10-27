@@ -1,5 +1,5 @@
 finances_group
-2.18
+2.17
 file:///home/nicolas/Documents/Dev/Cursos/Flutter%20-%20Proz/Projeto_integralizador/PIT01GP01/finances_group/
 file:///home/nicolas/Documents/Dev/Cursos/Flutter%20-%20Proz/Projeto_integralizador/PIT01GP01/finances_group/lib/
 async
@@ -30,10 +30,18 @@ fake_async
 2.12
 file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.3.1/
 file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.3.1/lib/
+flutter_credit_card_brazilian
+2.12
+file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_credit_card_brazilian-2.0.0/
+file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_credit_card_brazilian-2.0.0/lib/
 flutter_lints
 2.17
 file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/
 file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1/lib/
+flutter_statusbarcolor_ns
+2.12
+file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.4.0/
+file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.4.0/lib/
 lints
 2.17
 file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0/

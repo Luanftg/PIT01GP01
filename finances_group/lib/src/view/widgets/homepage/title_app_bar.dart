@@ -32,6 +32,7 @@ class TitleAppBar extends StatelessWidget {
                 const Text(
                   'Olá,',
                   //style: FinanceTextStyles.caption,
+                  //style: Theme.of(context).textTheme.caption,
                 ),
                 Text(
                   users[0].displayName!,
