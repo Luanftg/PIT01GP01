@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 import 'package:finances_group/src/view/widgets/homepage/balance.dart';
 import 'package:finances_group/src/view/widgets/homepage/body_transactions.dart';
+import 'package:finances_group/src/view/widgets/homepage/my_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -30,12 +32,13 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar,
       body: ListView(
         children: [
-          const BalanceSection(),
+          //const BalanceSection(),
           const SizedBox(height: 100),
           CustomLinearChart(weekData: weekData),
           const SizedBox(height: 100),
+          const MyCards(),
+          const SizedBox(height: 20),
           const Bodytest(),
-          //const MyCards(),
         ],
       ),
       bottomNavigationBar: bottomAppBAr,
@@ -46,5 +49,5 @@ class _HomePageState extends State<HomePage> {
 }
 
 _setStatusbarColor() {
-  FlutterStatusbarcolor.setStatusBarColor(Colors.blue);
+  FlutterStatusbarcolor.setStatusBarColor(AppCustomColors.dark);
 }
