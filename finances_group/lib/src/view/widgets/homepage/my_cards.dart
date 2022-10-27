@@ -1,3 +1,4 @@
+import 'package:finances_group/src/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card_brazilian/credit_card_widget.dart';
 import 'package:flutter_credit_card_brazilian/flutter_credit_card.dart';
@@ -10,21 +11,25 @@ class MyCards extends StatelessWidget {
     final myWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: const EdgeInsets.only(left: 20, right: 25),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Cartões',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-              const Icon(
-                Icons.arrow_circle_right_outlined,
-                size: 36,
-              ),
-            ],
+          InkWell(
+            onTap: (() {
+              debugPrint('Cards Page');
+            }),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Cartões',
+                  style: CustomAppTextTheme.headline2,
+                ),
+                const Icon(
+                  Icons.navigate_next,
+                ),
+              ],
+            ),
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -35,8 +40,8 @@ class MyCards extends StatelessWidget {
                   expiryDate: '12/2025',
                   cardHolderName: 'Antônio Carlos Ferreira',
                   cvvCode: '123',
-                  height: 250,
-                  width: myWidth * 0.85,
+                  height: 200,
+                  width: myWidth * 0.80,
                   cardType: CardType.visa,
                   showBackView:
                       false, //true when you want to show cvv(back) view
@@ -46,8 +51,8 @@ class MyCards extends StatelessWidget {
                   expiryDate: '06/2029',
                   cardHolderName: 'Silas Cardoso Genro',
                   cvvCode: '321',
-                  height: 250,
-                  width: myWidth * 0.85,
+                  height: 200,
+                  width: myWidth * 0.80,
                   cardType: CardType.mastercard,
                   cardBgColor: Colors.amber.shade700,
                   showBackView:
@@ -58,11 +63,10 @@ class MyCards extends StatelessWidget {
                   expiryDate: '01/2024',
                   cardHolderName: 'João Fernandes Pires',
                   cvvCode: '456',
-                  height: 250,
-                  width: myWidth * 0.85,
+                  height: 200,
+                  width: myWidth * 0.80,
                   cardType: CardType.americanExpress,
                   cardBgColor: Colors.grey.shade800,
-
                   showBackView:
                       false, //true when you want to show cvv(back) view
                 ),
