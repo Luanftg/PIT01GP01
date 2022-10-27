@@ -1,3 +1,4 @@
+import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class ActionAppBar extends StatelessWidget {
@@ -13,7 +14,7 @@ class ActionAppBar extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(right: 16),
           decoration: const BoxDecoration(
-              color: Color.fromARGB(20, 255, 255, 255),
+              color: AppCustomColors.darkSecondary,
               borderRadius: BorderRadius.all(Radius.circular(100))),
           child: IconButton(
             onPressed: () => debugPrint('Notification Icon'),

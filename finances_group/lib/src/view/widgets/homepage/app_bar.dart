@@ -1,16 +1,16 @@
+import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/homepage/action_app_bar.dart';
 import 'package:finances_group/src/view/widgets/homepage/title_app_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'custom_bottom_app_bar.dart';
 
 final appBar = AppBar(
-  elevation: 0.0,
+  elevation: 0,
   centerTitle: false,
-  //backgroundColor: FinanceColors.primary,
-  toolbarHeight: 80,
+  toolbarHeight: 75,
   title: const TitleAppBar(),
   actions: const [ActionAppBar()],
+  automaticallyImplyLeading: false,
 );
 
 const bottomAppBAr = CustomBottomAppBar(
@@ -19,6 +19,14 @@ const bottomAppBAr = CustomBottomAppBar(
 );
 
 final floatingActionButton = FloatingActionButton(
-  child: const Icon(Icons.add),
-  onPressed: () {},
+  child: Container(
+    width: 60,
+    height: 60,
+    decoration: const BoxDecoration(
+        shape: BoxShape.circle, gradient: AppCustomColors.cyanGreen),
+    child: const Icon(Icons.add),
+  ),
+  onPressed: () {
+    debugPrint('FAT');
+  },
 );
