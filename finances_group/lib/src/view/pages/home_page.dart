@@ -29,17 +29,25 @@ class _HomePageState extends State<HomePage> {
     var weekData =
         List<double>.generate(100, (index) => random.nextDouble() * 100.0);
     return Scaffold(
-      appBar: appBar,
-      body: ListView(
-        children: [
-          //const BalanceSection(),
-          const SizedBox(height: 100),
-          CustomLinearChart(weekData: weekData),
-          const SizedBox(height: 100),
-          const MyCards(),
-          const SizedBox(height: 20),
-          const Bodytest(),
-        ],
+      drawer: const Drawer(),
+      body: SafeArea(
+        child: ListView(
+          children: [
+            appBar,
+            const Divider(
+              color: Color.fromARGB(131, 65, 69, 88),
+              thickness: 1,
+              indent: 20,
+              endIndent: 20,
+            ),
+            const BalanceSection(),
+            const SizedBox(height: 100),
+            CustomLinearChart(weekData: weekData),
+            const SizedBox(height: 80),
+            const MyCards(),
+            const BodyTransactions(),
+          ],
+        ),
       ),
       bottomNavigationBar: bottomAppBAr,
       floatingActionButton: floatingActionButton,
