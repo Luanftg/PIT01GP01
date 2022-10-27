@@ -80,12 +80,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_statusbarcolor_ns",
-      "rootUri": "file:///home/nicolas/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_statusbarcolor_ns-0.4.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_test",
       "rootUri": "file:///home/nicolas/snap/flutter/common/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -272,7 +266,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-27T18:54:52.859794Z",
+  "generated": "2022-10-27T22:31:49.847174Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
