@@ -2,9 +2,27 @@ import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primaryColorLight: AppCustomColors.primary,
+final ThemeData draculaTheme = ThemeData(
+  brightness: Brightness.dark,
+  colorScheme: const ColorScheme(
+      background: AppCustomColors.dark,
+      brightness: Brightness.dark,
+      error: AppCustomColors.danger,
+      onBackground: AppCustomColors.white,
+      onError: AppCustomColors.white,
+      onPrimary: AppCustomColors.dark,
+      onSecondary: AppCustomColors.white,
+      onSurface: AppCustomColors.white,
+      primary: AppCustomColors.primary,
+      secondary: AppCustomColors.secondary,
+      surface: AppCustomColors.dark),
+  scaffoldBackgroundColor: AppCustomColors.dark,
+
+  // TEXT THEME
+  textTheme: TextTheme(
+    headline2: CustomAppTextTheme.headline2,
+  ),
+  /* primaryColorLight: AppCustomColors.primary,
   secondaryHeaderColor: AppCustomColors.secondary,
   bottomAppBarColor: AppCustomColors.primary,
   appBarTheme: const AppBarTheme(
@@ -15,7 +33,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   textTheme: TextTheme(
     caption: CustomAppTextTheme.caption,
-  ),
+  ), */
 );
 
 ThemeData darkTheme = ThemeData(brightness: Brightness.dark);
