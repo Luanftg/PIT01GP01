@@ -1,4 +1,3 @@
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/design/theme/text_theme.dart';
 import 'package:finances_group/src/models/user.dart';
 import 'package:flutter/material.dart';
