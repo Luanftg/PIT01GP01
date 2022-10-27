@@ -11,9 +11,9 @@ class FinanceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
-        systemNavigationBarColor: const Color.fromARGB(255, 50, 53, 66),
-        systemNavigationBarDividerColor: const Color.fromARGB(255, 50, 53, 66)
-      ),
+          systemNavigationBarColor: const Color.fromARGB(255, 50, 53, 66),
+          systemNavigationBarDividerColor:
+              const Color.fromARGB(255, 50, 53, 66)),
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
