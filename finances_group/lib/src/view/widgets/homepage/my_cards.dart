@@ -16,17 +16,13 @@ class MyCards extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Cartões',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headline2,
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_circle_right_outlined,
                 size: 36,
-                color: Colors.grey.shade500,
               ),
             ],
           ),
