@@ -62,12 +62,12 @@ class CustomLinearChartPainter extends CustomPainter {
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
     var titleStyle = const TextStyle(
-      color: AppCustomColors.white,
+      color: AppCustomColors.foreGround,
       fontSize: 20,
       fontWeight: FontWeight.w900,
     );
     var labelStyle = const TextStyle(
-      color: AppCustomColors.white,
+      color: AppCustomColors.foreGround,
       fontSize: 10,
       fontWeight: FontWeight.bold,
     );
