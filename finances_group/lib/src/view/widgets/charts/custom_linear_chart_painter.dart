@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomLinearChartPainter extends CustomPainter {
@@ -57,16 +58,16 @@ class CustomLinearChartPainter extends CustomPainter {
       ..strokeWidth = 0.5
       ..style = PaintingStyle.stroke;
     var dpPaint = Paint()
-      ..color = Colors.blue
+      ..color = AppCustomColors.secondary
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
     var titleStyle = const TextStyle(
-      color: Colors.black,
+      color: AppCustomColors.white,
       fontSize: 20,
       fontWeight: FontWeight.w900,
     );
     var labelStyle = const TextStyle(
-      color: Colors.black,
+      color: AppCustomColors.white,
       fontSize: 10,
       fontWeight: FontWeight.bold,
     );
