@@ -1,3 +1,4 @@
+import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
@@ -16,6 +17,7 @@ class CustomBottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: AppCustomColors.darkSecondary,
       shape: shape,
       child: Row(
         children: [
