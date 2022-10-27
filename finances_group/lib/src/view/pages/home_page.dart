@@ -1,13 +1,10 @@
 import 'dart:math';
-
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 import 'package:finances_group/src/view/widgets/homepage/balance.dart';
 import 'package:finances_group/src/view/widgets/homepage/body_transactions.dart';
 import 'package:finances_group/src/view/widgets/homepage/my_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,12 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    _setStatusbarColor();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     var random = Random();
@@ -54,8 +45,4 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
-}
-
-_setStatusbarColor() {
-  FlutterStatusbarcolor.setStatusBarColor(AppCustomColors.dark);
 }
