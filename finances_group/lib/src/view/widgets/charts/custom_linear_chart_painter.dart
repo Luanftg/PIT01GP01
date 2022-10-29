@@ -54,7 +54,7 @@ class CustomLinearChartPainter extends CustomPainter {
   void drawChart(Canvas canvas, Offset center) {
     var rect = Rect.fromCenter(center: center, width: chartW, height: chartH);
     var chartBorderPaint = Paint()
-      ..color = Colors.grey
+      ..color = AppCustomColors.grayLight
       ..strokeWidth = 0.5
       ..style = PaintingStyle.stroke;
     var dpPaint = Paint()
