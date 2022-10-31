@@ -8,7 +8,7 @@ class CustomAppTextTheme {
   static TextStyle headline1 = TextStyle(
       color: AppCustomColors.secondary,
       fontFamily: GoogleFonts.abrilFatface().fontFamily,
-      fontSize: 31,
+      fontSize: 28,
       fontWeight: FontWeight.bold);
 
   static TextStyle headline2 = const TextStyle(
