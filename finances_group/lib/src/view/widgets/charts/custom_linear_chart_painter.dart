@@ -19,11 +19,7 @@ class CustomLinearChartPainter extends CustomPainter {
   var chartWidth = 350.0;
   @override
   void paint(Canvas canvas, Size size) {
-    // final paint = Paint()..color = Colors.black45;
-    //canvas.drawPaint(paint);
-
     var center = Offset(size.width / 2, size.height / 2);
-    //drawFrame(canvas, center);
     drawChart(canvas, center);
   }
 
@@ -44,9 +40,6 @@ class CustomLinearChartPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
     canvas.drawRect(rect, border);
   }
-
-  // get chartW => chartWidth * 0.8;
-  // get chartH => chartWidth * 0.35;
 
   var chartW = 300.0;
   var chartH = 100.0;

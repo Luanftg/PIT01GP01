@@ -24,7 +24,6 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
     super.initState();
     setState(() {
       weekData = widget.weekData.take(7).toList();
-      //log(weekData);
       for (var element in weekData) {
         minData = element < minData ? element : minData;
         maxData = element > maxData ? element : maxData;
@@ -66,7 +65,6 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
           rangeData,
           percentage,
         ),
-        //child: Container(),
       ),
     );
   }
