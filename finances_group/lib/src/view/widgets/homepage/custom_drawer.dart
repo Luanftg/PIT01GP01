@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/view/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomDrawer extends StatefulWidget {
-  final PageController pageController;
-  int indexPage = 0;
-
-  CustomDrawer(int indexPage, {super.key, required this.pageController});
+  const CustomDrawer({super.key});
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
@@ -18,78 +17,38 @@ class _CustomDrawerState extends State<CustomDrawer> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            accountName: const Text('Nicolas Kormann'),
-            accountEmail: const Text('nicolaskormann@gmail.com'),
+            decoration:
+                const BoxDecoration(color: AppCustomColors.darkSecondary),
+            accountName:
+                Text('Nicolas Kormann', style: CustomAppTextTheme.headline2),
+            accountEmail: Text(
+              'nicolaskormann@gmail.com',
+              style: CustomAppTextTheme.body,
+            ),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.greenAccent,
-              child: Image.network(
-                  'https://media-exp1.licdn.com/dms/image/C4D03AQEoqxz5Ur8xIw/profile-displayphoto-shrink_200_200/0/1661958896044?e=1671667200&v=beta&t=s1ikt5EvvbLEXcHOjrah9mVcUDrlahFACjBjH3C5TS8'),
+              child: ClipOval(
+                child: Image.network(
+                    'https://media-exp1.licdn.com/dms/image/C4D03AQEoqxz5Ur8xIw/profile-displayphoto-shrink_200_200/0/1661958896044?e=1671667200&v=beta&t=s1ikt5EvvbLEXcHOjrah9mVcUDrlahFACjBjH3C5TS8'),
+              ),
             ),
           ),
           ListTile(
-            title: const Text('Principal'),
+            title: Text(
+              'Principal',
+              style: CustomAppTextTheme.body,
+            ),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              widget.pageController.jumpToPage(0);
-              Navigator.pop(context);
-              setState(
-                () {
-                  widget.indexPage = 0;
-                },
-              );
-            },
+            onTap: () {},
           ),
           ListTile(
-            title: const Text('Tarefas'),
+            title: Text('Investimentos', style: CustomAppTextTheme.body),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              widget.pageController.jumpToPage(1);
-              Navigator.pop(context);
-              setState(
-                () {
-                  widget.indexPage = 1;
-                },
-              );
-            },
+            onTap: () {},
           ),
           ListTile(
-            title: const Text('Diversão'),
+            title: Text('Configurações', style: CustomAppTextTheme.body),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              widget.pageController.jumpToPage(2);
-              Navigator.pop(context);
-              setState(
-                () {
-                  widget.indexPage = 2;
-                },
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Jogos'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              widget.pageController.jumpToPage(3);
-              Navigator.pop(context);
-              setState(
-                () {
-                  widget.indexPage = 3;
-                },
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Amigos'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () {
-              widget.pageController.jumpToPage(4);
-              Navigator.pop(context);
-              setState(
-                () {
-                  widget.indexPage = 4;
-                },
-              );
-            },
+            onTap: () {},
           ),
         ],
       ),

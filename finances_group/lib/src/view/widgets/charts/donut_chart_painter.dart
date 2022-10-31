@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../models/data_item.dart';
 
@@ -19,9 +20,10 @@ const midTextStyle = TextStyle(
   fontSize: 25.0,
 );
 
-const labelStyle = TextStyle(
+final labelStyle = TextStyle(
   color: Colors.black,
-  fontSize: 12.0,
+  fontSize: 13.0,
+  fontFamily: GoogleFonts.sourceSansPro().fontFamily,
 );
 
 class DonutChartPainter extends CustomPainter {

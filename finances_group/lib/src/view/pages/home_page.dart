@@ -35,11 +35,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final HomeController homeController = HomeController();
     var weekData = homeController.getWeekdata();
-    final PageController pageController = PageController();
 
     List<DataItem> dataset = homeController.getList();
     return Scaffold(
-      drawer: CustomDrawer(0, pageController: pageController),
+      drawer: const CustomDrawer(),
       body: SafeArea(
         child: ListView(
           children: [
@@ -50,7 +49,6 @@ class _HomePageState extends State<HomePage> {
               indent: 20,
               endIndent: 20,
             ),
-            //const BalanceSection(),
             const SizedBox(height: 150),
             DonutChartWidget(dataset: dataset),
             const SizedBox(height: 50),
