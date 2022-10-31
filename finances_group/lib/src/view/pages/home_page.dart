@@ -1,10 +1,11 @@
-import 'dart:math';
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/controller/home_controller.dart';
+import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 
 import 'package:finances_group/src/view/widgets/homepage/body_transactions.dart';
+import 'package:finances_group/src/view/widgets/homepage/custom_drawer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
@@ -32,17 +33,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var random = Random();
-    var weekData =
-        List<double>.generate(100, (index) => random.nextDouble() * 100.0);
-    List<DataItem> dataset = [
-      DataItem(value: 0.3, label: 'Home', color: AppCustomColors.cyan),
-      DataItem(value: 0.2, label: 'Transport', color: AppCustomColors.danger),
-      DataItem(value: 0.4, label: 'Studies', color: AppCustomColors.primary),
-      DataItem(value: 0.1, label: 'Others', color: AppCustomColors.secondary),
-    ];
+    final HomeController homeController = HomeController();
+    var weekData = homeController.getWeekdata();
+    final PageController pageController = PageController();
+
+    List<DataItem> dataset = homeController.getList();
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: CustomDrawer(0, pageController: pageController),
       body: SafeArea(
         child: ListView(
           children: [
