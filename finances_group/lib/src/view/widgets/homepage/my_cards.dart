@@ -1,4 +1,4 @@
-import 'package:finances_group/src/design/theme/text_theme.dart';
+import 'package:finances_group/src/view/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card_brazilian/credit_card_widget.dart';
 import 'package:flutter_credit_card_brazilian/flutter_credit_card.dart';

@@ -1,4 +1,4 @@
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class ActionAppBar extends StatelessWidget {
