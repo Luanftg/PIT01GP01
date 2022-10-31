@@ -26,7 +26,10 @@ final ThemeData draculaTheme = ThemeData(
     backgroundColor: AppCustomColors.dark,
   ),
   dividerColor: AppCustomColors.divider,
+  listTileTheme: const ListTileThemeData(
+    iconColor: AppCustomColors.secondary,
+  ),
   dividerTheme: const DividerThemeData(color: AppCustomColors.divider),
 );
 
-ThemeData darkTheme = ThemeData(brightness: Brightness.dark);
+ThemeData draculaLightTheme = ThemeData(brightness: Brightness.light);
