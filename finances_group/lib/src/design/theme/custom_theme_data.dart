@@ -22,9 +22,9 @@ final ThemeData draculaTheme = ThemeData(
       backgroundColor: AppCustomColors.primary,
       foregroundColor: AppCustomColors.dark),
   cardTheme: const CardTheme(color: AppCustomColors.darkSecondary),
-  drawerTheme: const DrawerThemeData(
-    backgroundColor: AppCustomColors.dark
-  )
+  drawerTheme: const DrawerThemeData(backgroundColor: AppCustomColors.dark),
+  dividerColor: AppCustomColors.divider,
+  dividerTheme: const DividerThemeData(color: AppCustomColors.divider),
 );
 
 ThemeData darkTheme = ThemeData(brightness: Brightness.dark);
