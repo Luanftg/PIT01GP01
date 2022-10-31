@@ -1,4 +1,4 @@
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +22,9 @@ final ThemeData draculaTheme = ThemeData(
       backgroundColor: AppCustomColors.primary,
       foregroundColor: AppCustomColors.dark),
   cardTheme: const CardTheme(color: AppCustomColors.darkSecondary),
-  drawerTheme: const DrawerThemeData(backgroundColor: AppCustomColors.dark),
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: AppCustomColors.dark,
+  ),
   dividerColor: AppCustomColors.divider,
   dividerTheme: const DividerThemeData(color: AppCustomColors.divider),
 );

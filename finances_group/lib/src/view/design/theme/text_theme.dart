@@ -1,4 +1,4 @@
-import 'package:finances_group/src/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,9 +12,9 @@ class CustomAppTextTheme {
       fontWeight: FontWeight.bold);
 
   static TextStyle headline2 = const TextStyle(
-      color: AppCustomColors.secondary,
-      fontSize: 24,
-      );
+    color: AppCustomColors.secondary,
+    fontSize: 24,
+  );
 
   static TextStyle body = const TextStyle(
       color: AppCustomColors.foreGround,
