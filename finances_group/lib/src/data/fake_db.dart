@@ -11,6 +11,7 @@ final List<DataItem> dataset = [
 ];
 
 var random = Random();
+
 var weekData = List<double>.generate(
   100,
   (index) => random.nextDouble() * 100.0,
