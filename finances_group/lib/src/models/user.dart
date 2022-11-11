@@ -1,13 +1,4 @@
-List<User> users = [
-  User(true,
-      uid: '1',
-      displayName: 'Nícolas Kormann',
-      email: 'kormann.nicolas@gmail.com',
-      phoneNumber: '(47) 9999-0000',
-      balance: 10000,
-      photoURL:
-          'https://media-exp1.licdn.com/dms/image/C4D03AQEoqxz5Ur8xIw/profile-displayphoto-shrink_200_200/0/1661958896044?e=1671667200&v=beta&t=s1ikt5EvvbLEXcHOjrah9mVcUDrlahFACjBjH3C5TS8'),
-];
+import 'package:finances_group/src/models/finantial_movement.dart';
 
 class User {
   final String? displayName;
@@ -17,9 +8,11 @@ class User {
   String? photoURL;
   final String uid;
   final double balance;
+  List<FinantialMovement> finantialMovementList;
 
   User(
     this.emailVerified, {
+    required this.finantialMovementList,
     this.displayName,
     this.email,
     this.phoneNumber,
@@ -27,4 +20,9 @@ class User {
     required this.uid,
     this.balance = 0.0,
   });
+
+  @override
+  String toString() {
+    return 'User(displayName: $displayName, email: $email, emailVerified: $emailVerified, phoneNumber: $phoneNumber, photoURL: $photoURL, uid: $uid, balance: $balance, finantialMovementList: $finantialMovementList)';
+  }
 }
