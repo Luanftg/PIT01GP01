@@ -1,4 +1,5 @@
 import 'package:finances_group/src/controller/home_controller.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_local_imp.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
@@ -33,7 +34,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController = HomeController();
+    final HomeController homeController =
+        HomeController(FinantialMovementRepositoryLocalImp());
     var weekData = homeController.getWeekdata();
 
     List<DataItem> dataset = homeController.getList();
