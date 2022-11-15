@@ -9,15 +9,16 @@ class FinantialMovement {
   final int userID;
   final bool isIncome;
   final Category category;
+  final DateTime paymentDate;
 
-  FinantialMovement({
-    this.id,
-    required this.category,
-    required this.description,
-    required this.value,
-    required this.userID,
-    required this.isIncome,
-  });
+  FinantialMovement(
+      {this.id,
+      required this.category,
+      required this.description,
+      required this.value,
+      required this.userID,
+      required this.isIncome,
+      required this.paymentDate});
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -30,19 +31,20 @@ class FinantialMovement {
     result.addAll({'userID': userID});
     result.addAll({'isIncome': isIncome});
     result.addAll({'category': category.toMap()});
+    result.addAll({'paymentDate': paymentDate});
 
     return result;
   }
 
   factory FinantialMovement.fromMap(Map<String, dynamic> map) {
     return FinantialMovement(
-      id: map['id']?.toInt(),
-      description: map['description'] ?? '',
-      value: map['value']?.toDouble() ?? 0.0,
-      userID: map['userID']?.toInt() ?? 0,
-      isIncome: map['isIncome'] ?? false,
-      category: Category.fromMap(map['category']),
-    );
+        id: map['id']?.toInt(),
+        description: map['description'] ?? '',
+        value: map['value']?.toDouble() ?? 0.0,
+        userID: map['userID']?.toInt() ?? 0,
+        isIncome: map['isIncome'] ?? false,
+        category: Category.fromMap(map['category']),
+        paymentDate: map['paymentDate']);
   }
 
   String toJson() => json.encode(toMap());
