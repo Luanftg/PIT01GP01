@@ -23,7 +23,9 @@ final floatingActionButton = FloatingActionButton(
     width: 60,
     height: 60,
     decoration: const BoxDecoration(
-        shape: BoxShape.circle, gradient: AppCustomColors.cyanGreen),
+      shape: BoxShape.circle,
+      gradient: AppCustomColors.cyanGreen,
+    ),
     child: const Icon(Icons.add),
   ),
   onPressed: () {
