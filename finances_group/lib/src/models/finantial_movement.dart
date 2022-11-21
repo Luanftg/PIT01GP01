@@ -5,7 +5,7 @@ import 'package:finances_group/src/models/category.dart';
 class FinantialMovement {
   final int? id;
   final String description;
-  final double value;
+  double value;
   final int userID;
   final bool isIncome;
   final Category category;
@@ -49,4 +49,9 @@ class FinantialMovement {
 
   factory FinantialMovement.fromJson(String source) =>
       FinantialMovement.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'FinantialMovement(id: $id, description: $description, value: $value, userID: $userID, isIncome: $isIncome, category: $category)';
+  }
 }
