@@ -11,6 +11,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool readOnly;
   final TextInputAction? textInputAction;
   final TextEditingController? controller;
+  final bool? showCursor;
 
   const CustomTextFormField({
     Key? key,
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatefulWidget {
     this.readOnly = false,
     this.textInputAction,
     this.controller,
+    this.showCursor,
   }) : super(key: key);
 
   @override
@@ -44,6 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
+        showCursor: widget.showCursor,
         controller: widget.controller,
         readOnly: widget.readOnly,
         initialValue: widget.initialValue,

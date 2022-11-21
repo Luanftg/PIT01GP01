@@ -79,10 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         if (result is LoginStateLoading) {
-                          return FutureBuilder(                            
-                            builder: (context, snapshot) =>
-                                const CircularProgressIndicator(),
-                          );
+                          const CircularProgressIndicator();
                         }
                         if (result is LoginStateSucces) {
                           return Navigator.of(context).pushNamed('/home');
