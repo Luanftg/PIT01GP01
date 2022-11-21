@@ -6,12 +6,15 @@ class UserModel {
   final String? phone;
   final String? cpf;
   final String? password;
+  final String? photoURL;
+
   UserModel({
     this.name,
     required this.email,
     this.phone,
     this.cpf,
     required this.password,
+    this.photoURL,
   });
 
   UserModel copyWith({
@@ -20,6 +23,7 @@ class UserModel {
     String? phone,
     String? cpf,
     String? password,
+    String? photoURL,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -27,6 +31,7 @@ class UserModel {
       phone: phone ?? this.phone,
       cpf: cpf ?? this.cpf,
       password: password ?? this.password,
+      //photoURL: photoURL ?? photoURL,
     );
   }
 
@@ -95,5 +100,6 @@ class RegisterModel extends UserModel {
     required super.phone,
     required super.cpf,
     required super.password,
+    required super.photoURL,
   });
 }
