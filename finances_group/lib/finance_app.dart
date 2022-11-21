@@ -1,9 +1,7 @@
 //import 'package:finances_group/src/design/theme/custom_theme_data.dart';
 import 'package:finances_group/src/view/design/theme/custom_theme_data.dart';
 import 'package:finances_group/src/view/pages/home_page.dart';
-import 'package:finances_group/src/view/pages/login_page.dart';
-import 'package:finances_group/src/view/pages/register_page.dart';
-import 'package:finances_group/src/view/pages/teste.dart';
+import 'package:finances_group/src/view/pages/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
