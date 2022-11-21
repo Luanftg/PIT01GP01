@@ -38,8 +38,10 @@ class _HomePageState extends State<HomePage> {
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
-    var weekData = homeController.getWeekdata(context);
-    List<DataItem>? dataset = homeController.getList(context);
+    var weekData = homeController.getWeekdata();
+    //var weekData = homeController.getWeekdata(context);
+    List<DataItem>? dataset = homeController.getList();
+    //List<DataItem>? dataset = homeController.getList(context);
 
     return Scaffold(
       drawer: const CustomDrawer(),

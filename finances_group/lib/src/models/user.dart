@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:finances_group/src/models/finantial_movement.dart';
+
 List<User> users = [
   User(
     true,
@@ -10,7 +13,6 @@ List<User> users = [
     //     'https://media-exp1.licdn.com/dms/image/C4D03AQEoqxz5Ur8xIw/profile-displayphoto-shrink_200_200/0/1661958896044?e=1671667200&v=beta&t=s1ikt5EvvbLEXcHOjrah9mVcUDrlahFACjBjH3C5TS8'
   ),
 ];
-import 'package:finances_group/src/models/finantial_movement.dart';
 
 class User {
   final String? displayName;
