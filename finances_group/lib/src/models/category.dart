@@ -31,4 +31,7 @@ class Category {
 
   factory Category.fromJson(String source) =>
       Category.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Category(label: $label, color: $color)';
 }
