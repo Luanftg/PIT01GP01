@@ -28,13 +28,10 @@ class FinantialMovementRepositoryLocalImp
     var result = await PathProviderService.readFile();
     log('result: $result');
 
-    var list = [];
-    var fm = FinantialMovement.fromJson((result));
-    list.add(fm);
+    var list = List.from(jsonDecode(result)).toList();
     log('list: $list');
 
-    var response =
-        list.map((e) => FinantialMovement.fromMap(e.toMap())).toList();
+    var response = list.map((e) => FinantialMovement.fromMap(e)).toList();
     return response;
   }
 
