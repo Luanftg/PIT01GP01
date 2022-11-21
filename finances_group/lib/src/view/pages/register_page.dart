@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final phoneController = TextEditingController();
   final cpfController = TextEditingController();
   final passwordController = TextEditingController();
+  final photoURLController = TextEditingController();
 
   final loginKey = GlobalKey();
 
@@ -55,83 +56,95 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Form(
-                key: loginKey,
-                child: Column(
-                  children: [
-                    const Text(
-                      'Cadastrar',
-                      style: TextStyle(
-                        fontSize: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomTextFormField(
-                      controller: nameController,
-                      icon: Icons.person_outline,
-                      label: 'Nome',
-                      typeKeyboard: TextInputType.name,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    CustomTextFormField(
-                      controller: emailController,
-                      icon: Icons.mail_outline,
-                      label: 'E-mail',
-                      typeKeyboard: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    CustomTextFormField(
-                      controller: phoneController,
-                      icon: Icons.phone,
-                      label: 'Celular',
-                      inputFormatters: [phoneFormater],
-                      typeKeyboard: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    CustomTextFormField(
-                      controller: cpfController,
-                      icon: Icons.numbers_outlined,
-                      label: 'CPF',
-                      inputFormatters: [cpfFormater],
-                      typeKeyboard: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    CustomTextFormField(
-                      controller: passwordController,
-                      icon: Icons.key_outlined,
-                      label: 'Senha',
-                      isSecret: true,
-                      typeKeyboard: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        registerController
-                            .register(
-                              RegisterModel(
-                                name: nameController.text,
-                                email: emailController.text,
-                                phone: phoneController.text,
-                                cpf: cpfController.text,
-                                password: passwordController.text,
-                              ),
-                            )
-                            .then((value) =>
-                                Navigator.of(context).pushNamed('/login'));
-                      },
-                      child: const Text(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Form(
+                  key: loginKey,
+                  child: Column(
+                    children: [
+                      const Text(
                         'Cadastrar',
+                        style: TextStyle(
+                          fontSize: 32,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      CustomTextFormField(
+                        controller: nameController,
+                        icon: Icons.person_outline,
+                        label: 'Nome',
+                        typeKeyboard: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      CustomTextFormField(
+                        controller: emailController,
+                        icon: Icons.mail_outline,
+                        label: 'E-mail',
+                        typeKeyboard: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      CustomTextFormField(
+                        controller: phoneController,
+                        icon: Icons.phone,
+                        label: 'Celular',
+                        inputFormatters: [phoneFormater],
+                        typeKeyboard: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      CustomTextFormField(
+                        controller: cpfController,
+                        icon: Icons.numbers_outlined,
+                        label: 'CPF',
+                        inputFormatters: [cpfFormater],
+                        typeKeyboard: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      CustomTextFormField(
+                        controller: photoURLController,
+                        icon: Icons.photo,
+                        label: 'Foto',
+                        typeKeyboard: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        showCursor: true,
+                        isSecret: false,
+                      ),
+                      CustomTextFormField(
+                        controller: passwordController,
+                        icon: Icons.key_outlined,
+                        label: 'Senha',
+                        isSecret: true,
+                        typeKeyboard: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          registerController
+                              .register(
+                                RegisterModel(
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  phone: phoneController.text,
+                                  cpf: cpfController.text,
+                                  photoURL: photoURLController.text,
+                                  password: passwordController.text,
+                                ),
+                              )
+                              .then((value) =>
+                                  Navigator.of(context).pushNamed('/login'));
+                        },
+                        child: const Text(
+                          'Cadastrar',
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
