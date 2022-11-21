@@ -1,5 +1,6 @@
 import 'package:finances_group/src/controller/home_controller.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_local_imp.dart';
+
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
@@ -12,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
 import '../../models/data_item.dart';
-import '../widgets/homepage/my_cards.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,10 +35,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final HomeController homeController =
-        HomeController(FinantialMovementRepositoryLocalImp());
-    var weekData = homeController.getWeekdata();
+        HomeController(FinantialMovementRepositoryPrefsImp());
 
-    List<DataItem> dataset = homeController.getList();
+    var weekData = homeController.getWeekdata(context);
+    List<DataItem>? dataset = homeController.getList(context);
+
     return Scaffold(
       drawer: const CustomDrawer(),
       body: SafeArea(
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 200),
             CustomLinearChart(weekData: weekData),
             const SizedBox(height: 80),
-            const MyCards(),
+            //const MyCards(),
             const BodyTransactions(),
           ],
         ),

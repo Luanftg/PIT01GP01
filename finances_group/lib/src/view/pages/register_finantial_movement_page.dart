@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:finances_group/src/controller/home_controller.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_local_imp.dart';
+
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:finances_group/src/models/user.dart';
+
 import 'package:flutter/material.dart';
 
 class RegisterFinantialMovementPage extends StatefulWidget {
@@ -21,7 +20,7 @@ class _RegisterFinantialMovementPageState
   @override
   Widget build(BuildContext context) {
     final HomeController homeController =
-        HomeController(FinantialMovementRepositoryLocalImp());
+        HomeController(FinantialMovementRepositoryPrefsImp());
 
     var titleController = TextEditingController();
     var bodyController = TextEditingController();
@@ -57,20 +56,16 @@ class _RegisterFinantialMovementPageState
                   value: double.parse(bodyController.text),
                   userID: 1,
                   isIncome: true,
-                  category: Category(label: 'Casa', color: Colors.blue),
+                  category:
+                      Category(label: titleController.text, color: Colors.blue),
                 );
-                var result = await homeController.create(finantialMovement);
-                log(finantialMovement.toString());
-                log(result.toString());
-                if (result) {
-                  var list = <FinantialMovement>[];
-                  list.add(finantialMovement);
-                  final user = User(
-                    true,
-                    uid: '1',
-                  );
-                  Navigator.pushNamed(context, '/home', arguments: user);
-                }
+
+                var listAfterSave = await homeController.findAll();
+                listAfterSave.add(finantialMovement);
+                await homeController.create(finantialMovement);
+
+                Navigator.of(context)
+                    .pushNamed('/home', arguments: listAfterSave);
               },
               child: const Text('Publicar post'),
             ),
