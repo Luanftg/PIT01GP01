@@ -1,10 +1,12 @@
-# PIT01GP1 - Projeto Integrador do Curso de Flutter
+# Finances Group :chart:
+
+##  PIT01GP1 - Projeto Integrador do Curso de Flutter
 
 ## Desafio
 
 Desenvolvimento de uma aplicação para gerenciamento de finanças pessoais.
 
-[Video demonstração da HomePage version: 1.0](Sprints/Screenrecorder-2022-10-31-00-26-50-993.mp4)
+https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4
 
 - Entregas:
   - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
@@ -39,6 +41,9 @@ Desenvolvimento de uma aplicação para gerenciamento de finanças pessoais.
 - [x] myCards - *Cards*
 - [x] titleAppBar - *GestureDetector*
 - [x] charts - *CustomPaint* and *CustomPainter*
+
+### Protótipo com ideia inicial
+[Protótipo com ideia inicial](https://marvelapp.com/project/6493232)
 
 ### Referências
 
