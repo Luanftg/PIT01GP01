@@ -18,17 +18,19 @@ const bottomAppBAr = CustomBottomAppBar(
   shape: CircularNotchedRectangle(),
 );
 
-final floatingActionButton = FloatingActionButton(
-  child: Container(
-    width: 60,
-    height: 60,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
-      gradient: AppCustomColors.cyanGreen,
+Widget floatingActionButton(BuildContext context) {
+  return FloatingActionButton(
+    child: Container(
+      width: 60,
+      height: 60,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: AppCustomColors.cyanGreen,
+      ),
+      child: const Icon(Icons.add),
     ),
-    child: const Icon(Icons.add),
-  ),
-  onPressed: () {
-    debugPrint('FAT');
-  },
-);
+    onPressed: () {
+      Navigator.of(context).pushNamed('/registerFM');
+    },
+  );
+}
