@@ -64,6 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   key: loginKey,
                   child: Column(
                     children: [
+                      const SizedBox(
+                        height: 100,
+                      ),
                       const Text(
                         'Cadastrar',
                         style: TextStyle(

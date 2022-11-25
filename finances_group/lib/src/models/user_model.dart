@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'finantial_movement.dart';
+
 class UserModel {
   final String? name;
   final String? email;
@@ -7,6 +9,7 @@ class UserModel {
   final String? cpf;
   final String? password;
   final String? photoURL;
+  late List<FinantialMovement>? finantialMovementList;
 
   UserModel({
     this.name,
@@ -31,7 +34,7 @@ class UserModel {
       phone: phone ?? this.phone,
       cpf: cpf ?? this.cpf,
       password: password ?? this.password,
-      //photoURL: photoURL ?? photoURL,
+      photoURL: photoURL ?? this.photoURL,
     );
   }
 
@@ -41,6 +44,7 @@ class UserModel {
       'email': email,
       'phone': phone,
       'cpf': cpf,
+      'photoURL': photoURL,
       'password': password,
     };
   }
@@ -51,6 +55,7 @@ class UserModel {
       email: map['email'] as String,
       phone: map['phone'] as String,
       cpf: map['cpf'] as String,
+      photoURL: map['photoURL'] as String,
       password: map['password'] as String,
     );
   }
@@ -62,7 +67,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, password: $password)';
+    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, photoURL: $photoURL ,password: $password)';
   }
 
   @override
