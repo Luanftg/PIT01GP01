@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "finances_group",
+            "cwd": "finances_group",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "finances_group (profile mode)",
+            "cwd": "finances_group",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "finances_group (release mode)",
+            "cwd": "finances_group",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

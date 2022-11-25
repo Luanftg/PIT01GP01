@@ -1,5 +1,6 @@
+import 'package:finances_group/src/data/fake_db.dart';
 import 'package:finances_group/src/view/design/theme/text_theme.dart';
-import 'package:finances_group/src/models/user.dart';
+
 import 'package:flutter/material.dart';
 
 class TitleAppBar extends StatelessWidget {
@@ -15,11 +16,17 @@ class TitleAppBar extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8),
           child: GestureDetector(
             onTap: () => {Scaffold.of(context).openDrawer()},
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(users[0].photoURL ??
-                  'https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png'),
-              radius: 24,
-            ),
+            child: users[0].photoURL != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(users[0].photoURL ??
+                        'https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png'),
+                    radius: 24,
+                  )
+                : const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'),
+                    radius: 24,
+                  ),
           ),
         ),
         Text(
