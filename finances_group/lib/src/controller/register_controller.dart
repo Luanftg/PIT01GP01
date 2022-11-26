@@ -14,7 +14,7 @@ class RegisterController {
 
     log(result.toString());
 
-    if (result!.isNotEmpty) {     
+    if (result != null) {
       final decodedList = result.map((e) => jsonDecode(e));
 
       final mapedList =
