@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: bottomAppBAr,
-      floatingActionButton: floatingActionButton,
+      floatingActionButton: floatingActionButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

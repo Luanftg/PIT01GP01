@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:finances_group/src/data/fake_db.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
 import 'package:finances_group/src/models/data_item.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:flutter/material.dart';
 
 class HomeController {
   final IRepository<FinantialMovement> _finantialMovementRepositoryLocalImp;
