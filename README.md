@@ -42,6 +42,9 @@ https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-
 - [x] titleAppBar - *GestureDetector*
 - [x] charts - *CustomPaint* and *CustomPainter*
 
+### Protótipo com ideia inicial
+[Protótipo com ideia inicial](https://marvelapp.com/project/6493232)
+
 ### Referências
 
 - [Flutter](https://flutter.dev/)
