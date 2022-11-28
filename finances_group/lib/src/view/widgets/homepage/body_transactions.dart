@@ -3,19 +3,7 @@ import 'package:finances_group/src/view/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class BodyTransactions extends StatelessWidget {
-  final String fmImage;
-  final String fmPrice;
-  final Color fmColor;
-  final String title;
-  final String subtitle;
-  const BodyTransactions(
-      {Key? key,
-      required this.fmImage,
-      required this.fmPrice,
-      required this.fmColor,
-      required this.title,
-      required this.subtitle})
-      : super(key: key);
+  const BodyTransactions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +34,15 @@ class BodyTransactions extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
           child: ListTile(
             leading: Image.asset(
-              fmImage,
+              'assets/icons/food.png',
               width: 52,
             ),
-            trailing: Text(
-              'R\$ $fmPrice',
-              style: TextStyle(color: fmColor),
+            trailing: const Text(
+              '- R\$ 50,00',
+              style: TextStyle(color: AppCustomColors.danger),
             ),
-            title: Text(title),
-            subtitle: Text(subtitle),
+            title: const Text('IFood'),
+            subtitle: const Text('Data, Hora'),
           ),
         ),
         Card(

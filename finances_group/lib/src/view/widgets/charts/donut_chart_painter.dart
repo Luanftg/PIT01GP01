@@ -41,14 +41,6 @@ class DonutChartPainter extends CustomPainter {
     var startAngle = 0.0;
     canvas.drawArc(rect, startAngle, fullAngle * pi / 180, false, linePaint);
     double incrementX = 10;
-    double maxValue = 0.00;
-
-    if (dataset != null && dataset!.isNotEmpty) {}
-
-    dataset!.forEach((element) {
-      maxValue += element.value;
-    });
-
     for (var element in dataset!) {
       final sweepAngle = element.value * fullAngle * pi / 180;
       drawSector(element, canvas, rect, startAngle, sweepAngle);
@@ -57,13 +49,8 @@ class DonutChartPainter extends CustomPainter {
       incrementX += 70;
       startAngle += sweepAngle;
     }
-    drawTextCentered(
-        canvas,
-        center,
-        'Saldo geral\nR\$ ${maxValue.toStringAsPrecision(2)}',
-        midTextStyle,
-        radius * 0.6,
-        (Size size) {});
+    drawTextCentered(canvas, center, 'Saldo geral\nR\$ 1.000,00', midTextStyle,
+        radius * 0.6, (Size size) {});
   }
 
   void drawSector(DataItem element, Canvas canvas, Rect rect, double startAngle,
@@ -99,12 +86,12 @@ class DonutChartPainter extends CustomPainter {
     });
   }
 
-  // void drawLabels2(
-  //   Canvas canvas,
-  //   Offset startPosition,
-  //   double spaceBetween,
-  //   DataItem element,
-  // ) {}
+  void drawLabels2(
+    Canvas canvas,
+    Offset startPosition,
+    double spaceBetween,
+    DataItem element,
+  ) {}
 
   TextPainter measureText(
       String text, TextStyle style, double maxWidth, TextAlign align) {

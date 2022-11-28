@@ -7,8 +7,6 @@ import 'package:finances_group/src/models/finantial_movement.dart';
 
 import 'package:flutter/material.dart';
 
-import '../../models/user_model.dart';
-
 class RegisterFinantialMovementPage extends StatefulWidget {
   const RegisterFinantialMovementPage({super.key});
 
@@ -21,9 +19,6 @@ class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
   @override
   Widget build(BuildContext context) {
-    final UserModel userModel =
-        ModalRoute.of(context)!.settings.arguments as UserModel;
-
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
@@ -62,18 +57,15 @@ class _RegisterFinantialMovementPageState
                   value: double.parse(bodyController.text),
                   userID: 1,
                   isIncome: true,
-                  category: Category(
-                    label: titleController.text,
-                    color: Colors.amber,
-                  ),
+                  category:
+                      Category(label: titleController.text, color: Colors.blue),
                 );
 
-                //var listAfterSave = await homeController.findAll(userModel);
-                //listAfterSave.add(finantialMovement);
-                await homeController.create(finantialMovement, userModel);
-                //userModel.finantialMovementList!.add(finantialMovement);
+                var listAfterSave = await homeController.findAll();
+                listAfterSave.add(finantialMovement);
+                await homeController.create(finantialMovement);
                 registerContextNavigator.pushNamed('/home',
-                    arguments: userModel);
+                    arguments: listAfterSave);
               },
               child: const Text('Publicar post'),
             ),

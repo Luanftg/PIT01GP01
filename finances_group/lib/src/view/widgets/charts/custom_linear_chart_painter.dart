@@ -3,7 +3,7 @@ import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomLinearChartPainter extends CustomPainter {
-  final List<double>? weekData;
+  final List<double> weekData;
   final double minData;
   final double maxData;
   final double rangeData;
@@ -102,7 +102,7 @@ class CustomLinearChartPainter extends CustomPainter {
   }
 
   void drawDataPoints(Canvas canvas, Paint dpPaint, Rect rect) {
-    if (weekData == null) return;
+    if (weekData.isEmpty) return;
     var startX = rect.left;
     var startY = rect.bottom;
     // the radio is the number of y pixels per unit data
@@ -112,7 +112,7 @@ class CustomLinearChartPainter extends CustomPainter {
     path.moveTo(startX, startY);
     var x = rect.left;
     bool first = true;
-    for (var element in weekData!) {
+    for (var element in weekData) {
       //(d-minData) because we start our range at min value
       var y = (element - minData) * yRatio * percentage;
       if (first) {
