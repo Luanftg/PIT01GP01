@@ -22,6 +22,7 @@ class _RegisterFinantialMovementPageState
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
+    final registerContextNavigator = Navigator.of(context);
     var titleController = TextEditingController();
     var bodyController = TextEditingController();
 
@@ -63,9 +64,8 @@ class _RegisterFinantialMovementPageState
                 var listAfterSave = await homeController.findAll();
                 listAfterSave.add(finantialMovement);
                 await homeController.create(finantialMovement);
-
-                Navigator.of(context)
-                    .pushNamed('/home', arguments: listAfterSave);
+                registerContextNavigator.pushNamed('/home',
+                    arguments: listAfterSave);
               },
               child: const Text('Publicar post'),
             ),

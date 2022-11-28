@@ -1,9 +1,7 @@
-import 'dart:developer';
-
+import 'package:finances_group/src/data/fake_db.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
 import 'package:finances_group/src/models/data_item.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:flutter/material.dart';
 
 class HomeController {
   final IRepository<FinantialMovement> _finantialMovementRepositoryLocalImp;
@@ -21,34 +19,39 @@ class HomeController {
     return result;
   }
 
-  List<DataItem>? getList(BuildContext context) {
-    var args =
-        ModalRoute.of(context)!.settings.arguments as List<FinantialMovement>;
-    var fmList = args;
-    for (var index = 0; index < fmList.length; index++) {
-      maxValue += fmList[index].value;
-      log((fmList[index].value / maxValue).toString());
-    }
-    log('UserfmList: $fmList');
-    var dataset = List.generate(
-      fmList.length,
-      (index) => DataItem(
-          value: fmList[index].value / maxValue,
-          label: fmList[index].category.label,
-          color: fmList[index].category.color),
-    );
+  List<DataItem>? getList() => dataset;
 
-    return dataset;
-  }
+  // List<DataItem>? getList(BuildContext context) {
+  //   var args =
+  //       ModalRoute.of(context)!.settings.arguments as List<FinantialMovement>;
+  //   var fmList = args;
+  //   for (var index = 0; index < fmList.length; index++) {
+  //     maxValue += fmList[index].value;
+  //     log((fmList[index].value / maxValue).toString());
+  //   }
+  //   log('UserfmList: $fmList');
+  //   var dataset = List.generate(
+  //     fmList.length,
+  //     (index) => DataItem(
+  //         value: fmList[index].value / maxValue,
+  //         label: fmList[index].category.label,
+  //         color: fmList[index].category.color),
+  //   );
 
-  List<double>? getWeekdata(BuildContext context) {
-    var args =
-        ModalRoute.of(context)!.settings.arguments as List<FinantialMovement>;
+  //   return dataset;
+  // }
 
-    var fmList = args;
+  List<double>? getWeekdata() => weekData;
 
-    var weekdata = List.generate(fmList.length, (index) => fmList[index].value);
+  // List<double>? getWeekdata(BuildContext context) {
 
-    return weekdata;
-  }
+  //   var args =
+  //       ModalRoute.of(context)!.settings.arguments as List<FinantialMovement>;
+
+  //   var fmList = args;
+
+  //   var weekdata = List.generate(fmList.length, (index) => fmList[index].value);
+
+  //   return weekdata;
+  // }
 }
