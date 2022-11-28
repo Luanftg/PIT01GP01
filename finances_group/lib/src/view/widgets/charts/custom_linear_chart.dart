@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'custom_linear_chart_painter.dart';
 
 class CustomLinearChart extends StatefulWidget {
-  final List<double> weekData;
+  final List<double>? weekData;
   const CustomLinearChart({required this.weekData, super.key});
 
   @override
@@ -23,12 +23,18 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
   void initState() {
     super.initState();
     setState(() {
-      weekData = widget.weekData.take(7).toList();
+      weekData = widget.weekData!.take(7).toList();
+      //log('weekDataFromChart: ${weekData.toString()}');
       for (var element in weekData) {
         minData = element < minData ? element : minData;
         maxData = element > maxData ? element : maxData;
       }
+
       rangeData = maxData - minData;
+      if (rangeData == 0) {
+        rangeData = minData;
+        minData = 0.0;
+      }
     });
 
     //setup animation timer and update variables

@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'dart:math';
 
 import '../models/data_item.dart';
@@ -17,7 +18,6 @@ var weekData = List<double>.generate(
   100,
   (index) => random.nextDouble() * 100.0,
 );
-
 List<User> users = [
   User(true,
       uid: '1',

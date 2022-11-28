@@ -51,4 +51,9 @@ class FinantialMovement {
 
   factory FinantialMovement.fromJson(String source) =>
       FinantialMovement.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'FinantialMovement(id: $id, description: $description, value: $value, userID: $userID, isIncome: $isIncome, category: $category, paymentDate: $paymentDate)';
+  }
 }
