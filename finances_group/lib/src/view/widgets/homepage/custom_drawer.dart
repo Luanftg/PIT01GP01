@@ -5,14 +5,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomDrawer extends StatefulWidget {
-  final String userImage;
-  final String userName;
-  final String userEmail;
-  const CustomDrawer(
-      {super.key,
-      required this.userImage,
-      required this.userName,
-      required this.userEmail});
+  const CustomDrawer({super.key});
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
@@ -27,16 +20,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
             decoration:
                 const BoxDecoration(color: AppCustomColors.darkSecondary),
             accountName:
-                Text(widget.userName, style: CustomAppTextTheme.headline2),
+                Text('Nicolas Kormann', style: CustomAppTextTheme.headline2),
             accountEmail: Text(
-              widget.userEmail,
+              'nicolaskormann@gmail.com',
               style: CustomAppTextTheme.body,
             ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  widget.userImage,
-                ),
+                    'https://media-exp1.licdn.com/dms/image/C4D03AQEoqxz5Ur8xIw/profile-displayphoto-shrink_200_200/0/1661958896044?e=1671667200&v=beta&t=s1ikt5EvvbLEXcHOjrah9mVcUDrlahFACjBjH3C5TS8'),
               ),
             ),
           ),

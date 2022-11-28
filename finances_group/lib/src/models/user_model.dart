@@ -9,16 +9,66 @@ class UserModel {
   final String? cpf;
   final String? password;
   final String? photoURL;
-  List<FinantialMovement>? finantialMovementList;
+  late List<FinantialMovement>? finantialMovementList;
 
-  UserModel(
-      {this.name,
-      required this.email,
-      this.phone,
-      this.cpf,
-      required this.password,
-      this.photoURL,
-      this.finantialMovementList});
+  UserModel({
+    this.name,
+    required this.email,
+    this.phone,
+    this.cpf,
+    required this.password,
+    this.photoURL,
+  });
+
+  UserModel copyWith({
+    String? name,
+    String? email,
+    String? phone,
+    String? cpf,
+    String? password,
+    String? photoURL,
+  }) {
+    return UserModel(
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      cpf: cpf ?? this.cpf,
+      password: password ?? this.password,
+      photoURL: photoURL ?? this.photoURL,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'cpf': cpf,
+      'photoURL': photoURL,
+      'password': password,
+    };
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      name: map['name'] as String,
+      email: map['email'] as String,
+      phone: map['phone'] as String,
+      cpf: map['cpf'] as String,
+      photoURL: map['photoURL'] as String,
+      password: map['password'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserModel.fromJson(String source) =>
+      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, photoURL: $photoURL ,password: $password)';
+  }
 
   @override
   bool operator ==(covariant UserModel other) {
@@ -38,62 +88,6 @@ class UserModel {
         phone.hashCode ^
         cpf.hashCode ^
         password.hashCode;
-  }
-
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    if (name != null) {
-      result.addAll({'name': name});
-    }
-    if (email != null) {
-      result.addAll({'email': email});
-    }
-    if (phone != null) {
-      result.addAll({'phone': phone});
-    }
-    if (cpf != null) {
-      result.addAll({'cpf': cpf});
-    }
-    if (password != null) {
-      result.addAll({'password': password});
-    }
-    if (photoURL != null) {
-      result.addAll({'photoURL': photoURL});
-    }
-    if (finantialMovementList != null) {
-      result.addAll({
-        'finantialMovementList':
-            finantialMovementList!.map((x) => x.toMap()).toList()
-      });
-    }
-
-    return result;
-  }
-
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      name: map['name'],
-      email: map['email'],
-      phone: map['phone'],
-      cpf: map['cpf'],
-      password: map['password'],
-      photoURL: map['photoURL'],
-      finantialMovementList: map['finantialMovementList'] != null
-          ? List<FinantialMovement>.from(map['finantialMovementList']
-              ?.map((x) => FinantialMovement.fromMap(x)))
-          : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'UserModel(name: $name, email: $email, phone: $phone, cpf: $cpf, password: $password, photoURL: $photoURL, finantialMovementList: $finantialMovementList)';
   }
 }
 

@@ -13,7 +13,7 @@ class CustomLinearChart extends StatefulWidget {
 }
 
 class _CustomLinearChartState extends State<CustomLinearChart> {
-  late List<double>? weekData;
+  late List<double> weekData;
   double minData = double.maxFinite;
   double rangeData = 1.0;
   double maxData = -double.maxFinite;
@@ -22,28 +22,20 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      weekData = widget.weekData!.take(7).toList();
+      //log('weekDataFromChart: ${weekData.toString()}');
+      for (var element in weekData) {
+        minData = element < minData ? element : minData;
+        maxData = element > maxData ? element : maxData;
+      }
 
-    if (widget.weekData!.isNotEmpty) {
-      setState(() {
-        weekData = widget.weekData!.take(7).toList();
-        //log('weekDataFromChart: ${weekData.toString()}');
-        for (var element in weekData!) {
-          minData = element < minData ? element : minData;
-          maxData = element > maxData ? element : maxData;
-        }
-
-        rangeData = maxData - minData;
-        if (rangeData == 0) {
-          rangeData = minData;
-          minData = 0.0;
-        }
-      });
-    } else {
-      minData = 0.0;
-      maxData = 0.0;
-      rangeData = 0.0;
-      weekData = [];
-    }
+      rangeData = maxData - minData;
+      if (rangeData == 0) {
+        rangeData = minData;
+        minData = 0.0;
+      }
+    });
 
     //setup animation timer and update variables
     const fps = 60.0;

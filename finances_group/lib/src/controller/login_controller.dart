@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:finances_group/src/models/user_model.dart';
@@ -10,35 +9,17 @@ class LoginController {
     LoginState state = LoginStateLoading();
     final prefs = await SharedPreferences.getInstance();
 
-    final List<String>? users = prefs.getStringList('user1');
+    final String? email = prefs.getString('email');
+    final String? password = prefs.getString('password');
 
-    log('Users: $users');
+    log(email!);
+    log(password!);
 
-    if (users != null) {
-      final decodedList = users.map((e) => jsonDecode(e)).toList();
-      log('DecodedList: $decodedList');
-      //final list = List.from(decodedList);
+    await Future.delayed(const Duration(milliseconds: 500));
 
-      final mapedList =
-          decodedList.map((e) => UserModel.fromJson((e))).toList();
-
-      log('MapedList:$mapedList');
-
-      try {
-        final UserModel userFromShared = mapedList.firstWhere(
-          (element) =>
-              element.email == user.email && element.password == user.password,
-        );
-
-        log('UserFromShared: $userFromShared');
-
-        state = LoginStateSucces(userFromShared);
-        return state;
-      } catch (e) {
-        log(e.toString());
-        state = LoginStateError('Credenciais inválidas');
-        return state;
-      }
+    if (email == user.email && password == user.password) {
+      state = LoginStateSucces();
+      return state;
     }
     state = LoginStateError('Credenciais inválidas');
     return state;

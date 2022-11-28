@@ -1,19 +1,13 @@
-import 'dart:developer';
-
 import 'package:finances_group/src/controller/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-
-import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
-import 'package:finances_group/src/view/widgets/body_teste.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 
-import 'package:finances_group/src/view/widgets/homepage/custom_app_bar.dart';
+import 'package:finances_group/src/view/widgets/homepage/body_transactions.dart';
 import 'package:finances_group/src/view/widgets/homepage/custom_drawer.dart';
-import 'package:finances_group/src/view/widgets/homepage/icon_button_visibility.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
@@ -44,28 +38,17 @@ class _HomePageState extends State<HomePage> {
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
-    final userLogged = ModalRoute.of(context)!.settings.arguments as UserModel;
-    log('UserLogged = ${userLogged.toString()}');
-
-    //var weekData = homeController.getWeekdata();
-
-    var weekData = homeController.getWeekdata(userLogged);
-    //List<DataItem>? dataset = homeController.getList(userLogged);
-
-    List<DataItem>? dataset = homeController.getList(userLogged);
+    var weekData = homeController.getWeekdata();
+    //var weekData = homeController.getWeekdata(context);
+    List<DataItem>? dataset = homeController.getList();
+    //List<DataItem>? dataset = homeController.getList(context);
 
     return Scaffold(
-      drawer: CustomDrawer(
-          userEmail: userLogged.email ?? '',
-          userImage: userLogged.photoURL ?? "",
-          userName: userLogged.name ?? ''),
+      drawer: const CustomDrawer(),
       body: SafeArea(
         child: ListView(
-          shrinkWrap: true,
-          physics: const ClampingScrollPhysics(),
           children: [
-            CustomAppBar(
-                userName: userLogged.name, userImage: userLogged.photoURL),
+            appBar,
             const Divider(
               color: Color.fromARGB(131, 65, 69, 88),
               thickness: 1,
@@ -75,26 +58,17 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 150),
             DonutChartWidget(dataset: dataset),
             const SizedBox(height: 50),
-            const CustomIconButtonVisibility(),
+            const Icon(Icons.visibility_off),
             const SizedBox(height: 200),
             CustomLinearChart(weekData: weekData),
             const SizedBox(height: 80),
-            BodyTeste(
-              userLogged: userLogged,
-            ),
             //const MyCards(),
-            // BodyTransactions(
-            //   fmColor: dataset![0].color,
-            //   fmImage: 'assets/icons/food.png',
-            //   fmPrice: dataset[0].value.toString(),
-            //   subtitle: 'description default',
-            //   title: dataset[0].label,
-            // ),
+            const BodyTransactions(),
           ],
         ),
       ),
       bottomNavigationBar: bottomAppBAr,
-      floatingActionButton: floatingActionButton(context, userLogged),
+      floatingActionButton: floatingActionButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
