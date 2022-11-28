@@ -1,11 +1,14 @@
 import 'package:finances_group/src/view/design/theme/text_theme.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../../data/mock_db.dart';
-
 class TitleAppBar extends StatelessWidget {
+  final String? userName;
+  final String? userImage;
   const TitleAppBar({
     Key? key,
+    required this.userName,
+    required this.userImage,
   }) : super(key: key);
 
   @override
@@ -15,22 +18,25 @@ class TitleAppBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: GestureDetector(
-            onTap: () => {Scaffold.of(context).openDrawer()},
-            child: users[0].photoURL != null
-                ? CircleAvatar(
-                    backgroundImage: NetworkImage(users[0].photoURL ??
-                        'https://www.nicepng.com/png/full/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png'),
-                    radius: 24,
-                  )
-                : const CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'),
-                    radius: 24,
-                  ),
-          ),
+              onTap: () => {Scaffold.of(context).openDrawer()},
+              child:
+                  //userImage != null
+                  CircleAvatar(
+                backgroundImage: NetworkImage(
+                  userImage ??
+                      'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg',
+                ),
+                radius: 24,
+              )
+              // : const CircleAvatar(
+              //     backgroundImage: NetworkImage(
+              //         'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'),
+              //     radius: 24,
+              //   ),
+              ),
         ),
         Text(
-          users[0].displayName!,
+          userName ?? 'User Without Name',
           style: CustomAppTextTheme.body.copyWith(
             fontSize: 18,
           ),

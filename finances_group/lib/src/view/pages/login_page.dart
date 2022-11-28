@@ -82,7 +82,8 @@ class _LoginPageState extends State<LoginPage> {
                           const CircularProgressIndicator();
                         }
                         if (result is LoginStateSucces) {
-                          return Navigator.of(context).pushNamed('/home');
+                          return Navigator.of(context)
+                              .pushNamed('/home', arguments: result.userLogged);
                         }
                         if (result is LoginStateError) {
                           showDialog(
@@ -109,9 +110,6 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               });
                         }
-
-                        // .then((value) =>
-                        //     Navigator.of(context).pushNamed('/teste'));
                       },
                       child: const Text(
                         'Entrar',
