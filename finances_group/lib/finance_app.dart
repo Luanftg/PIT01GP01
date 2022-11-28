@@ -19,10 +19,12 @@ class FinanceApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FinanceApp',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const RegisterFinantialMovementPage(),
         '/home': (context) => const HomePage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
+        '/teste': (context) => const Teste(),
       },
       theme: draculaTheme,
     );

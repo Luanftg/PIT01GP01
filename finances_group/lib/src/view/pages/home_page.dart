@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  // Seleção da StatusBar Color
   _setStatusbarColor() {
     FlutterStatusbarcolor.setStatusBarColor(AppCustomColors.dark);
   }
