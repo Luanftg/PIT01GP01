@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class Category {
   final String label;
   final Color color;
-  final String image;
+  final String? image;
 
   Category({
     required this.label,
@@ -27,7 +27,7 @@ class Category {
     return Category(
       label: map['label'] ?? '',
       color: Color(map['color']),
-      image: map['image'],
+      image: map['image'] ?? '',
     );
   }
 

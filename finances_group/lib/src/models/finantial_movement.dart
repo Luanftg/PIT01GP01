@@ -9,16 +9,17 @@ class FinantialMovement {
   final int userID;
   final bool isIncome;
   final Category category;
-  final DateTime paymentDate;
+  final DateTime? paymentDate;
 
-  FinantialMovement(
-      {this.id,
-      required this.category,
-      required this.description,
-      required this.value,
-      required this.userID,
-      required this.isIncome,
-      required this.paymentDate});
+  FinantialMovement({
+    this.paymentDate,
+    this.id,
+    required this.category,
+    required this.description,
+    required this.value,
+    required this.userID,
+    required this.isIncome,
+  });
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
@@ -44,7 +45,7 @@ class FinantialMovement {
         userID: map['userID']?.toInt() ?? 0,
         isIncome: map['isIncome'] ?? false,
         category: Category.fromMap(map['category']),
-        paymentDate: map['paymentDate']);
+        paymentDate: map['paymentDate'] ?? DateTime.now());
   }
 
   String toJson() => json.encode(toMap());
