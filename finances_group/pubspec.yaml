@@ -39,6 +39,7 @@ dependencies:
   flutter_credit_card_brazilian: ^2.0.0
   google_fonts: ^3.0.1
   flutter_statusbarcolor_ns: ^0.4.0
+  path_provider: ^2.0.11
   mask_text_input_formatter: ^2.4.0
   shared_preferences: ^2.0.15
 

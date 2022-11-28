@@ -6,7 +6,7 @@ import '../../../models/data_item.dart';
 import 'donut_chart_painter.dart';
 
 class DonutChartWidget extends StatefulWidget {
-  final List<DataItem> dataset;
+  final List<DataItem>? dataset;
   const DonutChartWidget({super.key, required this.dataset});
 
   @override

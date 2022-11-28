@@ -27,7 +27,7 @@ final labelStyle = TextStyle(
 );
 
 class DonutChartPainter extends CustomPainter {
-  final List<DataItem> dataset;
+  final List<DataItem>? dataset;
   final double fullAngle;
   DonutChartPainter(this.dataset, this.fullAngle);
 
@@ -41,7 +41,15 @@ class DonutChartPainter extends CustomPainter {
     var startAngle = 0.0;
     canvas.drawArc(rect, startAngle, fullAngle * pi / 180, false, linePaint);
     double incrementX = 10;
-    for (var element in dataset) {
+    double maxValue = 0.00;
+
+    if (dataset != null && dataset!.isNotEmpty) {}
+
+    dataset!.forEach((element) {
+      maxValue += element.value;
+    });
+
+    for (var element in dataset!) {
       final sweepAngle = element.value * fullAngle * pi / 180;
       drawSector(element, canvas, rect, startAngle, sweepAngle);
       drawLabels(canvas, center, radius, startAngle, sweepAngle, element.label,
@@ -49,8 +57,13 @@ class DonutChartPainter extends CustomPainter {
       incrementX += 70;
       startAngle += sweepAngle;
     }
-    drawTextCentered(canvas, center, 'Saldo geral\nR\$ 1.000,00', midTextStyle,
-        radius * 0.6, (Size size) {});
+    drawTextCentered(
+        canvas,
+        center,
+        'Saldo geral\nR\$ ${maxValue.toStringAsPrecision(2)}',
+        midTextStyle,
+        radius * 0.6,
+        (Size size) {});
   }
 
   void drawSector(DataItem element, Canvas canvas, Rect rect, double startAngle,
@@ -72,17 +85,26 @@ class DonutChartPainter extends CustomPainter {
       double incrementX,
       DataItem element) {
     final newRadius = radius * 0.4;
-    final dx = -newRadius + 15 + incrementX;
-    final dy = newRadius + 15 + 20;
+    final dx = -radius * 0.55 + incrementX * 0.8;
+    final dy = newRadius + 35;
+    // double dx = -180 + incrementX * 0.8;
+
     final position = center + Offset(dx, dy);
 
     drawTextCentered(canvas, position, label, labelStyle, 100, (Size size) {
       final rect = Rect.fromCenter(
-          center: position, width: size.width + 5, height: size.height + 5);
+          center: position, width: size.width + 2, height: size.height + 5);
       final rrect = RRect.fromRectAndRadius(rect, const Radius.circular(5));
       canvas.drawRRect(rrect, midPaint(element.color));
     });
   }
+
+  // void drawLabels2(
+  //   Canvas canvas,
+  //   Offset startPosition,
+  //   double spaceBetween,
+  //   DataItem element,
+  // ) {}
 
   TextPainter measureText(
       String text, TextStyle style, double maxWidth, TextAlign align) {

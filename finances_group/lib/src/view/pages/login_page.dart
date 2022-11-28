@@ -79,13 +79,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         if (result is LoginStateLoading) {
-                          return FutureBuilder(                            
-                            builder: (context, snapshot) =>
-                                const CircularProgressIndicator(),
-                          );
+                          const CircularProgressIndicator();
                         }
                         if (result is LoginStateSucces) {
-                          return Navigator.of(context).pushNamed('/home');
+                          return Navigator.of(context)
+                              .pushNamed('/home', arguments: result.userLogged);
                         }
                         if (result is LoginStateError) {
                           showDialog(
@@ -94,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return AlertDialog(
                                   title: const Text('Ops, algo deu errado'),
                                   icon: const Icon(Icons.error),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Colors.blue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -112,9 +110,6 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               });
                         }
-
-                        // .then((value) =>
-                        //     Navigator.of(context).pushNamed('/teste'));
                       },
                       child: const Text(
                         'Entrar',

@@ -1,0 +1,86 @@
+import 'package:finances_group/src/controller/home_controller.dart';
+
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/models/category.dart';
+
+import 'package:finances_group/src/models/finantial_movement.dart';
+
+import 'package:flutter/material.dart';
+
+import '../../models/user_model.dart';
+
+class RegisterFinantialMovementPage extends StatefulWidget {
+  const RegisterFinantialMovementPage({super.key});
+
+  @override
+  State<RegisterFinantialMovementPage> createState() =>
+      _RegisterFinantialMovementPageState();
+}
+
+class _RegisterFinantialMovementPageState
+    extends State<RegisterFinantialMovementPage> {
+  @override
+  Widget build(BuildContext context) {
+    final UserModel userModel =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
+
+    final HomeController homeController =
+        HomeController(FinantialMovementRepositoryPrefsImp());
+
+    final registerContextNavigator = Navigator.of(context);
+    var titleController = TextEditingController();
+    var bodyController = TextEditingController();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Resty App')),
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            TextFormField(
+              decoration: InputDecoration(
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.8),
+                label: const Text('Título:'),
+              ),
+              controller: titleController,
+            ),
+            const SizedBox(height: 20),
+            TextFormField(
+              decoration: InputDecoration(
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.8),
+                label: const Text('Descrição:'),
+              ),
+              controller: bodyController,
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () async {
+                var finantialMovement = FinantialMovement(
+                  description: titleController.text,
+                  value: double.parse(bodyController.text),
+                  userID: 1,
+                  isIncome: true,
+                  category: Category(
+                    label: titleController.text,
+                    color: Colors.amber,
+                  ),
+                );
+
+                //var listAfterSave = await homeController.findAll(userModel);
+                //listAfterSave.add(finantialMovement);
+                await homeController.create(finantialMovement, userModel);
+                //userModel.finantialMovementList!.add(finantialMovement);
+                registerContextNavigator.pushNamed('/home',
+                    arguments: userModel);
+              },
+              child: const Text('Publicar post'),
+            ),
+            const SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
+  }
+}
