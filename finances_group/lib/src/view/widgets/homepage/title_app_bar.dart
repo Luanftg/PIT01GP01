@@ -1,7 +1,7 @@
-import 'package:finances_group/src/data/fake_db.dart';
 import 'package:finances_group/src/view/design/theme/text_theme.dart';
-
 import 'package:flutter/material.dart';
+
+import '../../../data/mock_db.dart';
 
 class TitleAppBar extends StatelessWidget {
   const TitleAppBar({

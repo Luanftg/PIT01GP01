@@ -1,4 +1,3 @@
-import 'package:finances_group/src/data/fake_db.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
 import 'package:finances_group/src/models/data_item.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
@@ -19,7 +18,7 @@ class HomeController {
     return result;
   }
 
-  List<DataItem>? getList() => dataset;
+  //List<DataItem>? getList() => dataset;
 
   // List<DataItem>? getList(BuildContext context) {
   //   var args =
@@ -41,7 +40,7 @@ class HomeController {
   //   return dataset;
   // }
 
-  List<double>? getWeekdata() => weekData;
+  //List<double>? getWeekdata() => weekData;
 
   // List<double>? getWeekdata(BuildContext context) {
 
