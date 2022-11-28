@@ -57,8 +57,11 @@ class _RegisterFinantialMovementPageState
                   value: double.parse(bodyController.text),
                   userID: 1,
                   isIncome: true,
-                  category:
-                      Category(label: titleController.text, color: Colors.blue),
+                  paymentDate: DateTime.now(),
+                  category: Category(
+                      label: titleController.text,
+                      color: Colors.blue,
+                      image: 'assets/expense.png'),
                 );
 
                 var listAfterSave = await homeController.findAll();
