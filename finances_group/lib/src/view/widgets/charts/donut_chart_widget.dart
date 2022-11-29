@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/data_item.dart';
 import 'donut_chart_painter.dart';
 
 class DonutChartWidget extends StatefulWidget {
-  final List<DataItem>? dataset;
+  final List<FinantialMovement>? dataset;
   const DonutChartWidget({super.key, required this.dataset});
 
   @override
