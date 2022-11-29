@@ -8,9 +8,9 @@ class Category {
   final String? image;
 
   Category({
+    this.image,
     required this.label,
     required this.color,
-    required this.image,
   });
 
   Map<String, dynamic> toMap() {
@@ -18,7 +18,9 @@ class Category {
 
     result.addAll({'label': label});
     result.addAll({'color': color.value});
-    result.addAll({'image': image});
+    if (image != null) {
+      result.addAll({'image': image});
+    }
 
     return result;
   }
@@ -37,5 +39,6 @@ class Category {
       Category.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Category(label: $label, color: $color, image: $image)';
+  String toString() =>
+      'Category(label: $label, color: $color, image: $image??' ')';
 }
