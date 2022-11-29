@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,7 +28,7 @@ final labelStyle = TextStyle(
 );
 
 class DonutChartPainter extends CustomPainter {
-  final List<DataItem>? dataset;
+  final List<FinantialMovement>? dataset;
   final double fullAngle;
   DonutChartPainter(this.dataset, this.fullAngle);
 
@@ -41,7 +42,23 @@ class DonutChartPainter extends CustomPainter {
     var startAngle = 0.0;
     canvas.drawArc(rect, startAngle, fullAngle * pi / 180, false, linePaint);
     double incrementX = 10;
-    for (var element in dataset!) {
+    double sum = 0.0;
+    List<DataItem>? dataList = [];
+
+    if (dataset != null) {
+      for (var index = 0; index < dataset!.length; index++) {
+        sum += dataset![index].value;
+      }
+      dataList = List.generate(
+        dataset!.length,
+        (index) => DataItem(
+            value: dataset![index].value / sum,
+            label: dataset![index].category.label,
+            color: dataset![index].category.color),
+      );
+    }
+
+    for (var element in dataList) {
       final sweepAngle = element.value * fullAngle * pi / 180;
       drawSector(element, canvas, rect, startAngle, sweepAngle);
       drawLabels(canvas, center, radius, startAngle, sweepAngle, element.label,
@@ -49,8 +66,13 @@ class DonutChartPainter extends CustomPainter {
       incrementX += 70;
       startAngle += sweepAngle;
     }
-    drawTextCentered(canvas, center, 'Saldo geral\nR\$ 1.000,00', midTextStyle,
-        radius * 0.6, (Size size) {});
+    drawTextCentered(
+        canvas,
+        center,
+        'Saldo geral\nR\$ ${sum.toStringAsFixed(2)}',
+        midTextStyle,
+        radius * 0.6,
+        (Size size) {});
   }
 
   void drawSector(DataItem element, Canvas canvas, Rect rect, double startAngle,
