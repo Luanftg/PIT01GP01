@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:finances_group/src/data/repositories/repository.dart';
-import 'package:finances_group/src/models/data_item.dart';
+
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/models/user_model.dart';
 
@@ -22,29 +20,8 @@ class HomeController {
     return result;
   }
 
-  List<DataItem>? getList(UserModel args) {
-    var fmList = args.finantialMovementList;
-
-    if (fmList != null) {
-      for (var index = 0; index < fmList.length; index++) {
-        maxValue += fmList[index].value;
-        log((fmList[index].value / maxValue).toString());
-      }
-      log('UserfmList: $fmList');
-
-      var dataset = List.generate(
-        fmList.length,
-        (index) => DataItem(
-            value: fmList![index].value / maxValue,
-            label: fmList[index].category.label,
-            color: fmList[index].category.color),
-      );
-
-      return dataset;
-    }
-
-    fmList = [];
-    return [];
+  List<FinantialMovement>? getList(UserModel args) {
+    return args.finantialMovementList;
   }
 
   List<double>? getWeekdata(UserModel args) {
