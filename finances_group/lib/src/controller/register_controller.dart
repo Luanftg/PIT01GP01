@@ -10,7 +10,7 @@ class RegisterController {
   Future<void> register(RegisterModel user) async {
     final prefs = await SharedPreferences.getInstance();
 
-    var result = prefs.getStringList('user3');
+    var result = prefs.getStringList('user1');
 
     log(result.toString());
 
@@ -25,7 +25,7 @@ class RegisterController {
       log(mapedList.toString());
 
       final userListToSave = mapedList.map((e) => jsonEncode(e)).toList();
-      await prefs.setStringList('user3', userListToSave);
+      await prefs.setStringList('user1', userListToSave);
     } else {
       userList = [];
       userList.add(user);
@@ -33,7 +33,7 @@ class RegisterController {
 
       log(userListToSave.toString());
 
-      await prefs.setStringList('user3', userListToSave);
+      await prefs.setStringList('user1', userListToSave);
     }
   }
 }
