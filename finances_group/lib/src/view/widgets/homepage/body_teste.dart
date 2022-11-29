@@ -40,13 +40,18 @@ class BodyTeste extends StatelessWidget {
                       vertical: 10.0, horizontal: 25.0),
                   child: ListTile(
                     leading: Image.asset(
-                      'assets/icons/eletronics.png',
+                      snapshot.data![index].category.image!,
                     ),
-                    title: Text(snapshot.data![index].description),
-                    subtitle: Text(snapshot.data![index].value.toString()),
-                    trailing: const Text(
-                      '- R\$ 100,00',
-                      style: TextStyle(color: AppCustomColors.danger),
+                    title: Text(
+                      snapshot.data![index].description,
+                      style: TextStyle(
+                          color: snapshot.data![index].category.color),
+                    ),
+                    subtitle:
+                        Text(snapshot.data![index].paymentDate.toString()),
+                    trailing: Text(
+                      '- R\$ ${snapshot.data![index].value.toString()}',
+                      style: const TextStyle(color: AppCustomColors.danger),
                     ),
                   ),
                 );
