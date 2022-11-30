@@ -2,10 +2,33 @@ import 'package:finances_group/src/data/repositories/repository.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/models/user_model.dart';
+import 'package:flutter/material.dart';
 
 class HomeController {
   final IRepository<FinantialMovement> _finantialMovementRepositoryLocalImp;
   HomeController(this._finantialMovementRepositoryLocalImp);
+
+  Color categoryColor(String name) {
+    final Color color;
+
+    switch (name) {
+      case 'Vermelho':
+        color = Colors.red;
+        break;
+      case 'Amarelo':
+        color = Colors.amber;
+        break;
+      case 'Verde':
+        color = Colors.green;
+        break;
+      case 'Azul':
+        color = Colors.blue;
+        break;
+      default:
+        color = Colors.white;
+    }
+    return color;
+  }
 
   double maxValue = 0;
   Future<bool> create(
