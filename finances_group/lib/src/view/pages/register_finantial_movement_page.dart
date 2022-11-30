@@ -4,6 +4,7 @@ import 'package:finances_group/src/data/repositories/finantial_movement_reposito
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/view/widgets/register_finaltial_movement/custom_switch.dart';
 
 import 'package:flutter/material.dart';
 import '../../models/user_model.dart';
@@ -11,7 +12,7 @@ import '../../models/user_model.dart';
 List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 
 class RegisterFinantialMovementPage extends StatefulWidget {
-  final UserModel userLogged;
+  final UserModel? userLogged;
   const RegisterFinantialMovementPage({super.key, required this.userLogged});
 
   @override
@@ -26,17 +27,11 @@ class _RegisterFinantialMovementPageState
 
   @override
   Widget build(BuildContext context) {
-    //final UserModel userModel =
-    //ModalRoute.of(context)!.settings.arguments as UserModel;
-
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
-    // final userLogged = ModalRoute.of(context)!.settings.arguments as UserModel;
-
     final registerContextNavigator = Navigator.of(context);
     var titleController = TextEditingController();
-    var descriptionController = TextEditingController();
     var valueController = TextEditingController();
     var categoryController = TextEditingController();
 
@@ -48,30 +43,30 @@ class _RegisterFinantialMovementPageState
             children: [
               const SizedBox(height: 10),
               TextFormField(
+                controller: titleController,
                 decoration: InputDecoration(
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width * 0.8),
                   label: const Text('Título:'),
                 ),
-                controller: titleController,
               ),
               const SizedBox(height: 20),
               TextFormField(
+                controller: valueController,
                 decoration: InputDecoration(
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width * 0.8),
                   label: const Text('Valor:'),
                 ),
-                controller: valueController,
               ),
               const SizedBox(height: 30),
               TextFormField(
+                controller: categoryController,
                 decoration: InputDecoration(
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width * 0.8),
                   label: const Text('Categoria:'),
                 ),
-                controller: categoryController,
               ),
               const SizedBox(height: 30),
               DropdownButton(
@@ -94,14 +89,7 @@ class _RegisterFinantialMovementPageState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Despesa'),
-                  Switch(
-                      activeColor: Colors.blue,
-                      inactiveTrackColor: Colors.red,
-                      value: valueSwitch,
-                      onChanged: (value) {
-                        valueSwitch = value;
-                        setState(() {});
-                      }),
+                  CustomSwitch(valueSwitch: valueSwitch),
                   const Text('Receita'),
                 ],
               ),
@@ -109,16 +97,22 @@ class _RegisterFinantialMovementPageState
               ElevatedButton(
                 onPressed: () async {
                   var finantialMovement = FinantialMovement(
-                    description: descriptionController.text,
+                    description: titleController.text,
                     value: double.parse(valueController.text),
                     userID: 1,
-                    isIncome: true,
+                    isIncome: valueSwitch,
+                    paymentDate: DateTime.now(),
                     category: Category(
-                        label: categoryController.text, color: Colors.blue),
+                      label: categoryController.text,
+                      color: homeController.categoryColor(dropDownValue),
+                      image: valueSwitch
+                          ? 'assets/income.png'
+                          : 'assets/expense.png',
+                    ),
                   );
 
                   await homeController.create(
-                      finantialMovement, widget.userLogged);
+                      finantialMovement, widget.userLogged!);
                   registerContextNavigator.pushNamed('/home',
                       arguments: widget.userLogged);
                 },
