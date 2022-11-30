@@ -2,6 +2,7 @@ import 'package:finances_group/src/controller/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
+import 'package:finances_group/src/view/pages/register_finantial_movement_page.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
@@ -63,12 +64,31 @@ class _HomePageState extends State<HomePage> {
             CustomLinearChart(weekData: weekData),
             const SizedBox(height: 80),
             //const MyCards(),
-            const BodyTransactions(),
+            BodyTransactions(),
           ],
         ),
       ),
       bottomNavigationBar: bottomAppBAr,
-      floatingActionButton: floatingActionButton(context),
+      floatingActionButton: FloatingActionButton(
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: AppCustomColors.cyanGreen,
+            ),
+            child: const Icon(Icons.add),
+          ),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => const FractionallySizedBox(
+                heightFactor: 0.8,
+                child: RegisterFinantialMovementPage(),
+              ),
+            );
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
