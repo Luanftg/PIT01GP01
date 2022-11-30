@@ -1,3 +1,4 @@
+import 'package:finances_group/src/view/pages/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
@@ -21,6 +22,8 @@ class _CustomSwitchState extends State<CustomSwitch> {
         onChanged: (value) {
           widget.valueSwitch = value;
           setState(() {});
+          RegisterFinantialMovementPage.valueSwitch =
+              widget.valueSwitch ? true : false;
         });
   }
 }

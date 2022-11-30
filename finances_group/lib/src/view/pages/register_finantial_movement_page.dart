@@ -14,6 +14,7 @@ List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 class RegisterFinantialMovementPage extends StatefulWidget {
   final UserModel? userLogged;
   const RegisterFinantialMovementPage({super.key, required this.userLogged});
+  static bool valueSwitch = true;
 
   @override
   State<RegisterFinantialMovementPage> createState() =>
@@ -22,7 +23,6 @@ class RegisterFinantialMovementPage extends StatefulWidget {
 
 class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
-  bool valueSwitch = true;
   String dropDownValue = list.first;
 
   @override
@@ -89,7 +89,8 @@ class _RegisterFinantialMovementPageState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Despesa'),
-                  CustomSwitch(valueSwitch: valueSwitch),
+                  CustomSwitch(
+                      valueSwitch: RegisterFinantialMovementPage.valueSwitch),
                   const Text('Receita'),
                 ],
               ),
@@ -100,12 +101,12 @@ class _RegisterFinantialMovementPageState
                     description: titleController.text,
                     value: double.parse(valueController.text),
                     userID: 1,
-                    isIncome: valueSwitch,
+                    isIncome: RegisterFinantialMovementPage.valueSwitch,
                     paymentDate: DateTime.now(),
                     category: Category(
                       label: categoryController.text,
                       color: homeController.categoryColor(dropDownValue),
-                      image: valueSwitch
+                      image: RegisterFinantialMovementPage.valueSwitch
                           ? 'assets/income.png'
                           : 'assets/expense.png',
                     ),
