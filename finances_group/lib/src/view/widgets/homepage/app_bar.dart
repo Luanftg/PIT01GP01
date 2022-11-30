@@ -1,4 +1,3 @@
-import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/widgets/homepage/action_app_bar.dart';
 import 'package:finances_group/src/view/widgets/homepage/title_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +17,24 @@ const bottomAppBAr = CustomBottomAppBar(
   shape: CircularNotchedRectangle(),
 );
 
-Widget floatingActionButton(BuildContext context) {
-  return FloatingActionButton(
-    child: Container(
-      width: 60,
-      height: 60,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: AppCustomColors.cyanGreen,
-      ),
-      child: const Icon(Icons.add),
-    ),
-    onPressed: () {
-      Navigator.of(context).pushNamed('/registerFM');
-    },
-  );
-}
+// Widget floatingActionButton(BuildContext context) {
+//   return FloatingActionButton(
+//     child: Container(
+//       width: 60,
+//       height: 60,
+//       decoration: const BoxDecoration(
+//         shape: BoxShape.circle,
+//         gradient: AppCustomColors.cyanGreen,
+//       ),
+//       child: const Icon(Icons.add),
+//     ),
+//     onPressed: () {
+//       {
+//         showModalBottomSheet(
+//             context: context,
+//             isScrollControlled: true,
+//             builder: buildBottomSheet);
+//       }
+//     },
+//   );
+// }
