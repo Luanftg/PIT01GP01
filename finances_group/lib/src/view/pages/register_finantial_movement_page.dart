@@ -6,11 +6,13 @@ import 'package:finances_group/src/models/category.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
 
 import 'package:flutter/material.dart';
+import '../../models/user_model.dart';
 
 List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 
 class RegisterFinantialMovementPage extends StatefulWidget {
-  const RegisterFinantialMovementPage({super.key});
+  final UserModel userLogged;
+  const RegisterFinantialMovementPage({super.key, required this.userLogged});
 
   @override
   State<RegisterFinantialMovementPage> createState() =>
@@ -24,6 +26,9 @@ class _RegisterFinantialMovementPageState
 
   @override
   Widget build(BuildContext context) {
+    //final UserModel userModel =
+    //ModalRoute.of(context)!.settings.arguments as UserModel;
+
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
@@ -112,11 +117,10 @@ class _RegisterFinantialMovementPageState
                         label: categoryController.text, color: Colors.blue),
                   );
 
-                  var listAfterSave = await homeController.findAll();
-                  listAfterSave.add(finantialMovement);
-                  await homeController.create(finantialMovement);
+                  await homeController.create(
+                      finantialMovement, widget.userLogged);
                   registerContextNavigator.pushNamed('/home',
-                      arguments: listAfterSave);
+                      arguments: widget.userLogged);
                 },
                 child: const Text('Adicionar'),
               ),

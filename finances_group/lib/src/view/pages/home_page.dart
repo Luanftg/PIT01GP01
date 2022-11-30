@@ -1,19 +1,24 @@
+import 'dart:core';
+
 import 'package:finances_group/src/controller/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/models/finantial_movement.dart';
+
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/view/pages/register_finantial_movement_page.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 
-import 'package:finances_group/src/view/widgets/homepage/body_transactions.dart';
 import 'package:finances_group/src/view/widgets/homepage/custom_drawer.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import '../../models/data_item.dart';
+import '../widgets/homepage/body_teste.dart';
+import '../widgets/homepage/custom_app_bar.dart';
+import '../widgets/homepage/custom_icon_buttom_visibility.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,17 +44,24 @@ class _HomePageState extends State<HomePage> {
     final HomeController homeController =
         HomeController(FinantialMovementRepositoryPrefsImp());
 
-    var weekData = homeController.getWeekdata();
-    //var weekData = homeController.getWeekdata(context);
-    List<DataItem>? dataset = homeController.getList();
-    //List<DataItem>? dataset = homeController.getList(context);
+    final userLogged = ModalRoute.of(context)!.settings.arguments as UserModel;
+
+    var weekData = homeController.getWeekdata(userLogged);
+
+    List<FinantialMovement>? dataset = homeController.getList(userLogged);
 
     return Scaffold(
-      drawer: const CustomDrawer(),
+      drawer: CustomDrawer(
+          userEmail: userLogged.email ?? '',
+          userImage: userLogged.photoURL ?? "",
+          userName: userLogged.name ?? ''),
       body: SafeArea(
         child: ListView(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
           children: [
-            appBar,
+            CustomAppBar(
+                userName: userLogged.name, userImage: userLogged.photoURL),
             const Divider(
               color: Color.fromARGB(131, 65, 69, 88),
               thickness: 1,
@@ -59,12 +71,13 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 150),
             DonutChartWidget(dataset: dataset),
             const SizedBox(height: 50),
-            const Icon(Icons.visibility_off),
+            const CustomIconButtonVisibility(),
             const SizedBox(height: 200),
             CustomLinearChart(weekData: weekData),
             const SizedBox(height: 80),
-            //const MyCards(),
-            BodyTransactions(),
+            BodyTeste(
+              userLogged: userLogged,
+            ),
           ],
         ),
       ),
@@ -83,9 +96,9 @@ class _HomePageState extends State<HomePage> {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              builder: (context) => const FractionallySizedBox(
+              builder: (context) => FractionallySizedBox(
                 heightFactor: 0.8,
-                child: RegisterFinantialMovementPage(),
+                child: RegisterFinantialMovementPage(userLogged: userLogged),
               ),
             );
           }),

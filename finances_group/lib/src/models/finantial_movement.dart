@@ -5,12 +5,14 @@ import 'package:finances_group/src/models/category.dart';
 class FinantialMovement {
   final int? id;
   final String description;
-  double value;
+  final double value;
   final int userID;
   final bool isIncome;
   final Category category;
+  final DateTime? paymentDate;
 
   FinantialMovement({
+    this.paymentDate,
     this.id,
     required this.category,
     required this.description,
@@ -30,6 +32,9 @@ class FinantialMovement {
     result.addAll({'userID': userID});
     result.addAll({'isIncome': isIncome});
     result.addAll({'category': category.toMap()});
+    if (paymentDate != null) {
+      result.addAll({'paymentDate': paymentDate!.millisecondsSinceEpoch});
+    }
 
     return result;
   }
@@ -42,6 +47,9 @@ class FinantialMovement {
       userID: map['userID']?.toInt() ?? 0,
       isIncome: map['isIncome'] ?? false,
       category: Category.fromMap(map['category']),
+      paymentDate: map['paymentDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['paymentDate'])
+          : null,
     );
   }
 
@@ -49,9 +57,4 @@ class FinantialMovement {
 
   factory FinantialMovement.fromJson(String source) =>
       FinantialMovement.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'FinantialMovement(id: $id, description: $description, value: $value, userID: $userID, isIncome: $isIncome, category: $category)';
-  }
 }

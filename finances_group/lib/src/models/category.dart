@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 class Category {
   final String label;
   final Color color;
+  final String? image;
 
   Category({
+    this.image,
     required this.label,
     required this.color,
   });
@@ -16,6 +18,9 @@ class Category {
 
     result.addAll({'label': label});
     result.addAll({'color': color.value});
+    if (image != null) {
+      result.addAll({'image': image});
+    }
 
     return result;
   }
@@ -24,6 +29,7 @@ class Category {
     return Category(
       label: map['label'] ?? '',
       color: Color(map['color']),
+      image: map['image'] ?? '',
     );
   }
 
@@ -33,5 +39,6 @@ class Category {
       Category.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Category(label: $label, color: $color)';
+  String toString() =>
+      'Category(label: $label, color: $color, image: $image??' ')';
 }
