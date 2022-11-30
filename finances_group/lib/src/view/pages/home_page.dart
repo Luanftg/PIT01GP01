@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:core';
 
 import 'package:finances_group/src/controller/home_controller.dart';
 
@@ -7,13 +7,12 @@ import 'package:finances_group/src/models/finantial_movement.dart';
 
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
-
+import 'package:finances_group/src/view/pages/register_finantial_movement_page.dart';
 import 'package:finances_group/src/view/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/view/widgets/charts/donut_chart_widget.dart';
 import 'package:finances_group/src/view/widgets/homepage/app_bar.dart';
 
 import 'package:finances_group/src/view/widgets/homepage/custom_drawer.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -46,12 +45,8 @@ class _HomePageState extends State<HomePage> {
         HomeController(FinantialMovementRepositoryPrefsImp());
 
     final userLogged = ModalRoute.of(context)!.settings.arguments as UserModel;
-    log('UserLogged = ${userLogged.toString()}');
-
-    //var weekData = homeController.getWeekdata();
 
     var weekData = homeController.getWeekdata(userLogged);
-    //List<DataItem>? dataset = homeController.getList(userLogged);
 
     List<FinantialMovement>? dataset = homeController.getList(userLogged);
 
@@ -83,19 +78,30 @@ class _HomePageState extends State<HomePage> {
             BodyTeste(
               userLogged: userLogged,
             ),
-            //const MyCards(),
-            // BodyTransactions(
-            //   fmColor: dataset![0].color,
-            //   fmImage: 'assets/icons/food.png',
-            //   fmPrice: dataset[0].value.toString(),
-            //   subtitle: 'description default',
-            //   title: dataset[0].label,
-            // ),
           ],
         ),
       ),
       bottomNavigationBar: bottomAppBAr,
-      floatingActionButton: floatingActionButton(context, userLogged),
+      floatingActionButton: FloatingActionButton(
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: AppCustomColors.cyanGreen,
+            ),
+            child: const Icon(Icons.add),
+          ),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => FractionallySizedBox(
+                heightFactor: 0.8,
+                child: RegisterFinantialMovementPage(userLogged: userLogged),
+              ),
+            );
+          }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
