@@ -29,7 +29,9 @@ class FinanceApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/teste': (context) => const Teste(),
-        '/registerFM': (context) => const RegisterFinantialMovementPage(),
+        '/registerFM': (context) => const RegisterFinantialMovementPage(
+              userLogged: null,
+            ),
       },
       theme: draculaTheme,
     );
