@@ -49,10 +49,16 @@ class BodyTeste extends StatelessWidget {
                     ),
                     subtitle:
                         Text(snapshot.data![index].paymentDate.toString()),
-                    trailing: Text(
-                      '- R\$ ${snapshot.data![index].value.toString()}',
-                      style: const TextStyle(color: AppCustomColors.danger),
-                    ),
+                    trailing: (snapshot.data![index].isIncome)
+                        ? Text(
+                            '+ R\$ ${snapshot.data![index].value.toString()}',
+                            style: const TextStyle(color: AppCustomColors.cyan),
+                          )
+                        : Text(
+                            '- R\$ ${snapshot.data![index].value.toString()}',
+                            style:
+                                const TextStyle(color: AppCustomColors.danger),
+                          ),
                   ),
                 );
               }));

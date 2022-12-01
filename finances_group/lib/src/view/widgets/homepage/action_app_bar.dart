@@ -1,15 +1,21 @@
+import 'package:finances_group/src/controller/login_controller.dart';
 import 'package:finances_group/src/view/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../models/user_model.dart';
+
 class ActionAppBar extends StatelessWidget {
+  final UserModel? userLogged;
   const ActionAppBar({
     Key? key,
+    required this.userLogged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    final controller = LoginController();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
           margin: const EdgeInsets.only(right: 16),
@@ -20,6 +26,15 @@ class ActionAppBar extends StatelessWidget {
             onPressed: () => debugPrint('Notification Icon'),
             icon: const Icon(Icons.notifications),
           ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 16),
+          child: IconButton(
+              onPressed: () {
+                controller.logout(userLogged!);
+                Navigator.of(context).pushReplacementNamed('/login');
+              },
+              icon: const Icon(Icons.logout)),
         ),
       ],
     );

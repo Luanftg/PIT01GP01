@@ -1,3 +1,4 @@
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/view/widgets/homepage/title_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +7,13 @@ import 'action_app_bar.dart';
 class CustomAppBar extends StatelessWidget {
   final String? userName;
   final String? userImage;
+  final UserModel? userLogged;
 
   const CustomAppBar(
-      {super.key, required this.userName, required this.userImage});
+      {super.key,
+      required this.userName,
+      required this.userImage,
+      this.userLogged});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,11 @@ class CustomAppBar extends StatelessWidget {
       centerTitle: false,
       toolbarHeight: 75,
       title: TitleAppBar(userImage: userImage, userName: userName),
-      actions: const [ActionAppBar()],
+      actions: [
+        ActionAppBar(
+          userLogged: userLogged,
+        )
+      ],
       automaticallyImplyLeading: false,
     );
   }
