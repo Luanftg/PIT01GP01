@@ -61,7 +61,9 @@ class _HomePageState extends State<HomePage> {
           physics: const ClampingScrollPhysics(),
           children: [
             CustomAppBar(
-                userName: userLogged.name, userImage: userLogged.photoURL),
+                userName: userLogged.name,
+                userImage: userLogged.photoURL,
+                userLogged: userLogged),
             const Divider(
               color: Color.fromARGB(131, 65, 69, 88),
               thickness: 1,
