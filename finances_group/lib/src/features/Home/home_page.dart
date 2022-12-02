@@ -1,20 +1,20 @@
 import 'dart:core';
 
+import 'package:finances_group/src/features/home/widgets/app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/body_teste.dart';
+import 'package:finances_group/src/features/home/widgets/custom_drawer.dart';
+import 'package:finances_group/src/features/home/widgets/custom_icon_buttom_visibility.dart';
 import 'package:finances_group/src/models/user_model.dart';
 
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
-import 'package:finances_group/src/shared/widgets/charts/custom_linear_chart.dart';
-import 'package:finances_group/src/shared/widgets/charts/donut_chart_widget.dart';
-import 'package:finances_group/src/shared/widgets/homepage/app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
+import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
 
-import 'package:finances_group/src/shared/widgets/homepage/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import '../../shared/widgets/homepage/body_teste.dart';
-import '../../shared/widgets/homepage/custom_app_bar.dart';
-import '../../shared/widgets/homepage/custom_icon_buttom_visibility.dart';
+import '../../shared/widgets/charts/homepage/custom_app_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

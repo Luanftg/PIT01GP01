@@ -1,8 +1,9 @@
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/shared/widgets/homepage/title_app_bar.dart';
+
 import 'package:flutter/material.dart';
 
-import 'action_app_bar.dart';
+import '../../../../features/home/widgets/action_app_bar.dart';
+import '../../../../features/home/widgets/title_app_bar.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? userName;

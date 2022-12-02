@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/features/registerFinantialMovement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:finances_group/src/shared/widgets/register_finaltial_movement/custom_switch.dart';
 
 import 'package:flutter/material.dart';
 import '../../models/user_model.dart';
@@ -14,7 +16,6 @@ List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 class RegisterFinantialMovementPage extends StatefulWidget {
   final UserModel? userLogged;
   const RegisterFinantialMovementPage({super.key, required this.userLogged});
-  static bool valueSwitch = true;
 
   @override
   State<RegisterFinantialMovementPage> createState() =>
@@ -25,6 +26,7 @@ class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
   String dropDownValue = list.first;
 
+  //static bool valueSwitch = false;
   @override
   Widget build(BuildContext context) {
     final HomeController homeController =
@@ -96,16 +98,17 @@ class _RegisterFinantialMovementPageState
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
+                  log('valueSwitch da View : $CustomSwitch.valueSwitch');
                   var finantialMovement = FinantialMovement(
                     description: titleController.text,
                     value: double.parse(valueController.text),
                     userID: 1,
-                    isIncome: RegisterFinantialMovementPage.valueSwitch,
+                    isIncome: CustomSwitch.valueSwitch,
                     paymentDate: DateTime.now(),
                     category: Category(
                       label: categoryController.text,
                       color: homeController.categoryColor(dropDownValue),
-                      image: RegisterFinantialMovementPage.valueSwitch
+                      image: CustomSwitch.valueSwitch
                           ? 'assets/income.png'
                           : 'assets/expense.png',
                     ),
