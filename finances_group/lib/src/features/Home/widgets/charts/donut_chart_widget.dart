@@ -7,7 +7,10 @@ import 'donut_chart_painter.dart';
 
 class DonutChartWidget extends StatefulWidget {
   final List<FinantialMovement>? dataset;
-  const DonutChartWidget({super.key, required this.dataset});
+  const DonutChartWidget({
+    super.key,
+    required this.dataset,
+  });
 
   @override
   State<DonutChartWidget> createState() => _DonutChartWidgetState();

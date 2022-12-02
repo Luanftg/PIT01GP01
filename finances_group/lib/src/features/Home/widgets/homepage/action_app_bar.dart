@@ -1,7 +1,8 @@
 import 'package:finances_group/src/features/login/login_controller.dart';
-import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../models/user_model.dart';
 
 class ActionAppBar extends StatelessWidget {
   final UserModel? userLogged;

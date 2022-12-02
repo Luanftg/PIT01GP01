@@ -77,19 +77,30 @@ class DonutChartPainter extends CustomPainter {
     drawTextCentered(
         canvas,
         center,
-        'Saldo geral\nR\$ ${sum.toStringAsFixed(2)}',
+        'Saldo geral\nR\$ ${sum.toStringAsFixed(2).replaceFirst('.', ',')}',
         midTextStyle,
         radius * 0.6,
         (Size size) {});
   }
 
-  void drawSector(DataItem element, Canvas canvas, Rect rect, double startAngle,
-      double sweepAngle) {
+  void drawSector(
+    DataItem element,
+    Canvas canvas,
+    Rect rect,
+    double startAngle,
+    double sweepAngle,
+  ) {
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 15
       ..color = element.color;
-    canvas.drawArc(rect, startAngle, sweepAngle, false, paint);
+    canvas.drawArc(
+      rect,
+      startAngle,
+      sweepAngle,
+      false,
+      paint,
+    );
   }
 
   void drawLabels(

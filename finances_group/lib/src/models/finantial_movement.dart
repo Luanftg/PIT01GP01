@@ -9,7 +9,7 @@ class FinantialMovement {
   final int userID;
   final bool isIncome;
   final Category category;
-  final DateTime? paymentDate;
+  final String? paymentDate;
 
   FinantialMovement({
     this.paymentDate,
@@ -33,7 +33,7 @@ class FinantialMovement {
     result.addAll({'isIncome': isIncome});
     result.addAll({'category': category.toMap()});
     if (paymentDate != null) {
-      result.addAll({'paymentDate': paymentDate!.millisecondsSinceEpoch});
+      result.addAll({'paymentDate': paymentDate!});
     }
 
     return result;
@@ -47,9 +47,7 @@ class FinantialMovement {
       userID: map['userID']?.toInt() ?? 0,
       isIncome: map['isIncome'] ?? false,
       category: Category.fromMap(map['category']),
-      paymentDate: map['paymentDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['paymentDate'])
-          : null,
+      paymentDate: map['paymentDate'] ?? '',
     );
   }
 

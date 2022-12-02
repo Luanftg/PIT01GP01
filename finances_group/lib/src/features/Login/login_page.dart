@@ -2,9 +2,10 @@ import 'package:finances_group/src/features/login/login_controller.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
-import 'package:finances_group/src/shared/widgets/login-register/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+
+import '../../shared/widgets/custom_text_form_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,17 +1,15 @@
-import 'dart:developer';
-
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-import 'package:finances_group/src/features/registerFinantialMovement/widgets/custom_switch.dart';
+import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
+import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../models/user_model.dart';
-
-List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 
 class RegisterFinantialMovementPage extends StatefulWidget {
   final UserModel? userLogged;
@@ -24,18 +22,21 @@ class RegisterFinantialMovementPage extends StatefulWidget {
 
 class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
-  String dropDownValue = list.first;
+  final HomeController homeController =
+      HomeController(FinantialMovementRepositoryPrefsImp());
+
+  var titleController = TextEditingController();
+  var valueController = TextEditingController();
+  var categoryController = TextEditingController();
+
+  final CustomDropDownButton customDropDownButton = const CustomDropDownButton(
+    list: ['Vermelho', 'Azul', 'Amarelo', 'Verde'],
+  );
 
   //static bool valueSwitch = false;
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController =
-        HomeController(FinantialMovementRepositoryPrefsImp());
-
     final registerContextNavigator = Navigator.of(context);
-    var titleController = TextEditingController();
-    var valueController = TextEditingController();
-    var categoryController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Adicionar movimentação')),
@@ -55,7 +56,9 @@ class _RegisterFinantialMovementPageState
               const SizedBox(height: 20),
               TextFormField(
                 controller: valueController,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
+                  //prefixText: 'R\$',
                   constraints: BoxConstraints(
                       maxWidth: MediaQuery.of(context).size.width * 0.8),
                   label: const Text('Valor:'),
@@ -71,19 +74,7 @@ class _RegisterFinantialMovementPageState
                 ),
               ),
               const SizedBox(height: 30),
-              DropdownButton(
-                  value: dropDownValue,
-                  items: list.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      dropDownValue = value!;
-                    });
-                  }),
+              customDropDownButton,
               const SizedBox(
                 height: 30,
               ),
@@ -98,16 +89,17 @@ class _RegisterFinantialMovementPageState
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () async {
-                  log('valueSwitch da View : $CustomSwitch.valueSwitch');
+                  final DateFormat formater = DateFormat('yyyy-MM-dd');
                   var finantialMovement = FinantialMovement(
                     description: titleController.text,
                     value: double.parse(valueController.text),
                     userID: 1,
                     isIncome: CustomSwitch.valueSwitch,
-                    paymentDate: DateTime.now(),
+                    paymentDate: formater.format(DateTime.now()),
                     category: Category(
                       label: categoryController.text,
-                      color: homeController.categoryColor(dropDownValue),
+                      color: homeController
+                          .categoryColor(CustomDropDownButton.dropDownValue),
                       image: CustomSwitch.valueSwitch
                           ? 'assets/income.png'
                           : 'assets/expense.png',
@@ -115,9 +107,13 @@ class _RegisterFinantialMovementPageState
                   );
 
                   await homeController.create(
-                      finantialMovement, widget.userLogged!);
-                  registerContextNavigator.pushNamed('/home',
-                      arguments: widget.userLogged);
+                    finantialMovement,
+                    widget.userLogged!,
+                  );
+                  registerContextNavigator.pushNamed(
+                    '/home',
+                    arguments: widget.userLogged,
+                  );
                 },
                 child: const Text('Adicionar'),
               ),

@@ -1,20 +1,15 @@
-import 'dart:core';
-
 import 'package:finances_group/src/features/home/widgets/app_bar.dart';
 import 'package:finances_group/src/features/home/widgets/body_teste.dart';
-import 'package:finances_group/src/features/home/widgets/custom_drawer.dart';
-import 'package:finances_group/src/features/home/widgets/custom_icon_buttom_visibility.dart';
-import 'package:finances_group/src/models/user_model.dart';
-
-import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
-import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
-
+import 'package:finances_group/src/features/home/widgets/custom_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/custom_drawer.dart';
+import 'package:finances_group/src/features/register_finantial_movement/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import '../../shared/widgets/charts/homepage/custom_app_bar.dart';
+import '../../models/user_model.dart';
+import '../../shared/design/colors/app_custom_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,9 +41,12 @@ class _HomePageState extends State<HomePage> {
           if (state is UserModel) {
             return Scaffold(
               drawer: CustomDrawer(
-                  userEmail: state.email ?? '',
-                  userImage: state.photoURL ?? "",
-                  userName: state.name ?? ''),
+                userEmail: state.email ?? '',
+                userImage: state.photoURL!.isNotEmpty
+                    ? state.photoURL!
+                    : "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg",
+                userName: state.name ?? '',
+              ),
               body: SafeArea(
                 child: ListView(
                   shrinkWrap: true,
@@ -66,8 +64,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 150),
                     DonutChartWidget(dataset: state.finantialMovementList),
-                    const SizedBox(height: 50),
-                    const CustomIconButtonVisibility(),
+                    const SizedBox(height: 80),
+                    //const CustomIconButtonVisibility(),
                     const SizedBox(height: 200),
                     CustomLinearChart(weekData: state.finantialMovementList),
                     const SizedBox(height: 80),
