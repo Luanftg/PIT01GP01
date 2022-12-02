@@ -1,12 +1,7 @@
 import 'dart:core';
 
-import 'package:finances_group/src/features/Home/home_controller.dart';
-
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-import 'package:finances_group/src/models/finantial_movement.dart';
-
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/Home/home_state.dart';
+
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
 import 'package:finances_group/src/shared/widgets/charts/custom_linear_chart.dart';
@@ -42,15 +37,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController =
-        HomeController(FinantialMovementRepositoryPrefsImp());
-
     ValueNotifier<UserModel?> userLogged = ValueNotifier<UserModel>(
         ModalRoute.of(context)!.settings.arguments as UserModel);
-
-    //var weekData = homeController.getWeekdata(userLogged);
-
-    // List<FinantialMovement>? dataset = homeController.getList(userLogged);
 
     return ValueListenableBuilder(
         valueListenable: userLogged,
@@ -114,12 +102,6 @@ class _HomePageState extends State<HomePage> {
                   FloatingActionButtonLocation.centerDocked,
             );
           }
-          if (state is HomeStateError) {
-            return const Center(
-              child: Text('deu ruim!'),
-            );
-          }
-
           return const Center(
             child: CircularProgressIndicator(),
           );
