@@ -2,10 +2,9 @@ import 'package:finances_group/src/features/RegisterFinantialMovement/register_f
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-  bool valueSwitch;
-  CustomSwitch({
+  //bool valueSwitch;
+  const CustomSwitch({
     Key? key,
-    required this.valueSwitch,
   }) : super(key: key);
 
   @override
@@ -18,12 +17,13 @@ class _CustomSwitchState extends State<CustomSwitch> {
     return Switch(
         activeColor: Colors.blue,
         inactiveTrackColor: Colors.pink,
-        value: widget.valueSwitch,
+        value: false,
         onChanged: (value) {
-          widget.valueSwitch = value;
+          //widget.valueSwitch = value;
           setState(() {});
           RegisterFinantialMovementPage.valueSwitch =
-              widget.valueSwitch ? true : false;
+              //widget.valueSwitch ? true : false;
+              value ? true : false;
         });
   }
 }
