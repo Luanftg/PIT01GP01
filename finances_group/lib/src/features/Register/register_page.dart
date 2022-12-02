@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Register/register_controller.dart';
+import 'package:finances_group/src/features/register/register_controller.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/shared/widgets/login-register/custom_text_form_field.dart';

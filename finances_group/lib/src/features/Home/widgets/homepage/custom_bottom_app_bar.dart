@@ -28,11 +28,11 @@ class CustomBottomAppBar extends StatelessWidget {
             tooltip: 'Abre o menu de navegação',
           ),
           if (centerLocations.contains(fabLocation)) const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.monetization_on),
-            tooltip: 'Estatísticas',
-          ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: const Icon(Icons.monetization_on),
+          //   tooltip: 'Estatísticas',
+          // ),
           IconButton(
             onPressed: () {},
             icon: const Icon(Icons.settings),

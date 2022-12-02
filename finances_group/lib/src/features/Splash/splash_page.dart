@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Splash/splash_state.dart';
+import 'package:finances_group/src/features/splash/splash_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 

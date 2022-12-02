@@ -4,7 +4,7 @@ import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../models/data_item.dart';
+import '../../../../models/data_item.dart';
 
 final linePaint = Paint()
   ..style = PaintingStyle.stroke
@@ -47,7 +47,13 @@ class DonutChartPainter extends CustomPainter {
 
     if (dataset != null) {
       for (var index = 0; index < dataset!.length; index++) {
-        sum += dataset![index].value;
+        if (dataset![index].isIncome == false) {
+          double num = dataset![index].value;
+          num = num * -1;
+          sum += num;
+        } else {
+          sum += dataset![index].value;
+        }
       }
       dataList = List.generate(
         dataset!.length,
@@ -69,19 +75,30 @@ class DonutChartPainter extends CustomPainter {
     drawTextCentered(
         canvas,
         center,
-        'Saldo geral\nR\$ ${sum.toStringAsFixed(2)}',
+        'Saldo geral\nR\$ ${sum.toStringAsFixed(2).replaceFirst('.', ',')}',
         midTextStyle,
         radius * 0.6,
         (Size size) {});
   }
 
-  void drawSector(DataItem element, Canvas canvas, Rect rect, double startAngle,
-      double sweepAngle) {
+  void drawSector(
+    DataItem element,
+    Canvas canvas,
+    Rect rect,
+    double startAngle,
+    double sweepAngle,
+  ) {
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 15
       ..color = element.color;
-    canvas.drawArc(rect, startAngle, sweepAngle, false, paint);
+    canvas.drawArc(
+      rect,
+      startAngle,
+      sweepAngle,
+      false,
+      paint,
+    );
   }
 
   void drawLabels(

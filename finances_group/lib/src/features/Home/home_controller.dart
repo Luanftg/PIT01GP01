@@ -2,7 +2,7 @@ import 'package:finances_group/src/data/repositories/repository.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/Home/home_state.dart';
+import 'package:finances_group/src/features/home/home_state.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends ValueNotifier<HomeState> {

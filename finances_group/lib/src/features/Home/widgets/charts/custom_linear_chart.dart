@@ -25,13 +25,14 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
   void initState() {
     super.initState();
 
-    if (widget.weekData!.isNotEmpty) {
+    if(widget.weekData != null) {
+      if (widget.weekData!.isNotEmpty) {
       for (int index = 0; index < widget.weekData!.length; index++) {
         charts.add(widget.weekData![index].value);
         setState(() {
           charts = charts.take(7).toList();
           //log('weekDataFromChart: ${weekData.toString()}');
-          for (var element in charts!) {
+          for (var element in charts) {
             minData = element < minData ? element : minData;
             maxData = element > maxData ? element : maxData;
           }
@@ -49,6 +50,8 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
         });
       }
     }
+    }
+    
 
     //setup animation timer and update variables
     const fps = 60.0;

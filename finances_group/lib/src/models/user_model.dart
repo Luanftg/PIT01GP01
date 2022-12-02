@@ -13,15 +13,17 @@ class UserModel {
   final String? photoURL;
   List<FinantialMovement>? finantialMovementList;
   bool? isLogged;
-  UserModel(this.id,
-      {this.name,
-      required this.email,
-      this.phone,
-      this.cpf,
-      required this.password,
-      this.photoURL,
-      this.finantialMovementList,
-      this.isLogged});
+  UserModel(
+    this.id, {
+    this.name,
+    required this.email,
+    this.phone,
+    this.cpf,
+    required this.password,
+    this.photoURL,
+    this.finantialMovementList,
+    this.isLogged,
+  });
 
   @override
   bool operator ==(covariant UserModel other) {

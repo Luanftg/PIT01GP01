@@ -1,9 +1,9 @@
 //import 'package:finances_group/src/design/theme/custom_theme_data.dart';
 import 'package:finances_group/src/shared/design/theme/custom_theme_data.dart';
-import 'package:finances_group/src/features/Home/home_page.dart';
+import 'package:finances_group/src/features/home/home_page.dart';
 import 'package:finances_group/src/features/Login/login_page.dart';
-import 'package:finances_group/src/features/Register/register_page.dart';
-import 'package:finances_group/src/features/Splash/splash_page.dart';
+import 'package:finances_group/src/features/register/register_page.dart';
+import 'package:finances_group/src/features/splash/splash_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

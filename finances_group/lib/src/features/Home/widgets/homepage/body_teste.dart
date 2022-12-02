@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Home/home_controller.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
@@ -7,8 +7,10 @@ import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class BodyTeste extends StatelessWidget {
+  final DateFormat formater = DateFormat('yyyy-MM-dd');
   final UserModel userLogged;
   final HomeController _controller =
       HomeController(FinantialMovementRepositoryPrefsImp());
@@ -30,6 +32,7 @@ class BodyTeste extends StatelessWidget {
           );
         }
         if (snapshot.hasData) {
+          
           return ListView.builder(
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),

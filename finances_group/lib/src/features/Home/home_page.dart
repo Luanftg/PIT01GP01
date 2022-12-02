@@ -1,25 +1,25 @@
 import 'dart:core';
 
-import 'package:finances_group/src/features/Home/home_controller.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-import 'package:finances_group/src/models/finantial_movement.dart';
+//import 'package:finances_group/src/models/finantial_movement.dart';
 
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/Home/home_state.dart';
+import 'package:finances_group/src/features/home/home_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
-import 'package:finances_group/src/shared/widgets/charts/custom_linear_chart.dart';
-import 'package:finances_group/src/shared/widgets/charts/donut_chart_widget.dart';
-import 'package:finances_group/src/shared/widgets/homepage/app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
+import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/app_bar.dart';
 
-import 'package:finances_group/src/shared/widgets/homepage/custom_drawer.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import '../../shared/widgets/homepage/body_teste.dart';
-import '../../shared/widgets/homepage/custom_app_bar.dart';
-import '../../shared/widgets/homepage/custom_icon_buttom_visibility.dart';
+import 'widgets/homepage/body_teste.dart';
+import 'widgets/homepage/custom_app_bar.dart';
+//import 'widgets/homepage/custom_icon_buttom_visibility.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController =
-        HomeController(FinantialMovementRepositoryPrefsImp());
+    // final HomeController homeController =
+    //     HomeController(FinantialMovementRepositoryPrefsImp());
 
     ValueNotifier<UserModel?> userLogged = ValueNotifier<UserModel>(
         ModalRoute.of(context)!.settings.arguments as UserModel);
@@ -58,9 +58,12 @@ class _HomePageState extends State<HomePage> {
           if (state is UserModel) {
             return Scaffold(
               drawer: CustomDrawer(
-                  userEmail: state.email ?? '',
-                  userImage: state.photoURL ?? "",
-                  userName: state.name ?? ''),
+                userEmail: state.email ?? '',
+                userImage: state.photoURL!.isNotEmpty
+                    ? state.photoURL!
+                    : "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg",
+                userName: state.name ?? '',
+              ),
               body: SafeArea(
                 child: ListView(
                   shrinkWrap: true,
@@ -78,8 +81,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 150),
                     DonutChartWidget(dataset: state.finantialMovementList),
-                    const SizedBox(height: 50),
-                    const CustomIconButtonVisibility(),
+                    const SizedBox(height: 80),
+                    //const CustomIconButtonVisibility(),
                     const SizedBox(height: 200),
                     CustomLinearChart(weekData: state.finantialMovementList),
                     const SizedBox(height: 80),
