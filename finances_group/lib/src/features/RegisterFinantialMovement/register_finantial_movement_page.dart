@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Home/home_controller.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 import 'package:finances_group/src/models/category.dart';
@@ -87,11 +87,10 @@ class _RegisterFinantialMovementPageState
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Despesa'),
-                  CustomSwitch(
-                      valueSwitch: RegisterFinantialMovementPage.valueSwitch),
-                  const Text('Receita'),
+                children: const [
+                  Text('Despesa'),
+                  CustomSwitch(),
+                  Text('Receita'),
                 ],
               ),
               const SizedBox(height: 30),
