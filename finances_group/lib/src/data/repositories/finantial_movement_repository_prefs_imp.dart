@@ -20,15 +20,6 @@ class FinantialMovementRepositoryPrefsImp
 
   @override
   Future<List<FinantialMovement>> findAll(UserModel userLogged) async {
-    // var result = await PrefsService.readFile();
-    // log('result: $result');
-
-    // if (result.isNotEmpty) {
-    //   var decodedList = List.from(jsonDecode(result)).toList();
-    //   log('decodedList: $decodedList');
-
-    // var userList = decodedList.map((e) => UserModel.fromJson(e));
-    // log('userList: ${userList.toString()}');
     List<FinantialMovement>? response;
     if (userLogged.finantialMovementList == null) {
       userLogged.finantialMovementList = [];
@@ -37,11 +28,8 @@ class FinantialMovementRepositoryPrefsImp
       response = userLogged.finantialMovementList!;
     }
 
-    //     list.map((e) => FinantialMovement.fromMap(jsonDecode(e))).toList();
-    // log('response: $response');
     return response;
   }
-  //return [];
 
   @override
   Future<FinantialMovement> findOne(int id) {
