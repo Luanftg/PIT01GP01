@@ -52,15 +52,15 @@ class HomeController extends ValueNotifier<HomeState> {
     return args.finantialMovementList;
   }
 
-  List<double>? getWeekdata(UserModel args) {
-    var fmList = args.finantialMovementList;
+  // List<double>? getWeekdata(UserModel args) {
+  //   var fmList = args.finantialMovementList;
 
-    // if (fmList != null) {
-    //   var weekdata =
-    //       List.generate(fmList.length, (index) => fmList[index].value);
-    //   return weekdata;
-    // }
-    // args.finantialMovementList = [];
-    // return [];
-  }
+  //   // if (fmList != null) {
+  //   //   var weekdata =
+  //   //       List.generate(fmList.length, (index) => fmList[index].value);
+  //   //   return weekdata;
+  //   // }
+  //   // args.finantialMovementList = [];
+  //   // return [];
+  // }
 }

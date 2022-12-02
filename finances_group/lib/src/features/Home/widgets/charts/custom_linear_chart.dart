@@ -25,6 +25,7 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
   void initState() {
     super.initState();
 
+<<<<<<< HEAD:finances_group/lib/src/features/Home/widgets/charts/custom_linear_chart.dart
     if(widget.weekData != null) {
       if (widget.weekData!.isNotEmpty) {
       for (int index = 0; index < widget.weekData!.length; index++) {
@@ -48,7 +49,30 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
             charts = [];
           }
         });
+=======
+    if (widget.weekData != null && widget.weekData!.isNotEmpty) {
+      for (int index = 0; index < widget.weekData!.length; index++) {
+        charts.add(widget.weekData![index].value);
+>>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97:finances_group/lib/src/shared/widgets/charts/custom_linear_chart.dart
       }
+
+      setState(() {
+        charts = charts.take(7).toList();
+        //log('weekDataFromChart: ${weekData.toString()}');
+        for (var element in charts) {
+          minData = element < minData ? element : minData;
+          maxData = element > maxData ? element : maxData;
+        }
+        rangeData = maxData - minData;
+      });
+      if (rangeData == 0) {
+        rangeData = minData;
+        minData = 0.0;
+      }
+    } else {
+      rangeData = 0;
+      minData = 0;
+      maxData = 0;
     }
     }
     

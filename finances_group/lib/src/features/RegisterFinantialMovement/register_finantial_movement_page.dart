@@ -81,11 +81,10 @@ class _RegisterFinantialMovementPageState
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Despesa'),
-                  CustomSwitch(
-                      valueSwitch: RegisterFinantialMovementPage.valueSwitch),
-                  const Text('Receita'),
+                children: const [
+                  Text('Despesa'),
+                  CustomSwitch(),
+                  Text('Receita'),
                 ],
               ),
               const SizedBox(height: 30),

@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // ignore_for_file: use_build_context_synchronously
 
+=======
+>>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97
 import 'package:finances_group/src/features/login/login_controller.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
@@ -35,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -79,11 +83,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         if (result is LoginStateLoading) {
-                          const CircularProgressIndicator();
+                          const Center(child: CircularProgressIndicator());
                         }
                         if (result is LoginStateSucces) {
-                          return Navigator.of(context)
-                              .pushNamed('/home', arguments: result.userLogged);
+                          return navigator.pushNamed('/home',
+                              arguments: result.userLogged);
                         }
                         if (result is LoginStateError) {
                           showDialog(

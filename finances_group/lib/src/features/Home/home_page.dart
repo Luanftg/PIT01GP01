@@ -1,5 +1,6 @@
 import 'dart:core';
 
+<<<<<<< HEAD
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
@@ -7,6 +8,10 @@ import 'package:finances_group/src/data/repositories/finantial_movement_reposito
 
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/home/home_state.dart';
+=======
+import 'package:finances_group/src/models/user_model.dart';
+
+>>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
@@ -42,15 +47,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     // final HomeController homeController =
     //     HomeController(FinantialMovementRepositoryPrefsImp());
 
+=======
+>>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97
     ValueNotifier<UserModel?> userLogged = ValueNotifier<UserModel>(
         ModalRoute.of(context)!.settings.arguments as UserModel);
-
-    //var weekData = homeController.getWeekdata(userLogged);
-
-    // List<FinantialMovement>? dataset = homeController.getList(userLogged);
 
     return ValueListenableBuilder(
         valueListenable: userLogged,
@@ -117,12 +121,6 @@ class _HomePageState extends State<HomePage> {
                   FloatingActionButtonLocation.centerDocked,
             );
           }
-          if (state is HomeStateError) {
-            return const Center(
-              child: Text('deu ruim!'),
-            );
-          }
-
           return const Center(
             child: CircularProgressIndicator(),
           );
