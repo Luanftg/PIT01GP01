@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/Login/login_state.dart';
+import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {

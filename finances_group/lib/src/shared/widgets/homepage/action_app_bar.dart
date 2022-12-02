@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Login/login_controller.dart';
+import 'package:finances_group/src/features/login/login_controller.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 

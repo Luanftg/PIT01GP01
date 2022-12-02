@@ -1,4 +1,4 @@
-import 'package:finances_group/src/features/Home/home_controller.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
