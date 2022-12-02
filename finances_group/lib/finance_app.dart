@@ -1,10 +1,9 @@
 //import 'package:finances_group/src/design/theme/custom_theme_data.dart';
-import 'package:finances_group/src/view/design/theme/custom_theme_data.dart';
-import 'package:finances_group/src/view/pages/home_page.dart';
-import 'package:finances_group/src/view/pages/login_page.dart';
-import 'package:finances_group/src/view/pages/register_page.dart';
-import 'package:finances_group/src/view/pages/splash_page.dart';
-import 'package:finances_group/src/view/pages/teste.dart';
+import 'package:finances_group/src/shared/design/theme/custom_theme_data.dart';
+import 'package:finances_group/src/features/Home/home_page.dart';
+import 'package:finances_group/src/features/Login/login_page.dart';
+import 'package:finances_group/src/features/Register/register_page.dart';
+import 'package:finances_group/src/features/Splash/splash_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +27,6 @@ class FinanceApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
-        '/teste': (context) => const Teste(),
         '/splash': (context) => const SplashPage(),
       },
       theme: draculaTheme,
