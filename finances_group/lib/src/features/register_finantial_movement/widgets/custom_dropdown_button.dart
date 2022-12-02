@@ -1,8 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
-
-//List<String> list = ['Vermelho', 'Azul', 'Amarelo', 'Verde'];
 
 class CustomDropDownButton extends StatefulWidget {
   final List<String> list;
@@ -12,17 +8,16 @@ class CustomDropDownButton extends StatefulWidget {
     required this.list,
   }) : super(key: key);
 
+  static String dropDownValue = 'Vermelho';
   @override
   State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
 }
 
 class _CustomDropDownButtonState extends State<CustomDropDownButton> {
-  String dropDownValue = 'Vermelho';
-
   @override
   Widget build(BuildContext context) {
     return DropdownButton<Object>(
-      value: dropDownValue,
+      value: CustomDropDownButton.dropDownValue,
       items: widget.list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
@@ -33,8 +28,8 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
       enableFeedback: true,
       onChanged: (value) {
         setState(() {
-          RegisterFinantialMovementPage.colorString = value.toString();
-          dropDownValue = value.toString();
+          // RegisterFinantialMovementPage.colorString = value.toString();
+          CustomDropDownButton.dropDownValue = value.toString();
         });
       },
     );

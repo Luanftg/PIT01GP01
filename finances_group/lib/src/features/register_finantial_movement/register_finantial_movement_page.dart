@@ -1,11 +1,11 @@
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-import 'package:finances_group/src/features/RegisterFinantialMovement/widgets/customDropdownButton/customDropDownButton.dart';
+import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
+import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:finances_group/src/features/RegisterFinantialMovement/widgets/register_finaltial_movement/custom_switch.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -14,8 +14,6 @@ import '../../models/user_model.dart';
 class RegisterFinantialMovementPage extends StatefulWidget {
   final UserModel? userLogged;
   const RegisterFinantialMovementPage({super.key, required this.userLogged});
-  static bool valueSwitch = true;
-  static String colorString = '';
 
   @override
   State<RegisterFinantialMovementPage> createState() =>
@@ -35,6 +33,7 @@ class _RegisterFinantialMovementPageState
     list: ['Vermelho', 'Azul', 'Amarelo', 'Verde'],
   );
 
+  //static bool valueSwitch = false;
   @override
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
@@ -95,14 +94,13 @@ class _RegisterFinantialMovementPageState
                     description: titleController.text,
                     value: double.parse(valueController.text),
                     userID: 1,
-                    isIncome: RegisterFinantialMovementPage.valueSwitch,
-                    paymentDate: formater.format(DateTime.now()).toString(),
+                    isIncome: CustomSwitch.valueSwitch,
+                    paymentDate: formater.format(DateTime.now()),
                     category: Category(
                       label: categoryController.text,
-                      color: homeController.categoryColor(
-                        RegisterFinantialMovementPage.colorString,
-                      ),
-                      image: RegisterFinantialMovementPage.valueSwitch
+                      color: homeController
+                          .categoryColor(CustomDropDownButton.dropDownValue),
+                      image: CustomSwitch.valueSwitch
                           ? 'assets/income.png'
                           : 'assets/expense.png',
                     ),

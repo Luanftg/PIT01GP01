@@ -41,24 +41,26 @@ class DonutChartPainter extends CustomPainter {
 
     var startAngle = 0.0;
     canvas.drawArc(rect, startAngle, fullAngle * pi / 180, false, linePaint);
-    double incrementX = 10;
+    double incrementX = 25;
     double sum = 0.0;
     List<DataItem>? dataList = [];
-
+    double totalSum = 0.0;
     if (dataset != null) {
       for (var index = 0; index < dataset!.length; index++) {
+        totalSum += dataset![index].value;
         if (dataset![index].isIncome == false) {
-          double num = dataset![index].value;
-          num = num * -1;
-          sum += num;
+          double number = dataset![index].value;
+          number = number * -1;
+          sum += number;
         } else {
           sum += dataset![index].value;
         }
       }
+
       dataList = List.generate(
         dataset!.length,
         (index) => DataItem(
-            value: dataset![index].value / sum,
+            value: dataset![index].value / totalSum,
             label: dataset![index].category.label,
             color: dataset![index].category.color),
       );
@@ -111,15 +113,16 @@ class DonutChartPainter extends CustomPainter {
       double incrementX,
       DataItem element) {
     final newRadius = radius * 0.4;
-    final dx = -radius * 0.55 + incrementX * 0.8;
+    // final dx = -radius * 0.55 + incrementX * 0.9;
     final dy = newRadius + 35;
-    // double dx = -180 + incrementX * 0.8;
+    // double dx = -180 + incrementX * 0.95 + 16;
+    double dx = -180 + incrementX * 0.9;
 
     final position = center + Offset(dx, dy);
 
     drawTextCentered(canvas, position, label, labelStyle, 100, (Size size) {
       final rect = Rect.fromCenter(
-          center: position, width: size.width + 2, height: size.height + 5);
+          center: position, width: size.width + 5, height: size.height + 5);
       final rrect = RRect.fromRectAndRadius(rect, const Radius.circular(5));
       canvas.drawRRect(rrect, midPaint(element.color));
     });
@@ -142,7 +145,8 @@ class DonutChartPainter extends CustomPainter {
   }
 
   Size drawTextCentered(Canvas canvas, Offset position, String text,
-      TextStyle style, double maxWidth, Function(Size size) bgCb) {
+      TextStyle style, double maxWidth, Function(Size size) bgCb,
+      [bool? isObscure]) {
     final textPainter = measureText(text, style, maxWidth, TextAlign.center);
     final pos =
         position + Offset(-textPainter.width / 2, -textPainter.height / 2);

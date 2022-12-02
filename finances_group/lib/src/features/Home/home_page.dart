@@ -1,30 +1,15 @@
-import 'dart:core';
-
-<<<<<<< HEAD
-import 'package:finances_group/src/features/home/home_controller.dart';
-
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-//import 'package:finances_group/src/models/finantial_movement.dart';
-
-import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/home/home_state.dart';
-=======
-import 'package:finances_group/src/models/user_model.dart';
-
->>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97
-import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
-import 'package:finances_group/src/features/RegisterFinantialMovement/register_finantial_movement_page.dart';
+import 'package:finances_group/src/features/home/widgets/app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/body_teste.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
-import 'package:finances_group/src/features/home/widgets/homepage/app_bar.dart';
-
-import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
+import 'package:finances_group/src/features/home/widgets/custom_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/custom_drawer.dart';
+import 'package:finances_group/src/features/register_finantial_movement/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
-import 'widgets/homepage/body_teste.dart';
-import 'widgets/homepage/custom_app_bar.dart';
-//import 'widgets/homepage/custom_icon_buttom_visibility.dart';
+import '../../models/user_model.dart';
+import '../../shared/design/colors/app_custom_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,12 +32,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    // final HomeController homeController =
-    //     HomeController(FinantialMovementRepositoryPrefsImp());
-
-=======
->>>>>>> 7b6f0adde9e3ec98da4ad91afb6a98cdc2b70e97
     ValueNotifier<UserModel?> userLogged = ValueNotifier<UserModel>(
         ModalRoute.of(context)!.settings.arguments as UserModel);
 

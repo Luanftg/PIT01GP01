@@ -69,7 +69,7 @@ class CustomLinearChartPainter extends CustomPainter {
     drawDataPoints(canvas, dpPaint, rect);
     drawGuides(canvas, chartBorderPaint, rect);
     drawText(canvas, rect.topLeft + const Offset(0, -50), rect.width,
-        titleStyle, "Movimentações da semana");
+        titleStyle, "Movimentações");
     drawLabels(canvas, rect, labelStyle);
   }
 
@@ -140,7 +140,7 @@ class CustomLinearChartPainter extends CustomPainter {
   }
 
   void drawLabels(Canvas canvas, Rect rect, TextStyle labelStyle) {
-    final xLabel = ["D", "S", "T", "Q", "Q", "S", "S"];
+    final xLabel = ["1", "2", "3", "4", "5", "6", "7"];
     var columW = chartW / 6.0;
     // draw x Label
     var x = rect.left;

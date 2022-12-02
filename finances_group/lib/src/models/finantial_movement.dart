@@ -12,13 +12,13 @@ class FinantialMovement {
   final String? paymentDate;
 
   FinantialMovement({
-    this.paymentDate,
     this.id,
-    required this.category,
     required this.description,
     required this.value,
     required this.userID,
     required this.isIncome,
+    required this.category,
+    this.paymentDate,
   });
 
   Map<String, dynamic> toMap() {
