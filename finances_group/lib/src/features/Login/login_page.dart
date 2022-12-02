@@ -1,8 +1,6 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:finances_group/src/features/Login/login_controller.dart';
+import 'package:finances_group/src/features/login/login_controller.dart';
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:finances_group/src/features/Login/login_state.dart';
+import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/shared/widgets/login-register/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -79,11 +78,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                         if (result is LoginStateLoading) {
-                          const CircularProgressIndicator();
+                          const Center(child: CircularProgressIndicator());
                         }
                         if (result is LoginStateSucces) {
-                          return Navigator.of(context)
-                              .pushNamed('/home', arguments: result.userLogged);
+                          return navigator.pushNamed('/home',
+                              arguments: result.userLogged);
                         }
                         if (result is LoginStateError) {
                           showDialog(
