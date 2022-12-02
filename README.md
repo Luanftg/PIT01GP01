@@ -40,6 +40,9 @@ https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-
 
 ![Definição da Arquitetura Inicial](Sprints/arquitetura.jpg)
 
+- **Avanço da Arquitetura para *Features***
+![Alt text](Sprints/arquitetura_de_feature.jpg)
+
 ### Componentes Desenvolvidos
 
 - Componentes da **HomePage**
