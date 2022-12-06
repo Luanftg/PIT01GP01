@@ -12,7 +12,9 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 
 - *SPRINT II*
 
-<https://user-images.githubusercontent.com/51548623/205399810-8a309c09-126f-43bb-a97c-0ff1d5600ef1.mp4>
+
+https://user-images.githubusercontent.com/51548623/206007012-12474703-7f0f-455a-8cb5-9e53a824fb5c.mp4
+
 
 - **Entregas:**
 - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
