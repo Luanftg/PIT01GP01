@@ -1,5 +1,6 @@
-import 'package:finances_group/src/features/Home/widgets/homepage/body_teste.dart';
+import 'package:finances_group/src/features/Home/widgets/homepage/custom_list_view_builder.dart';
 import 'package:finances_group/src/features/Home/widgets/homepage/custom_app_bar.dart';
+import 'package:finances_group/src/features/Home/widgets/homepage/custom_bottom_app_bar.dart';
 import 'package:finances_group/src/features/Home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
@@ -19,8 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  get bottomAppBAr => null;
-
   @override
   void initState() {
     _setStatusbarColor();
@@ -71,13 +70,16 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 200),
                     CustomLinearChart(weekData: state.finantialMovementList),
                     const SizedBox(height: 80),
-                    BodyTeste(
+                    CustomListViewBuilder(
                       userLogged: state,
                     ),
                   ],
                 ),
               ),
-              bottomNavigationBar: bottomAppBAr,
+              bottomNavigationBar: const CustomBottomAppBar(
+                fabLocation: FloatingActionButtonLocation.centerDocked,
+                shape: CircularNotchedRectangle(),
+              ),
               floatingActionButton: FloatingActionButton(
                   child: Container(
                     width: 60,
