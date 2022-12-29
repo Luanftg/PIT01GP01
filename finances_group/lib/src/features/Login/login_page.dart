@@ -46,15 +46,8 @@ class _LoginPageState extends State<LoginPage> {
                 key: loginKey,
                 child: Column(
                   children: [
-                    const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        fontSize: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const Text('Entrar', style: TextStyle(fontSize: 32)),
+                    const SizedBox(height: 16),
                     CustomTextFormField(
                       controller: emailController,
                       icon: Icons.mail_outline,
@@ -92,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return AlertDialog(
                                   title: const Text('Ops, algo deu errado'),
                                   icon: const Icon(Icons.error),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: AppCustomColors.danger,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -111,9 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                         }
                       },
-                      child: const Text(
-                        'Entrar',
-                      ),
+                      child: const Text('Entrar'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -122,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Não tem login? Cadastre-se',
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: AppCustomColors.grey,
                         ),
                       ),
                     ),

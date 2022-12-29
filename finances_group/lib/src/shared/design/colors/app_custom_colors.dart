@@ -11,6 +11,7 @@ class AppCustomColors {
   static const Color foreGround = Color(0xFFF8F8F2);
   static const Color grayLight = Color(0xFFA9A9AE);
   static const Color cyan = Color(0xFF80FFEA);
+  static const Color grey = Colors.grey;
 
   static const Color divider = Color.fromARGB(131, 65, 69, 88);
 
