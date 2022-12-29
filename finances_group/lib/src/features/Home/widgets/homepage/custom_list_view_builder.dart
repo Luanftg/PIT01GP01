@@ -9,12 +9,12 @@ import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BodyTeste extends StatelessWidget {
+class CustomListViewBuilder extends StatelessWidget {
   final DateFormat formater = DateFormat('yyyy-MM-dd');
   final UserModel userLogged;
   final HomeController _controller =
       HomeController(FinantialMovementRepositoryPrefsImp());
-  BodyTeste({Key? key, required this.userLogged}) : super(key: key);
+  CustomListViewBuilder({Key? key, required this.userLogged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,6 @@ class BodyTeste extends StatelessWidget {
           );
         }
         if (snapshot.hasData) {
-          
           return ListView.builder(
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
