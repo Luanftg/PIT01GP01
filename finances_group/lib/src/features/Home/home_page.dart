@@ -1,7 +1,7 @@
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_list_view_builder.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_app_bar.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_bottom_app_bar.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_drawer.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_list_view_builder.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_bottom_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
 
