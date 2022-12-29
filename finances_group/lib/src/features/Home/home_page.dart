@@ -1,9 +1,9 @@
-import 'package:finances_group/src/features/home/widgets/app_bar.dart';
-import 'package:finances_group/src/features/home/widgets/body_teste.dart';
+import 'package:finances_group/src/features/Home/widgets/homepage/body_teste.dart';
+import 'package:finances_group/src/features/Home/widgets/homepage/custom_app_bar.dart';
+import 'package:finances_group/src/features/Home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
-import 'package:finances_group/src/features/home/widgets/custom_app_bar.dart';
-import 'package:finances_group/src/features/home/widgets/custom_drawer.dart';
+
 import 'package:finances_group/src/features/register_finantial_movement/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
@@ -19,6 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  get bottomAppBAr => null;
+
   @override
   void initState() {
     _setStatusbarColor();
