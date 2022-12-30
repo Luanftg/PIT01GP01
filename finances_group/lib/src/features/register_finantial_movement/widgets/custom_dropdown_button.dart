@@ -28,7 +28,6 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
       enableFeedback: true,
       onChanged: (value) {
         setState(() {
-          // RegisterFinantialMovementPage.colorString = value.toString();
           CustomDropDownButton.dropDownValue = value.toString();
         });
       },

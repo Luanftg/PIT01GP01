@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
@@ -16,19 +15,13 @@ class _CustomSwitchState extends State<CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return Switch(
-        activeColor: Colors.blue,
-        inactiveTrackColor: Colors.pink,
+        activeColor: AppCustomColors.cyan,
+        inactiveTrackColor: AppCustomColors.danger,
         value: CustomSwitch.valueSwitch,
         onChanged: (value) {
-          log('value: $value');
           setState(() {
-            log('value $value');
-            // RegisterFinantialMovementPage.valueSwitch =
             CustomSwitch.valueSwitch = value;
-            //     valueSwitch ? true : false;
           });
-          //log('Register.valueSwitch : $valueSwitch');
-          log('valueSwitch : $CustomSwitch.valueSwitch');
         });
   }
 }
