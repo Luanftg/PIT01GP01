@@ -1,6 +1,7 @@
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/features/register_finantial_movement/finantial_movement_controller.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
@@ -22,8 +23,8 @@ class RegisterFinantialMovementPage extends StatefulWidget {
 
 class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
-  final HomeController homeController =
-      HomeController(FinantialMovementRepositoryPrefsImp());
+  final FinantialMovementController controller =
+      FinantialMovementController(FinantialMovementRepositoryPrefsImp());
 
   var titleController = TextEditingController();
   var valueController = TextEditingController();
@@ -117,7 +118,8 @@ class _RegisterFinantialMovementPageState
                 ElevatedButton(
                   onPressed: () async {
                     bool? isFormValid = globalKey.currentState?.validate();
-                    final DateFormat formater = DateFormat('yyyy-MM-dd');
+                    final DateFormat formater =
+                        DateFormat('yyyy-MM-dd HH:MM:ss');
                     var finantialMovement = FinantialMovement(
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
@@ -126,7 +128,7 @@ class _RegisterFinantialMovementPageState
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(
                         label: categoryController.text,
-                        color: homeController
+                        color: controller
                             .categoryColor(CustomDropDownButton.dropDownValue),
                         image: CustomSwitch.valueSwitch
                             ? 'assets/income.png'
@@ -135,7 +137,7 @@ class _RegisterFinantialMovementPageState
                     );
 
                     if (isFormValid ?? false) {
-                      await homeController.create(
+                      await controller.create(
                         finantialMovement,
                         widget.userLogged!,
                       );
