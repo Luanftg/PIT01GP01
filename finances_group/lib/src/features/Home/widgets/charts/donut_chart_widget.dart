@@ -24,7 +24,9 @@ class _DonutChartWidgetState extends State<DonutChartWidget> {
   void initState() {
     super.initState();
     controller.addListener(() {
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     controller.incrementFullAngle();
   }
