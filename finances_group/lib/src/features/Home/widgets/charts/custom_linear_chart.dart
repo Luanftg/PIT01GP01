@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:finances_group/src/features/home/widgets/charts/liner_chart_controller.dart';
+import 'package:finances_group/src/features/home/widgets/charts/linear_chart_controller.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +13,13 @@ class CustomLinearChart extends StatefulWidget {
 }
 
 class _CustomLinearChartState extends State<CustomLinearChart> {
+  var controller = LinearChartController();
+
   double get minData => controller.minData;
   double get rangeData => controller.rangeData;
   double get maxData => controller.maxData;
   double get percentage => controller.percentage;
 
-  var controller = LinearChartController();
   List<double> get listOfDouble => controller.doubleList;
 
   @override
