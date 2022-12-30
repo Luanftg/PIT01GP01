@@ -8,28 +8,26 @@ import 'package:finances_group/src/features/home/home_state.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends ValueNotifier<HomeState> {
-  final IRepository<FinantialMovement> _finantialMovementRepositoryLocalImp;
+  final IRepository<FinantialMovement> _repository;
 
-  HomeController(this._finantialMovementRepositoryLocalImp)
-      : super(HomeStateInitial());
+  HomeController(this._repository) : super(HomeStateInitial());
 
   ValueNotifier<HomeState> userLogged = ValueNotifier(HomeStateInitial());
 
   double maxValue = 0;
   Future<bool> create(
       FinantialMovement finantialMovement, UserModel userModel) async {
-    var result = await _finantialMovementRepositoryLocalImp.create(
-        finantialMovement, userModel);
+    var result = await _repository.create(finantialMovement, userModel);
     return result ? true : false;
   }
 
   Future<List<FinantialMovement>> findAll(UserModel userModel) async {
-    var result = await _finantialMovementRepositoryLocalImp.findAll(userModel);
+    var result = await _repository.findAll(userModel);
     return result;
   }
 
-  List<FinantialMovement>? getList(UserModel args) {
-    return args.finantialMovementList;
+  List<FinantialMovement>? getList(UserModel userModel) {
+    return userModel.finantialMovementList;
   }
 
   Color categoryColor(String name) {
