@@ -1,12 +1,15 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {
-  Future<LoginState> logar(UserModel user) async {
-    LoginState state = LoginStateLoading();
+  late LoginState state;
+
+  Future<void> logar(UserModel user) async {
+    state = LoginStateLoading();
     final prefs = await SharedPreferences.getInstance();
 
     final List<String>? users = prefs.getStringList('user1');
@@ -16,6 +19,7 @@ class LoginController {
 
       final mapedList =
           decodedList.map((e) => UserModel.fromJson((e))).toList();
+      log(mapedList.toString());
 
       try {
         final UserModel userFromShared = mapedList.firstWhere(
@@ -28,14 +32,11 @@ class LoginController {
         await prefs.setStringList('user1', userListToSave);
 
         state = LoginStateSucces(userFromShared);
-        return state;
       } catch (e) {
         state = LoginStateError('Credenciais inválidas');
-        return state;
       }
     }
-    state = LoginStateError('Credenciais inválidas');
-    return state;
+    //state = LoginStateError('Credenciais inválidas');
   }
 
   void logout(UserModel userModel) async {

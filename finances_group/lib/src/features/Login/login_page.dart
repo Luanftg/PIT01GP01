@@ -18,9 +18,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final loginUser = LoginController();
+  final controller = LoginController();
 
   final loginKey = GlobalKey();
+
+  LoginState get state => controller.state;
 
   @override
   void initState() {
@@ -65,20 +67,21 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: <Object>() async {
-                        final result = await loginUser.logar(
+                        await controller.logar(
                           LoginModel(
                             email: emailController.text,
                             password: passwordController.text,
                           ),
                         );
-                        if (result is LoginStateLoading) {
+                        if (state is LoginStateLoading) {
                           const Center(child: CircularProgressIndicator());
                         }
-                        if (result is LoginStateSucces) {
+                        if (state is LoginStateSucces) {
                           return navigator.pushNamed('/home',
-                              arguments: result.userLogged);
+                              arguments:
+                                  (state as LoginStateSucces).userLogged);
                         }
-                        if (result is LoginStateError) {
+                        if (state is LoginStateError) {
                           showDialog(
                               context: context,
                               builder: (context) {
