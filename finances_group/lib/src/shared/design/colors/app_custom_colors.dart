@@ -12,6 +12,7 @@ class AppCustomColors {
   static const Color grayLight = Color(0xFFA9A9AE);
   static const Color cyan = Color(0xFF80FFEA);
   static const Color grey = Colors.grey;
+  static const Color mainBackgroug = Color.fromARGB(255, 50, 53, 66);
 
   static const Color divider = Color.fromARGB(131, 65, 69, 88);
 
@@ -32,9 +33,4 @@ class AppCustomColors {
       primary,
     ],
   );
-
-  /*  static const Color secondary = Color.fromRGBO(13, 18, 56, 1);
-  static const Color primary = Color.fromRGBO(63, 222, 174, 1);
-  static const Color black = Color.fromRGBO(13, 16, 40, 1);
-  static const Color white = Color.fromARGB(255, 230, 255, 247); */
 }

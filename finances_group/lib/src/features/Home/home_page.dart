@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  // Seleção da StatusBar Color
   _setStatusbarColor() {
     FlutterStatusbarcolor.setStatusBarColor(AppCustomColors.dark);
   }
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                         userImage: state.photoURL,
                         userLogged: state),
                     const Divider(
-                      color: Color.fromARGB(131, 65, 69, 88),
+                      color: AppCustomColors.divider,
                       thickness: 1,
                       indent: 20,
                       endIndent: 20,

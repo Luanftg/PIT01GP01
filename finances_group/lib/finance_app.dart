@@ -1,3 +1,4 @@
+import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/shared/design/theme/custom_theme_data.dart';
 import 'package:finances_group/src/features/home/home_page.dart';
 import 'package:finances_group/src/features/login/login_page.dart';
@@ -14,9 +15,8 @@ class FinanceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.light.copyWith(
-          systemNavigationBarColor: const Color.fromARGB(255, 50, 53, 66),
-          systemNavigationBarDividerColor:
-              const Color.fromARGB(255, 50, 53, 66)),
+          systemNavigationBarColor: AppCustomColors.mainBackgroug,
+          systemNavigationBarDividerColor: AppCustomColors.mainBackgroug),
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
