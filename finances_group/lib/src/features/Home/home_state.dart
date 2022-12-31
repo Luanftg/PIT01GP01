@@ -16,3 +16,8 @@ class HomeStateSucess extends HomeState {
   final UserModel userLogged;
   HomeStateSucess(this.userLogged);
 }
+
+class HomeStateWelcome extends HomeState {
+  final UserModel userLogged;
+  HomeStateWelcome(this.userLogged);
+}
