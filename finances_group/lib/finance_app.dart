@@ -1,3 +1,4 @@
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/shared/design/theme/custom_theme_data.dart';
 import 'package:finances_group/src/features/home/home_page.dart';
@@ -23,7 +24,9 @@ class FinanceApp extends StatelessWidget {
       title: 'FinanceApp',
       initialRoute: '/splash',
       routes: {
-        '/home': (context) => const HomePage(),
+        '/home': (context) => HomePage(
+            userLogged:
+                (ModalRoute.of(context)!.settings.arguments) as UserModel),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/splash': (context) => const SplashPage(),

@@ -5,15 +5,11 @@ import 'package:flutter/material.dart';
 import '../../../../models/user_model.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final String? userName;
-  final String? userImage;
-  final UserModel? userLogged;
+  final UserModel userLogged;
 
   const CustomAppBar({
     super.key,
-    required this.userName,
-    required this.userImage,
-    this.userLogged,
+    required this.userLogged,
   });
 
   @override
@@ -22,7 +18,8 @@ class CustomAppBar extends StatelessWidget {
       elevation: 0,
       centerTitle: false,
       toolbarHeight: 75,
-      title: TitleAppBar(userImage: userLogged!.photoURL, userName: userName),
+      title: TitleAppBar(
+          userImage: userLogged.photoURL, userName: userLogged.name),
       actions: [
         ActionAppBar(
           userLogged: userLogged,
