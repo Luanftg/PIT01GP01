@@ -37,7 +37,7 @@ class PrefsService {
         return result;
       } else {
         var registerList = <String>[];
-        // userModel.finantialMovementList = [];
+        userModel.finantialMovementList = [];
         userModel.finantialMovementList!.add(finantialMovement);
         //log('UserModel: $userModel');
         mapedList[indexUser] = userModel;
