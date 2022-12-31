@@ -7,7 +7,7 @@ import '../../models/finantial_movement.dart';
 class FinantialMovementRepositoryPrefsImp
     implements IRepository<FinantialMovement> {
   @override
-  Future<bool> create(value, UserModel userModel) async {
+  Future<bool> create(FinantialMovement value, UserModel userModel) async {
     var response = await PrefsService.save(value, userModel);
     return response ? true : false;
   }
