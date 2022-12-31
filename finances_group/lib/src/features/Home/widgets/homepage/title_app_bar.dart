@@ -19,28 +19,20 @@ class TitleAppBar extends StatelessWidget {
           padding: const EdgeInsets.only(right: 8),
           child: GestureDetector(
               onTap: () => {Scaffold.of(context).openDrawer()},
-              child:
-                  //userImage != null
-                  CircleAvatar(
+              child: CircleAvatar(
                 backgroundImage: NetworkImage(
-                  userImage!.isNotEmpty ?
-                      userImage! : 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg',
+                  userImage?.isNotEmpty ?? false
+                      ? userImage!
+                      : 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg',
                 ),
                 radius: 24,
-              )
-              // : const CircleAvatar(
-              //     backgroundImage: NetworkImage(
-              //         'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'),
-              //     radius: 24,
-              //   ),
-              ),
+              )),
         ),
         Text(
-          userName ?? 'User Without Name',
+          userName ?? 'Usuário sem nome',
           style: CustomAppTextTheme.body.copyWith(
             fontSize: 18,
           ),
-          //style: FinanceTextStyles.headlineLarge,
         ),
       ],
     );
