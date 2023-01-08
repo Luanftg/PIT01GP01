@@ -1,6 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
+import 'package:finances_group/src/features/home/widgets/charts/dounut_chart_controller.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'donut_chart_painter.dart';
@@ -9,7 +9,7 @@ class DonutChartWidget extends StatefulWidget {
   final List<FinantialMovement>? dataset;
   const DonutChartWidget({
     super.key,
-    required this.dataset,
+    this.dataset,
   });
 
   @override
@@ -17,36 +17,31 @@ class DonutChartWidget extends StatefulWidget {
 }
 
 class _DonutChartWidgetState extends State<DonutChartWidget> {
-  late Timer timer;
-  double fullAngle = 0.0;
-  double secondsToComplete = 5;
+  var controller = DonutChartController();
+  double get _fullAngle => controller.fullAngle;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(milliseconds: 1000 ~/ 60), (timer) {
-      setState(() {
-        fullAngle += 360 / (secondsToComplete * 1000 ~/ 60);
-        if (fullAngle >= 360) {
-          fullAngle = 360;
-          timer.cancel();
-        }
-      });
+    controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
     });
+    controller.incrementFullAngle();
   }
 
   @override
   void dispose() {
-    timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
+      color: AppCustomColors.grey,
       child: CustomPaint(
-        painter: DonutChartPainter(widget.dataset, fullAngle),
+        painter: DonutChartPainter(widget.dataset, _fullAngle),
         child: Container(),
       ),
     );

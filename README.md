@@ -4,14 +4,22 @@
 
 ## Desafio
 
-Desenvolvimento de uma aplicação para gerenciamento de finanças pessoais.
+Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoais.
 
-https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4
+- *SPRINT I*
 
-- Entregas:
-  - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
-  - [x] Sprint I ![Sprint I](Sprints/sprintI.png)
-  - [x] Sprint II ![Sprint II](Sprints/sprintII.png)
+<https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4>
+
+- *SPRINT II*
+
+
+https://user-images.githubusercontent.com/51548623/206007012-12474703-7f0f-455a-8cb5-9e53a824fb5c.mp4
+
+
+- **Entregas:**
+- [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
+- [x] Sprint I ![Sprint I](Sprints/sprintI.png)
+- [x] Sprint II ![Sprint II](Sprints/sprintII.png)
 
 [Link da Apresentação PROZ Educação](https://docs.google.com/presentation/d/181Vlhx1l7lmpuS8htd34nlJ9vLXomLDjK2Sc5mJm4JY/edit#slide=id.g1395cdef0a2_0_83 )
 
@@ -28,19 +36,20 @@ https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-
   ![Alt text](Sprints/Page-Flow-SprintII.png)
 
 - *Dependências Utilizadas*
-  - [flutter_credit_card_brazilian](https://pub.dev/packages/flutter_credit_card_brazilian)
-  - [google_fonts](https://pub.dev/packages/google_fonts)
-  - [flutter_statusbarcolor_ns](https://pub.dev/packages/flutter_statusbarcolor_ns)
-  - [cupertino_icons](https://pub.dev/packages/cupertino_icons)
-  - [path_provider](https://pub.dev/packages/path_provider)
-  - [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter)
-  - [shared_preferences](https://pub.dev/packages/shared_preferences)
+- [flutter_credit_card_brazilian](https://pub.dev/packages/flutter_credit_card_brazilian)
+- [google_fonts](https://pub.dev/packages/google_fonts)
+- [flutter_statusbarcolor_ns](https://pub.dev/packages/flutter_statusbarcolor_ns)
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons)
+- [path_provider](https://pub.dev/packages/path_provider)
+- [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter)
+- [shared_preferences](https://pub.dev/packages/shared_preferences)
 
 - **Definição da Arquitetura Inicial:**
 
 ![Definição da Arquitetura Inicial](Sprints/arquitetura.jpg)
 
-- **Avanço da Arquitetura para *Features***
+- **Avanço da Arquitetura para Features**
+
 ![Alt text](Sprints/arquitetura_de_feature.jpg)
 
 ### Componentes Desenvolvidos
@@ -61,6 +70,17 @@ https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-
 - [x] custom - *TextFormField*
 - Componentes da **Register-Finantial-Movement-Page**
 - [x] customSwitch - *Switch*
+
+### Idéias para as próximas Implementações de Funcionalidades
+
+- :star: ***Lembrete de Registro de Movimentações***
+![Alt text](Sprints/exemplo_lembrete_diario.jpg)
+
+- :star: ***Simulador de Valor Futuro***
+![Alt text](Sprints/exemplo_monetus.jpg)
+
+- :star: ***Calculadora do milhão***
+![Alt text](Sprints/exemplo_calc_do_milhao.jpg)
 
 #### Protótipo com ideia inicial
 

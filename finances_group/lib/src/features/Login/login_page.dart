@@ -18,9 +18,11 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final loginUser = LoginController();
+  final controller = LoginController();
 
   final loginKey = GlobalKey();
+
+  LoginState get state => controller.state;
 
   @override
   void initState() {
@@ -46,15 +48,8 @@ class _LoginPageState extends State<LoginPage> {
                 key: loginKey,
                 child: Column(
                   children: [
-                    const Text(
-                      'Entrar',
-                      style: TextStyle(
-                        fontSize: 32,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    const Text('Entrar', style: TextStyle(fontSize: 32)),
+                    const SizedBox(height: 16),
                     CustomTextFormField(
                       controller: emailController,
                       icon: Icons.mail_outline,
@@ -72,27 +67,28 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: <Object>() async {
-                        final result = await loginUser.logar(
+                        await controller.logar(
                           LoginModel(
                             email: emailController.text,
                             password: passwordController.text,
                           ),
                         );
-                        if (result is LoginStateLoading) {
+                        if (state is LoginStateLoading) {
                           const Center(child: CircularProgressIndicator());
                         }
-                        if (result is LoginStateSucces) {
+                        if (state is LoginStateSucces) {
                           return navigator.pushNamed('/home',
-                              arguments: result.userLogged);
+                              arguments:
+                                  (state as LoginStateSucces).userLogged);
                         }
-                        if (result is LoginStateError) {
+                        if (state is LoginStateError) {
                           showDialog(
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
                                   title: const Text('Ops, algo deu errado'),
                                   icon: const Icon(Icons.error),
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: AppCustomColors.danger,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -111,9 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                         }
                       },
-                      child: const Text(
-                        'Entrar',
-                      ),
+                      child: const Text('Entrar'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -122,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Não tem login? Cadastre-se',
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: AppCustomColors.grey,
                         ),
                       ),
                     ),

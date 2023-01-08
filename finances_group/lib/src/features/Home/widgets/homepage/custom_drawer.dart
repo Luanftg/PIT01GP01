@@ -1,18 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:finances_group/src/shared/design/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class CustomDrawer extends StatefulWidget {
-  final String userImage;
-  final String userName;
-  final String userEmail;
-  const CustomDrawer(
-      {super.key,
-      required this.userImage,
-      required this.userName,
-      required this.userEmail});
+  final UserModel userModel;
+  const CustomDrawer({super.key, required this.userModel});
   @override
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
@@ -26,16 +20,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
           UserAccountsDrawerHeader(
             decoration:
                 const BoxDecoration(color: AppCustomColors.darkSecondary),
-            accountName:
-                Text(widget.userName, style: CustomAppTextTheme.headline2),
+            accountName: Text(widget.userModel.name ?? '',
+                style: CustomAppTextTheme.headline2),
             accountEmail: Text(
-              widget.userEmail,
+              widget.userModel.email ?? '',
               style: CustomAppTextTheme.body,
             ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  widget.userImage,
+                  widget.userModel.photoURL!.isEmpty
+                      ? "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+                      : widget.userModel.photoURL ?? '',
                 ),
               ),
             ),
