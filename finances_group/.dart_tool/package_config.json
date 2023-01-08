@@ -116,6 +116,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
@@ -338,7 +344,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-01-08T21:00:27.246422Z",
+  "generated": "2023-01-08T21:01:12.115959Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
