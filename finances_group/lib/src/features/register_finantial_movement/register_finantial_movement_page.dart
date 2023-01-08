@@ -28,11 +28,7 @@ class _RegisterFinantialMovementPageState
   var valueController = TextEditingController();
   var categoryController = TextEditingController();
   final globalKey = GlobalKey<FormState>();
-  static bool isVisible = false;
-
-  final CustomDropDownButton customDropDownButton = const CustomDropDownButton(
-    list: ['Vermelho', 'Azul', 'Amarelo', 'Verde'],
-  );
+  static bool isNewCategory = false;
 
   @override
   void dispose() {
@@ -45,6 +41,7 @@ class _RegisterFinantialMovementPageState
   @override
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
+
     final List<String> listaDeCategoria = [
       "Geral",
       "Casa",
@@ -104,28 +101,8 @@ class _RegisterFinantialMovementPageState
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: !isVisible,
-                        child: CustomDropDownButton(list: listaDeCategoria),
-                      ),
-                      const SizedBox(
-                        width: 32,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isVisible = !isVisible;
-                          });
-                        },
-                        child: const Icon(Icons.add),
-                      ),
-                    ],
-                  ),
                   Visibility(
-                    visible: isVisible,
+                    visible: isNewCategory,
                     child: Column(
                       children: [
                         TextFormField(
@@ -144,12 +121,29 @@ class _RegisterFinantialMovementPageState
                           ),
                         ),
                         const SizedBox(height: 30),
-                        customDropDownButton,
+                        //customDropDownButton,
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Visibility(
+                        visible: !isNewCategory,
+                        child: CustomDropDownButton(list: listaDeCategoria),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isNewCategory = !isNewCategory;
+                          });
+                        },
+                        child:
+                            Icon(!isNewCategory ? Icons.add : Icons.arrow_back),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 30),
                   ElevatedButton(
@@ -164,9 +158,9 @@ class _RegisterFinantialMovementPageState
                         isIncome: CustomSwitch.valueSwitch,
                         paymentDate: formater.format(DateTime.now()),
                         category: Category(
-                          label: categoryController.text,
-                          color: controller.categoryColor(
-                              CustomDropDownButton.dropDownValue ?? ''),
+                          label: isNewCategory
+                              ? categoryController.text
+                              : CustomDropDownButton.dropDownValue ?? "",
                           image: CustomSwitch.valueSwitch
                               ? 'assets/income.png'
                               : 'assets/expense.png',
