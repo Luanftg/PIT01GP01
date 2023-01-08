@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,15 +12,12 @@ class PrefsService {
       FinantialMovement finantialMovement, UserModel userModel) async {
     var prefs = await SharedPreferences.getInstance();
     var register = prefs.getStringList(_userAuthenticated);
-    log('register: $register');
     bool result = false;
 
     if (register != null) {
       final decodedList = register.map((e) => jsonDecode(e)).toList();
       final mapedList =
           decodedList.map((e) => UserModel.fromJson((e))).toList();
-
-      log('MapedList: $mapedList');
       final int indexUser = mapedList.indexOf(userModel);
       List<FinantialMovement>? fmList = userModel.finantialMovementList;
 
