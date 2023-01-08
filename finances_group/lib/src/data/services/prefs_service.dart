@@ -8,9 +8,13 @@ import '../../models/user_model.dart';
 class PrefsService {
   static const String _userAuthenticated = 'user1';
 
+  static Future<SharedPreferences> getInstance() async {
+    return SharedPreferences.getInstance();
+  }
+
   static Future<bool> save(
       FinantialMovement finantialMovement, UserModel userModel) async {
-    var prefs = await SharedPreferences.getInstance();
+    var prefs = await getInstance();
     var register = prefs.getStringList(_userAuthenticated);
     bool result = false;
 
@@ -47,7 +51,7 @@ class PrefsService {
   }
 
   static Future<String> readFile() async {
-    var prefs = await SharedPreferences.getInstance();
+    var prefs = await getInstance();
 
     var jsonResult = prefs.getStringList(_userAuthenticated);
 
