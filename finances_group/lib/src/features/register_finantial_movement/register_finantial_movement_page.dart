@@ -102,26 +102,19 @@ class _RegisterFinantialMovementPageState
                 const SizedBox(height: 30),
                 Visibility(
                   visible: isNewCategory,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        validator: (String? text) {
-                          if (text == null || text.isEmpty) {
-                            return 'O campo Categoria não pode ser vazio';
-                          }
-                          return null;
-                        },
-                        controller: categoryController,
-                        decoration: InputDecoration(
-                          constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width * 0.8),
-                          label: const Text('Categoria:'),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      //customDropDownButton,
-                    ],
+                  child: TextFormField(
+                    validator: (String? text) {
+                      if (text == null || text.isEmpty) {
+                        return 'O campo Categoria não pode ser vazio';
+                      }
+                      return null;
+                    },
+                    controller: categoryController,
+                    decoration: InputDecoration(
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.8),
+                      label: const Text('Categoria:'),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),
