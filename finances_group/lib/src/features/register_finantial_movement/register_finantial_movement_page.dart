@@ -5,8 +5,8 @@ import 'package:finances_group/src/features/register_finantial_movement/widgets/
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
-
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 import '../../models/user_model.dart';
 
@@ -28,10 +28,7 @@ class _RegisterFinantialMovementPageState
   var valueController = TextEditingController();
   var categoryController = TextEditingController();
   final globalKey = GlobalKey<FormState>();
-
-  final CustomDropDownButton customDropDownButton = const CustomDropDownButton(
-    list: ['Vermelho', 'Azul', 'Amarelo', 'Verde'],
-  );
+  static bool isNewCategory = false;
 
   @override
   void dispose() {
@@ -45,6 +42,16 @@ class _RegisterFinantialMovementPageState
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
 
+    final List<String> listaDeCategoria = [
+      "Geral",
+      "Casa",
+      "Alimentação",
+      "Transporte",
+      "Pet",
+      "Saúde",
+      "Lazer"
+    ];
+
     return Scaffold(
       appBar: AppBar(title: const Text('Adicionar movimentação')),
       body: Center(
@@ -54,6 +61,14 @@ class _RegisterFinantialMovementPageState
             child: Column(
               children: [
                 const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Despesa'),
+                    CustomSwitch(),
+                    Text('Receita'),
+                  ],
+                ),
                 TextFormField(
                   validator: (text) {
                     if (text == null || text.isEmpty) {
@@ -85,31 +100,41 @@ class _RegisterFinantialMovementPageState
                   ),
                 ),
                 const SizedBox(height: 30),
-                TextFormField(
-                  validator: (String? text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Categoria não pode ser vazio';
-                    }
-                    return null;
-                  },
-                  controller: categoryController,
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Categoria:'),
+                Visibility(
+                  visible: isNewCategory,
+                  child: TextFormField(
+                    validator: (String? text) {
+                      if (text == null || text.isEmpty) {
+                        return 'O campo Categoria não pode ser vazio';
+                      }
+                      return null;
+                    },
+                    controller: categoryController,
+                    decoration: InputDecoration(
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.8),
+                      label: const Text('Categoria:'),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),
-                customDropDownButton,
-                const SizedBox(
-                  height: 30,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Despesa'),
-                    CustomSwitch(),
-                    Text('Receita'),
+                  children: [
+                    Visibility(
+                      visible: !isNewCategory,
+                      child: CustomDropDownButton(list: listaDeCategoria),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isNewCategory = !isNewCategory;
+                        });
+                      },
+                      child:
+                          Icon(!isNewCategory ? Icons.add : Icons.arrow_back),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -121,13 +146,14 @@ class _RegisterFinantialMovementPageState
                     var finantialMovement = FinantialMovement(
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
-                      userID: 1,
+                      userID:
+                          int.tryParse((widget.userLogged?.id).toString()) ?? 1,
                       isIncome: CustomSwitch.valueSwitch,
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(
-                        label: categoryController.text,
-                        color: controller
-                            .categoryColor(CustomDropDownButton.dropDownValue),
+                        label: isNewCategory
+                            ? categoryController.text
+                            : CustomDropDownButton.dropDownValue ?? "",
                         image: CustomSwitch.valueSwitch
                             ? 'assets/income.png'
                             : 'assets/expense.png',
