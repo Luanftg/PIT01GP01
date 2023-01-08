@@ -58,131 +58,129 @@ class _RegisterFinantialMovementPageState
         child: SingleChildScrollView(
           child: Form(
             key: globalKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Despesa'),
-                      CustomSwitch(),
-                      Text('Receita'),
-                    ],
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text('Despesa'),
+                    CustomSwitch(),
+                    Text('Receita'),
+                  ],
+                ),
+                TextFormField(
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'O campo Título não pode ser vazio';
+                    }
+                    return null;
+                  },
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.8),
+                    label: const Text('Título:'),
                   ),
-                  TextFormField(
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'O campo Título não pode ser vazio';
-                      }
-                      return null;
-                    },
-                    controller: titleController,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8),
-                      label: const Text('Título:'),
-                    ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: valueController,
+                  keyboardType: TextInputType.number,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'O campo Valor não pode ser vazio';
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.8),
+                    label: const Text('Valor:'),
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    controller: valueController,
-                    keyboardType: TextInputType.number,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'O campo Valor não pode ser vazio';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8),
-                      label: const Text('Valor:'),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Visibility(
-                    visible: isNewCategory,
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          validator: (String? text) {
-                            if (text == null || text.isEmpty) {
-                              return 'O campo Categoria não pode ser vazio';
-                            }
-                            return null;
-                          },
-                          controller: categoryController,
-                          decoration: InputDecoration(
-                            constraints: BoxConstraints(
-                                maxWidth:
-                                    MediaQuery.of(context).size.width * 0.8),
-                            label: const Text('Categoria:'),
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        //customDropDownButton,
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                const SizedBox(height: 30),
+                Visibility(
+                  visible: isNewCategory,
+                  child: Column(
                     children: [
-                      Visibility(
-                        visible: !isNewCategory,
-                        child: CustomDropDownButton(list: listaDeCategoria),
-                      ),
-                      const SizedBox(width: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            isNewCategory = !isNewCategory;
-                          });
+                      TextFormField(
+                        validator: (String? text) {
+                          if (text == null || text.isEmpty) {
+                            return 'O campo Categoria não pode ser vazio';
+                          }
+                          return null;
                         },
-                        child:
-                            Icon(!isNewCategory ? Icons.add : Icons.arrow_back),
+                        controller: categoryController,
+                        decoration: InputDecoration(
+                          constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.8),
+                          label: const Text('Categoria:'),
+                        ),
                       ),
+                      const SizedBox(height: 30),
+                      //customDropDownButton,
                     ],
                   ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                    onPressed: () async {
-                      bool? isFormValid = globalKey.currentState?.validate();
-                      final DateFormat formater =
-                          DateFormat('yyyy-MM-dd HH:MM:ss');
-                      var finantialMovement = FinantialMovement(
-                        description: titleController.text,
-                        value: double.tryParse(valueController.text) ?? 0,
-                        userID: 1,
-                        isIncome: CustomSwitch.valueSwitch,
-                        paymentDate: formater.format(DateTime.now()),
-                        category: Category(
-                          label: isNewCategory
-                              ? categoryController.text
-                              : CustomDropDownButton.dropDownValue ?? "",
-                          image: CustomSwitch.valueSwitch
-                              ? 'assets/income.png'
-                              : 'assets/expense.png',
-                        ),
-                      );
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: !isNewCategory,
+                      child: CustomDropDownButton(list: listaDeCategoria),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isNewCategory = !isNewCategory;
+                        });
+                      },
+                      child:
+                          Icon(!isNewCategory ? Icons.add : Icons.arrow_back),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () async {
+                    bool? isFormValid = globalKey.currentState?.validate();
+                    final DateFormat formater =
+                        DateFormat('yyyy-MM-dd HH:MM:ss');
+                    var finantialMovement = FinantialMovement(
+                      description: titleController.text,
+                      value: double.tryParse(valueController.text) ?? 0,
+                      userID: 1,
+                      isIncome: CustomSwitch.valueSwitch,
+                      paymentDate: formater.format(DateTime.now()),
+                      category: Category(
+                        label: isNewCategory
+                            ? categoryController.text
+                            : CustomDropDownButton.dropDownValue ?? "",
+                        image: CustomSwitch.valueSwitch
+                            ? 'assets/income.png'
+                            : 'assets/expense.png',
+                      ),
+                    );
 
-                      if (isFormValid ?? false) {
-                        await controller.create(
-                          finantialMovement,
-                          widget.userLogged!,
-                        );
-                        registerContextNavigator.pushNamed(
-                          '/home',
-                          arguments: widget.userLogged,
-                        );
-                      }
-                    },
-                    child: const Text('Adicionar'),
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
+                    if (isFormValid ?? false) {
+                      await controller.create(
+                        finantialMovement,
+                        widget.userLogged!,
+                      );
+                      registerContextNavigator.pushNamed(
+                        '/home',
+                        arguments: widget.userLogged,
+                      );
+                    }
+                  },
+                  child: const Text('Adicionar'),
+                ),
+                const SizedBox(height: 30),
+              ],
             ),
           ),
         ),
