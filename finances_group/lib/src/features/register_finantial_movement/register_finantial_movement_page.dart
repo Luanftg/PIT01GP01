@@ -1,12 +1,14 @@
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/data/services/firestore_service.dart';
 import 'package:finances_group/src/features/register_finantial_movement/finantial_movement_controller.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
-
+import 'package:finances_group/src/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 import '../../models/user_model.dart';
 
@@ -28,10 +30,14 @@ class _RegisterFinantialMovementPageState
   var valueController = TextEditingController();
   var categoryController = TextEditingController();
   final globalKey = GlobalKey<FormState>();
+  static bool isNewCategory = false;
+  List<String> listaDeCategoria = [];
 
-  final CustomDropDownButton customDropDownButton = const CustomDropDownButton(
-    list: ['Vermelho', 'Azul', 'Amarelo', 'Verde'],
-  );
+  @override
+  void initState() {
+    _fetchCategories();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -41,10 +47,14 @@ class _RegisterFinantialMovementPageState
     super.dispose();
   }
 
+  void _fetchCategories() async {
+    listaDeCategoria = await controller.fetchCategories();
+    if (mounted) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
-
     return Scaffold(
       appBar: AppBar(title: const Text('Adicionar movimentação')),
       body: Center(
@@ -54,62 +64,59 @@ class _RegisterFinantialMovementPageState
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                TextFormField(
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Título não pode ser vazio';
-                    }
-                    return null;
-                  },
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Título:'),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: valueController,
-                  keyboardType: TextInputType.number,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Valor não pode ser vazio';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Valor:'),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                TextFormField(
-                  validator: (String? text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Categoria não pode ser vazio';
-                    }
-                    return null;
-                  },
-                  controller: categoryController,
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Categoria:'),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                customDropDownButton,
-                const SizedBox(
-                  height: 30,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text('Despesa'),
                     CustomSwitch(),
                     Text('Receita'),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                CustomTextFormField(
+                  icon: Icons.text_fields_sharp,
+                  label: 'Título',
+                  controller: titleController,
+                  textInputAction: TextInputAction.next,
+                  typeKeyboard: TextInputType.name,
+                ),
+                const SizedBox(height: 32),
+                CustomTextFormField(
+                  icon: Icons.monetization_on_outlined,
+                  label: 'Valor',
+                  controller: valueController,
+                  textInputAction: TextInputAction.next,
+                  typeKeyboard: TextInputType.number,
+                ),
+                const SizedBox(height: 32),
+                Visibility(
+                  visible: isNewCategory,
+                  child: CustomTextFormField(
+                    icon: Icons.category_outlined,
+                    label: 'Categoria',
+                    controller: categoryController,
+                    textInputAction: TextInputAction.next,
+                    typeKeyboard: TextInputType.name,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: !isNewCategory,
+                      child: CustomDropDownButton(list: listaDeCategoria),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          isNewCategory = !isNewCategory;
+                        });
+                      },
+                      child:
+                          Icon(!isNewCategory ? Icons.add : Icons.arrow_back),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 30),
@@ -121,13 +128,14 @@ class _RegisterFinantialMovementPageState
                     var finantialMovement = FinantialMovement(
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
-                      userID: 1,
+                      userID:
+                          int.tryParse((widget.userLogged?.id).toString()) ?? 1,
                       isIncome: CustomSwitch.valueSwitch,
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(
-                        label: categoryController.text,
-                        color: controller
-                            .categoryColor(CustomDropDownButton.dropDownValue),
+                        label: isNewCategory
+                            ? categoryController.text
+                            : CustomDropDownButton.dropDownValue ?? "",
                         image: CustomSwitch.valueSwitch
                             ? 'assets/income.png'
                             : 'assets/expense.png',
@@ -136,9 +144,12 @@ class _RegisterFinantialMovementPageState
 
                     if (isFormValid ?? false) {
                       await controller.create(
-                        finantialMovement,
-                        widget.userLogged!,
-                      );
+                          finantialMovement, widget.userLogged!);
+                      if (!listaDeCategoria
+                          .contains(finantialMovement.category.label)) {
+                        await controller
+                            .saveCategory(finantialMovement.category);
+                      }
                       registerContextNavigator.pushNamed(
                         '/home',
                         arguments: widget.userLogged,

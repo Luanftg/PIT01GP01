@@ -39,10 +39,10 @@ class _LoginPageState extends State<LoginPage> {
     final navigator = Navigator.of(context);
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Form(
                 key: loginKey,
