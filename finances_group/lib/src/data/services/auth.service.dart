@@ -1,3 +1,5 @@
+import 'package:finances_group/src/data/services/firestore_service.dart';
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +31,8 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
-  register(String email, String password, String phoneNumber) async {
+  void register(String email, String password, String name, String phone,
+      String cpf) async {
     await Future.delayed(const Duration(seconds: 1));
     try {
       await _auth.createUserWithEmailAndPassword(
@@ -37,7 +40,12 @@ class AuthService extends ChangeNotifier {
         password: password,
       );
 
+      usuario?.updateDisplayName(name);
+
       _getUser();
+
+      FireStoreService.registerUser(UserModel(usuario?.uid,
+          email: usuario?.email, name: name, phone: phone, cpf: cpf));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw AuthException('A senha é muito fraca');
@@ -47,7 +55,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  login(String email, String password) async {
+  void login(String email, String password) async {
     await Future.delayed(const Duration(seconds: 1));
     try {
       await _auth.signInWithEmailAndPassword(
