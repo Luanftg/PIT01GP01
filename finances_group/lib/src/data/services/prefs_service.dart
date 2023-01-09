@@ -61,4 +61,29 @@ class PrefsService {
     }
     return '';
   }
+
+  Future<void> register(RegisterModel user) async {
+    late List<UserModel> userList;
+    final prefs = await SharedPreferences.getInstance();
+
+    var result = prefs.getStringList('user1');
+
+    if (result != null) {
+      final decodedList = result.map((e) => jsonDecode(e));
+
+      final mapedList =
+          decodedList.map((e) => UserModel.fromJson((e))).toList();
+
+      mapedList.add(user);
+
+      final userListToSave = mapedList.map((e) => jsonEncode(e)).toList();
+      await prefs.setStringList('user1', userListToSave);
+    } else {
+      userList = [];
+      userList.add(user);
+      final userListToSave = userList.map((e) => jsonEncode(e)).toList();
+
+      await prefs.setStringList('user1', userListToSave);
+    }
+  }
 }
