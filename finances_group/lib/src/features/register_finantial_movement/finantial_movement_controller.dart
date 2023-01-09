@@ -24,9 +24,9 @@ class FinantialMovementController {
     }
     List<String> listaDeCategoria = [];
 
-    listaDeMapDeCategoria.docs.forEach((element) {
+    for (var element in listaDeMapDeCategoria.docs) {
       listaDeCategoria.add(element["label"]);
-    });
+    }
     return listaDeCategoria;
   }
 
