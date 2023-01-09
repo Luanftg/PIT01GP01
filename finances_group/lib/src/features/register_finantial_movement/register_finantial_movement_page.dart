@@ -5,6 +5,7 @@ import 'package:finances_group/src/features/register_finantial_movement/widgets/
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/shared/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -70,55 +71,34 @@ class _RegisterFinantialMovementPageState
                     Text('Receita'),
                   ],
                 ),
-                TextFormField(
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Título não pode ser vazio';
-                    }
-                    return null;
-                  },
+                const SizedBox(height: 32),
+                CustomTextFormField(
+                  icon: Icons.text_fields_sharp,
+                  label: 'Título',
                   controller: titleController,
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Título:'),
-                  ),
+                  textInputAction: TextInputAction.next,
+                  typeKeyboard: TextInputType.name,
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
+                const SizedBox(height: 32),
+                CustomTextFormField(
+                  icon: Icons.monetization_on_outlined,
+                  label: 'Valor',
                   controller: valueController,
-                  keyboardType: TextInputType.number,
-                  validator: (text) {
-                    if (text == null || text.isEmpty) {
-                      return 'O campo Valor não pode ser vazio';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.8),
-                    label: const Text('Valor:'),
-                  ),
+                  textInputAction: TextInputAction.next,
+                  typeKeyboard: TextInputType.number,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 32),
                 Visibility(
                   visible: isNewCategory,
-                  child: TextFormField(
-                    validator: (String? text) {
-                      if (text == null || text.isEmpty) {
-                        return 'O campo Categoria não pode ser vazio';
-                      }
-                      return null;
-                    },
+                  child: CustomTextFormField(
+                    icon: Icons.category_outlined,
+                    label: 'Categoria',
                     controller: categoryController,
-                    decoration: InputDecoration(
-                      constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8),
-                      label: const Text('Categoria:'),
-                    ),
+                    textInputAction: TextInputAction.next,
+                    typeKeyboard: TextInputType.name,
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 32),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
