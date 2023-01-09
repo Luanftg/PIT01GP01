@@ -29,6 +29,13 @@ class _RegisterFinantialMovementPageState
   var categoryController = TextEditingController();
   final globalKey = GlobalKey<FormState>();
   static bool isNewCategory = false;
+  List<String> listaDeCategoria = [];
+
+  @override
+  void initState() {
+    _fetchCategories();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -38,20 +45,14 @@ class _RegisterFinantialMovementPageState
     super.dispose();
   }
 
+  void _fetchCategories() async {
+    listaDeCategoria = await controller.fetchCategories();
+    if (mounted) setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
-
-    final List<String> listaDeCategoria = [
-      "Geral",
-      "Casa",
-      "Alimentação",
-      "Transporte",
-      "Pet",
-      "Saúde",
-      "Lazer"
-    ];
-
     return Scaffold(
       appBar: AppBar(title: const Text('Adicionar movimentação')),
       body: Center(
@@ -162,9 +163,12 @@ class _RegisterFinantialMovementPageState
 
                     if (isFormValid ?? false) {
                       await controller.create(
-                        finantialMovement,
-                        widget.userLogged!,
-                      );
+                          finantialMovement, widget.userLogged!);
+                      if (!listaDeCategoria
+                          .contains(finantialMovement.category.label)) {
+                        await controller
+                            .saveCategory(finantialMovement.category);
+                      }
                       registerContextNavigator.pushNamed(
                         '/home',
                         arguments: widget.userLogged,
