@@ -22,6 +22,14 @@ class FinantialMovementController {
   Future<bool> create(
       FinantialMovement finantialMovement, UserModel userModel) async {
     var result = await _repository.create(finantialMovement, userModel);
+    if (userModel.finantialMovementList == null) {
+      List<FinantialMovement> list = [];
+      list.add(finantialMovement);
+      userModel.finantialMovementList = list;
+    } else {
+      userModel.finantialMovementList!.add(finantialMovement);
+    }
+
     return result ? true : false;
   }
 
