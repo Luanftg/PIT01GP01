@@ -54,7 +54,7 @@ class AuthService extends ChangeNotifier {
           email: userModel.email!,
           password: userModel.password!,
         );
-        usuario?.updateDisplayName(userModel.name);
+        await usuario?.updateDisplayName(userModel.name);
 
         _getUser();
         userModel.id = usuario?.uid;
