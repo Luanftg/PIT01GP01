@@ -1,32 +1,18 @@
-import 'dart:convert';
-
+import 'package:finances_group/src/data/services/auth.service.dart';
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController {
-  late List<UserModel> userList;
+  final authService = AuthService();
 
-  Future<void> register(RegisterModel user) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> register(String name, String email, String phoneNumber,
+      String cpf, String password) async {
+    UserModel userModel = UserModel(null,
+        email: email,
+        cpf: cpf,
+        name: name,
+        password: password,
+        phone: phoneNumber);
 
-    var result = prefs.getStringList('user1');
-
-    if (result != null) {
-      final decodedList = result.map((e) => jsonDecode(e));
-
-      final mapedList =
-          decodedList.map((e) => UserModel.fromJson((e))).toList();
-
-      mapedList.add(user);
-
-      final userListToSave = mapedList.map((e) => jsonEncode(e)).toList();
-      await prefs.setStringList('user1', userListToSave);
-    } else {
-      userList = [];
-      userList.add(user);
-      final userListToSave = userList.map((e) => jsonEncode(e)).toList();
-
-      await prefs.setStringList('user1', userListToSave);
-    }
+    authService.register(userModel);
   }
 }
