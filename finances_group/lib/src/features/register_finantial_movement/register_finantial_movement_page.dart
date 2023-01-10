@@ -1,5 +1,5 @@
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
-import 'package:finances_group/src/data/services/firestore_service.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
+
 import 'package:finances_group/src/features/register_finantial_movement/finantial_movement_controller.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
 import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
@@ -24,7 +24,7 @@ class RegisterFinantialMovementPage extends StatefulWidget {
 class _RegisterFinantialMovementPageState
     extends State<RegisterFinantialMovementPage> {
   final FinantialMovementController controller =
-      FinantialMovementController(FinantialMovementRepositoryPrefsImp());
+      FinantialMovementController(FinantialMovementRepositoryFirestoreImp());
 
   var titleController = TextEditingController();
   var valueController = TextEditingController();
@@ -145,6 +145,7 @@ class _RegisterFinantialMovementPageState
                     if (isFormValid ?? false) {
                       await controller.create(
                           finantialMovement, widget.userLogged!);
+
                       if (!listaDeCategoria
                           .contains(finantialMovement.category.label)) {
                         await controller
