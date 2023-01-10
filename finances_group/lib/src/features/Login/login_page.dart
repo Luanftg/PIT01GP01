@@ -1,5 +1,5 @@
-import 'package:finances_group/src/features/login/login_controller.dart';
-import 'package:finances_group/src/models/user_model.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
+import 'package:finances_group/src/features/Login/login_controller.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final controller = LoginController();
+  final controller =
+      LoginController(repository: FinantialMovementRepositoryFirestoreImp());
 
   final loginKey = GlobalKey();
 
@@ -68,11 +69,10 @@ class _LoginPageState extends State<LoginPage> {
                     ElevatedButton(
                       onPressed: <Object>() async {
                         await controller.logar(
-                          LoginModel(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          ),
+                          emailController.text,
+                          passwordController.text,
                         );
+
                         if (state is LoginStateLoading) {
                           const Center(child: CircularProgressIndicator());
                         }
