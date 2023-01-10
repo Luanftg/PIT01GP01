@@ -26,36 +26,53 @@ class AuthService extends ChangeNotifier {
     });
   }
 
+  Future<UserModel?> isUserLoged() async {
+    var userFromFireBaseAuth = _auth.currentUser;
+    if (userFromFireBaseAuth != null) {
+      var userModel =
+          await FireStoreService.getUserById(userFromFireBaseAuth.uid);
+      if (userModel != null) {
+        userModel.isLogged = true;
+        return userModel;
+      }
+      return null;
+    }
+    return null;
+  }
+
   _getUser() {
     usuario = _auth.currentUser;
     notifyListeners();
   }
 
-  void register(String email, String password, String name, String phone,
-      String cpf) async {
+  void register(UserModel userModel) async {
     await Future.delayed(const Duration(seconds: 1));
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
 
-      usuario?.updateDisplayName(name);
+    if (userModel.email != null || userModel.password != null) {
+      try {
+        await _auth.createUserWithEmailAndPassword(
+          email: userModel.email!,
+          password: userModel.password!,
+        );
+        usuario?.updateDisplayName(userModel.name);
 
-      _getUser();
-
-      FireStoreService.registerUser(UserModel(usuario?.uid,
-          email: usuario?.email, name: name, phone: phone, cpf: cpf));
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        throw AuthException('A senha é muito fraca');
-      } else if (e.code == 'email-already-in-use') {
-        throw AuthException('Este e-mail já está cadastrado!');
+        _getUser();
+        userModel.id = usuario?.uid;
+        //userModel.isLogged = true;
+        FireStoreService.registerUser(userModel);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          throw AuthException('A senha é muito fraca');
+        } else if (e.code == 'email-already-in-use') {
+          throw AuthException('Este e-mail já está cadastrado!');
+        }
       }
+    } else {
+      throw Exception("Informar email e senha");
     }
   }
 
-  void login(String email, String password) async {
+  Future<UserModel?> login(String email, String password) async {
     await Future.delayed(const Duration(seconds: 1));
     try {
       await _auth.signInWithEmailAndPassword(
@@ -63,6 +80,12 @@ class AuthService extends ChangeNotifier {
         password: password,
       );
       _getUser();
+      var userLoged = await FireStoreService.getUserById(usuario?.uid);
+      if (userLoged != null) {
+        userLoged.isLogged = true;
+        //
+        return userLoged;
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw AuthException('Email não encontrado. Cadastre-se.');
@@ -70,6 +93,7 @@ class AuthService extends ChangeNotifier {
         throw AuthException('Senha incorreta. Tente novamente');
       }
     }
+    return null;
   }
 
   logout() {
