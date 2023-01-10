@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'finantial_movement.dart';
 
 class UserModel {
-  final String? id;
+  String? id;
   final String? name;
   final String? email;
   final String? phone;
