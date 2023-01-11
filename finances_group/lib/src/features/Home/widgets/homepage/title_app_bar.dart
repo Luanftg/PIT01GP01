@@ -22,7 +22,7 @@ class TitleAppBar extends StatelessWidget {
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                   userImage?.isNotEmpty ?? false
-                      ? userImage!
+                      ? userImage ?? ''
                       : 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg',
                 ),
                 radius: 24,

@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'finantial_movement.dart';
 
 class UserModel {
-  final Int? id;
+  String? id;
   final String? name;
   final String? email;
   final String? phone;
@@ -19,7 +18,7 @@ class UserModel {
     required this.email,
     this.phone,
     this.cpf,
-    required this.password,
+    this.password,
     this.photoURL,
     this.finantialMovementList,
     this.isLogged,

@@ -86,6 +86,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "firebase_auth",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-4.2.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_auth_platform_interface",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.11.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_auth_web",
+      "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-5.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "firebase_core",
       "rootUri": "file:///C:/flutter_windows_3.0.5-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-2.4.1",
       "packageUri": "lib/",
@@ -386,7 +404,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-01-11T03:59:27.565501Z",
+  "generated": "2023-01-11T04:06:07.236751Z",
   "generator": "pub",
   "generatorVersion": "2.18.6"
 }
