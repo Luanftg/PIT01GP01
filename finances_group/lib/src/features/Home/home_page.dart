@@ -1,13 +1,13 @@
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
-import 'package:finances_group/src/features/Home/home_controller.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/features/home/home_state.dart';
-import 'package:finances_group/src/features/Home/widgets/charts/custom_linear_chart.dart';
-import 'package:finances_group/src/features/Home/widgets/charts/donut_chart_widget.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/action_app_bar.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_bottom_app_bar.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_drawer.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/custom_list_view_builder.dart';
-import 'package:finances_group/src/features/Home/widgets/homepage/title_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
+import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/action_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_bottom_app_bar.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/custom_list_view_builder.dart';
+import 'package:finances_group/src/features/home/widgets/homepage/title_app_bar.dart';
 
 import 'package:finances_group/src/features/register_finantial_movement/register_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
@@ -92,8 +92,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   const Text('Erro ao ler informações do usuário.'),
                   TextButton(
-                      onPressed: () {
-                        setState(() {});
+                      onPressed: () async {
+                        await _fetchUserLoged();
+
                       },
                       child: const Text('Tentar Novamente'))
                 ],
