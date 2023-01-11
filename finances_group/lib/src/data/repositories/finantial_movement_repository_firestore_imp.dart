@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
 
@@ -15,11 +17,19 @@ class FinantialMovementRepositoryFirestoreImp
   Future<bool> create(FinantialMovement value, UserModel userModel) async {
     if (userModel.id != null) {
       try {
-        await db
+        var docRef = await db
             .collection(users)
             .doc(userModel.id!)
             .collection(finantialMovement)
             .add(value.toMap());
+        var fmWithId = await docRef.get();
+        value.id = fmWithId.id;
+        await db
+            .collection(users)
+            .doc(userModel.id)
+            .collection(finantialMovement)
+            .doc(fmWithId.id)
+            .set(value.toMap());
         return true;
       } catch (e) {
         throw Exception(e.toString());
@@ -29,9 +39,21 @@ class FinantialMovementRepositoryFirestoreImp
   }
 
   @override
-  Future<bool> delete(int id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<bool> delete(String id, UserModel userModel) async {
+    try {
+      var docRef = db
+          .collection(users)
+          .doc(userModel.id)
+          .collection(finantialMovement)
+          .doc(id);
+      var doc = await docRef.get();
+      log('-------------$doc-------');
+      if (doc.exists) await docRef.delete();
+
+      return true;
+    } catch (e) {
+      throw Exception("[ERRO no DELETE do FireBase] -> ${e.toString()}");
+    }
   }
 
   @override
@@ -46,12 +68,50 @@ class FinantialMovementRepositoryFirestoreImp
     }
     var fmList =
         mapedList.docs.map((e) => FinantialMovement.fromMap(e.data())).toList();
+    log('************************FINDALL*******************');
     return fmList;
   }
 
   @override
-  Future<FinantialMovement> findOne(int id) {
-    // TODO: implement findOne
-    throw UnimplementedError();
+  Future<FinantialMovement?> findOne(String id, UserModel userModel) async {
+    if (userModel.finantialMovementList != null &&
+        userModel.finantialMovementList!.isNotEmpty) {
+      try {
+        var docSnap = await db
+            .collection(users)
+            .doc(userModel.id)
+            .collection(finantialMovement)
+            .doc(id)
+            .get();
+        if (docSnap.exists) {
+          var fmMap = docSnap.data();
+          var fm = FinantialMovement.fromMap(fmMap!);
+          return fm;
+        }
+        return null;
+      } catch (e) {
+        throw Exception('[Erro no findONE do FireBase] -> ${e.toString()}');
+      }
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> update(FinantialMovement value, UserModel userModel) async {
+    if (value.id == null) {
+      return false;
+    }
+    try {
+      await db
+          .collection(users)
+          .doc(userModel.id)
+          .collection(finantialMovement)
+          .doc(userModel.id)
+          .set(value.toMap());
+      return true;
+    } catch (e) {
+      throw Exception('[Erro no UPDATE do Firebase] -> ${e.toString()}');
+    }
   }
 }
