@@ -1,4 +1,5 @@
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_prefs_imp.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
+
 import 'package:finances_group/src/features/register_finantial_movement/finantial_movement_controller.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
@@ -13,7 +14,7 @@ class CustomListViewBuilder extends StatelessWidget {
   final DateFormat formater = DateFormat('yyyy-MM-dd');
   final UserModel userLogged;
   final FinantialMovementController _controller =
-      FinantialMovementController(FinantialMovementRepositoryPrefsImp());
+      FinantialMovementController(FinantialMovementRepositoryFirestoreImp());
   CustomListViewBuilder({Key? key, required this.userLogged}) : super(key: key);
 
   @override
