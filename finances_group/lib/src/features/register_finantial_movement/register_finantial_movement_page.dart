@@ -128,8 +128,7 @@ class _RegisterFinantialMovementPageState
                     var finantialMovement = FinantialMovement(
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
-                      userID:
-                          int.tryParse((widget.userLogged?.id).toString()) ?? 1,
+                      userID: widget.userLogged?.id.toString() ?? '',
                       isIncome: CustomSwitch.valueSwitch,
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(

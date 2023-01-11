@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:finances_group/src/models/category.dart';
 
 class FinantialMovement {
-  final int? id;
+  String? id;
   final String description;
   final double value;
-  final int userID;
+  final String userID;
   final bool isIncome;
   final Category category;
   final String? paymentDate;
@@ -41,10 +41,10 @@ class FinantialMovement {
 
   factory FinantialMovement.fromMap(Map<String, dynamic> map) {
     return FinantialMovement(
-      id: map['id']?.toInt(),
+      id: map['id'] ?? '',
       description: map['description'] ?? '',
       value: map['value']?.toDouble() ?? 0.0,
-      userID: map['userID']?.toInt() ?? 0,
+      userID: map['userID'] ?? '',
       isIncome: map['isIncome'] ?? false,
       category: Category.fromMap(map['category']),
       paymentDate: map['paymentDate'] ?? '',
