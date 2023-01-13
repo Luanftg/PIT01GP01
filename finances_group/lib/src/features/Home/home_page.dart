@@ -3,13 +3,14 @@ import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/features/home/home_state.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
+
 import 'package:finances_group/src/features/home/widgets/homepage/action_app_bar.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/custom_bottom_app_bar.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/custom_list_view_builder.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/title_app_bar.dart';
 
-import 'package:finances_group/src/features/register_finantial_movement/register_finantial_movement_page.dart';
+import 'package:finances_group/src/features/add_finantial_movement/add_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -27,11 +28,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   HomeController controller =
       HomeController(FinantialMovementRepositoryFirestoreImp());
+
   @override
   void initState() {
+    super.initState();
+
     _fetchUserLoged();
     _setStatusbarColor();
-    super.initState();
   }
 
   _fetchUserLoged() async {
@@ -94,7 +97,6 @@ class _HomePageState extends State<HomePage> {
                   TextButton(
                       onPressed: () async {
                         await _fetchUserLoged();
-
                       },
                       child: const Text('Tentar Novamente'))
                 ],
@@ -157,8 +159,8 @@ class _HomePageState extends State<HomePage> {
                     isScrollControlled: true,
                     builder: (context) => FractionallySizedBox(
                       heightFactor: 0.8,
-                      child:
-                          RegisterFinantialMovementPage(userLogged: userModel),
+                      child: AddFinantialMovementPage(
+                          userLogged: userModel, title: 'Adicionar'),
                     ),
                   );
                 }),
