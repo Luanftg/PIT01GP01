@@ -1,8 +1,8 @@
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
 
-import 'package:finances_group/src/features/register_finantial_movement/finantial_movement_controller.dart';
-import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_dropdown_button.dart';
-import 'package:finances_group/src/features/register_finantial_movement/widgets/custom_switch.dart';
+import 'package:finances_group/src/features/add_finantial_movement/finantial_movement_controller.dart';
+import 'package:finances_group/src/features/add_finantial_movement/widgets/custom_dropdown_button.dart';
+import 'package:finances_group/src/features/add_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
@@ -12,17 +12,22 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../models/user_model.dart';
 
-class RegisterFinantialMovementPage extends StatefulWidget {
+class AddFinantialMovementPage extends StatefulWidget {
   final UserModel? userLogged;
-  const RegisterFinantialMovementPage({super.key, this.userLogged});
+  final String title;
+  final FinantialMovement? finantialMovement;
+  const AddFinantialMovementPage(
+      {super.key,
+      this.userLogged,
+      required this.title,
+      this.finantialMovement});
 
   @override
-  State<RegisterFinantialMovementPage> createState() =>
-      _RegisterFinantialMovementPageState();
+  State<AddFinantialMovementPage> createState() =>
+      _AddFinantialMovementPageState();
 }
 
-class _RegisterFinantialMovementPageState
-    extends State<RegisterFinantialMovementPage> {
+class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   final FinantialMovementController controller =
       FinantialMovementController(FinantialMovementRepositoryFirestoreImp());
 
@@ -36,6 +41,12 @@ class _RegisterFinantialMovementPageState
   @override
   void initState() {
     _fetchCategories();
+    titleController.text = widget.finantialMovement?.description ?? '';
+    valueController.text = (widget.finantialMovement?.value ?? '').toString();
+    categoryController.text = widget.finantialMovement?.category.label ?? '';
+    if (mounted) {
+      setState(() {});
+    }
     super.initState();
   }
 
@@ -55,8 +66,9 @@ class _RegisterFinantialMovementPageState
   @override
   Widget build(BuildContext context) {
     final registerContextNavigator = Navigator.of(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Adicionar movimentação')),
+      appBar: AppBar(title: Text('${widget.title} movimentação financeira')),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
@@ -128,13 +140,15 @@ class _RegisterFinantialMovementPageState
                     var finantialMovement = FinantialMovement(
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
+                      id: widget.finantialMovement?.id,
                       userID: widget.userLogged?.id.toString() ?? '',
                       isIncome: CustomSwitch.valueSwitch,
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(
                         label: isNewCategory
                             ? categoryController.text
-                            : CustomDropDownButton.dropDownValue ?? "",
+                            : CustomDropDownButton.dropDownValue ??
+                                listaDeCategoria[0],
                         image: CustomSwitch.valueSwitch
                             ? 'assets/income.png'
                             : 'assets/expense.png',
@@ -156,7 +170,7 @@ class _RegisterFinantialMovementPageState
                       );
                     }
                   },
-                  child: const Text('Adicionar'),
+                  child: Text(widget.title),
                 ),
                 const SizedBox(height: 30),
               ],
