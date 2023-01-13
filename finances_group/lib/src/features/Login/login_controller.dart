@@ -18,8 +18,8 @@ class LoginController {
       if (userLoged == null) {
         state = LoginStateError('Credenciais inválidas');
       }
-      var fmList = await repository.findAll(userLoged!);
-      userLoged.finantialMovementList = fmList;
+      var fmList = await repository.findAll();
+      userLoged!.finantialMovementList = fmList;
       state = LoginStateSucces(userLoged);
     } catch (e) {
       state = LoginStateError('Credenciais inválidas');
