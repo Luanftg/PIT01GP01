@@ -14,7 +14,7 @@ class HomeController extends ValueNotifier<HomeState> {
   Future<void> fetchUserLogged(UserModel userModel) async {
     value = HomeStateLoading();
     try {
-      var fmList = await _repository.findAll(userModel);
+      var fmList = await _repository.findAll();
       userModel.finantialMovementList = fmList;
       if (userModel.finantialMovementList!.isNotEmpty) {
         value = HomeStateSucess(userModel);
@@ -24,5 +24,9 @@ class HomeController extends ValueNotifier<HomeState> {
     } catch (e) {
       value = HomeStateError(e.toString());
     }
+  }
+
+  Future<void> delete(String id) async {
+    await _repository.delete(id);
   }
 }
