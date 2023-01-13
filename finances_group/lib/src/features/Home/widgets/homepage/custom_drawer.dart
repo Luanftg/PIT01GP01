@@ -29,7 +29,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
-                  widget.userModel.photoURL?.isEmpty ?? false
+                  widget.userModel.photoURL?.isEmpty ?? true
                       ? "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
                       : widget.userModel.photoURL ?? '',
                 ),
