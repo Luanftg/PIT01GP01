@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,6 +32,7 @@ class FireStoreService {
 
   static Future<List<String>> fetchCategories() async {
     var listaDeMapDeCategoria = await db.collection(categorias).get();
+    log('*********FETCH CATEGORIES***************');
     if (listaDeMapDeCategoria.docs.isEmpty) {
       return [];
     }
