@@ -6,17 +6,24 @@
 
 Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoais.
 
-- *SPRINT I* - **:star: HomePage**
+- *SPRINT III* - **:star: Firebase Authentication e Cloud Firestore**
 
-<https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4>
+<https://user-images.githubusercontent.com/51548623/212443715-c246378c-ccf5-4f73-a84f-ab1c2b659a13.mp4>
 
 - *SPRINT II* - **:star: State Managment**
 
 <https://user-images.githubusercontent.com/51548623/206007012-12474703-7f0f-455a-8cb5-9e53a824fb5c.mp4>
 
-- *SPRINT III* - **:star: Firebase Authentication e Cloud Firestore**
+- *SPRINT I* - **:star: HomePage**
 
-<https://user-images.githubusercontent.com/51548623/212443715-c246378c-ccf5-4f73-a84f-ab1c2b659a13.mp4>
+<https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4>
+
+![Alt text](Sprints/Sprint_III_screens/1673659176362.jpg)
+![Alt text](Sprints/Sprint_III_screens/1673659176319.jpg)
+![Alt text](Sprints/Sprint_III_screens/1673659176691.jpg)
+![Alt text](Sprints/Sprint_III_screens/1673659176651.jpg)
+![Alt text](Sprints/Sprint_III_screens/1673659176565.jpg)
+![Alt text](Sprints/Sprint_III_screens/1673659176442.jpg)
 
 - **Entregas:**
 - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
