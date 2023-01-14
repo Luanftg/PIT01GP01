@@ -1,4 +1,4 @@
-# Finances Group :chart
+# Finances Group :chart:
 
 ## PIT01GP1 - Projeto Integrador do Curso de Flutter
 
