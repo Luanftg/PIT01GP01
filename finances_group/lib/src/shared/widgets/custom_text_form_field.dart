@@ -53,7 +53,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         inputFormatters: widget.inputFormatters,
         obscureText: isObscure,
         keyboardType: widget.typeKeyboard,
+        validator: (String? text) {
+          if (text == null || text.isEmpty) {
+            return 'O campo ${widget.label} não pode ser vazio';
+          }
+          return null;
+        },
         decoration: InputDecoration(
+          constraints:
+              BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
           prefixIcon: Icon(widget.icon),
           suffixIcon: widget.isSecret
               ? IconButton(
@@ -74,7 +82,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         textInputAction: widget.textInputAction,
-        //onChanged: ((_) => log(widget.controller!.value.text)),
       ),
     );
   }

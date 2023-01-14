@@ -1,57 +1,32 @@
-import 'dart:convert';
-import 'dart:developer';
-
+import 'package:finances_group/src/data/repositories/repository.dart';
+import 'package:finances_group/src/data/services/auth.service.dart';
+import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {
   late LoginState state;
+  final IRepository<FinantialMovement> repository;
+  final authService = AuthService();
 
-  Future<void> logar(UserModel user) async {
+  LoginController({required this.repository});
+
+  Future<void> logar(String email, String password) async {
     state = LoginStateLoading();
-    final prefs = await SharedPreferences.getInstance();
-
-    final List<String>? users = prefs.getStringList('user1');
-
-    if (users != null) {
-      final decodedList = users.map((e) => jsonDecode(e)).toList();
-
-      final mapedList =
-          decodedList.map((e) => UserModel.fromJson((e))).toList();
-      log(mapedList.toString());
-
-      try {
-        final UserModel userFromShared = mapedList.firstWhere(
-          (element) =>
-              element.email == user.email && element.password == user.password,
-        );
-        userFromShared.isLogged = true;
-
-        final userListToSave = mapedList.map((e) => jsonEncode(e)).toList();
-        await prefs.setStringList('user1', userListToSave);
-
-        state = LoginStateSucces(userFromShared);
-      } catch (e) {
+    try {
+      var userLoged = await authService.login(email, password);
+      if (userLoged == null) {
         state = LoginStateError('Credenciais inválidas');
       }
+      var fmList = await repository.findAll();
+      userLoged!.finantialMovementList = fmList;
+      state = LoginStateSucces(userLoged);
+    } catch (e) {
+      state = LoginStateError('Credenciais inválidas');
     }
-    //state = LoginStateError('Credenciais inválidas');
   }
 
-  void logout(UserModel userModel) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    final List<String>? users = prefs.getStringList('user1');
-    final decodedList = users!.map((e) => jsonDecode(e)).toList();
-    final mapedList = decodedList.map((e) => UserModel.fromJson((e))).toList();
-    final UserModel userFromShared = mapedList.firstWhere(
-      (element) =>
-          element.email == userModel.email &&
-          element.password == userModel.password,
-    );
-    userFromShared.isLogged = false;
-    final userListToSave = mapedList.map((e) => jsonEncode(e)).toList();
-    await prefs.setStringList('user1', userListToSave);
+  void logout(UserModel userModel) {
+    authService.logout();
   }
 }

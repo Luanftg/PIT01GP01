@@ -1,5 +1,5 @@
 import 'package:finances_group/src/features/splash/splash_controller.dart';
-import 'package:finances_group/src/features/splash/splash_state.dart';
+
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +15,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      controller.isAuthenticated().then((value) {
-        if (value is UserLogedSplashState) {
-          Navigator.of(context)
-              .pushReplacementNamed('/home', arguments: value.userLogged);
-        } else {
-          Navigator.of(context).pushReplacementNamed('/login');
-        }
-      });
+
+    controller.isAuthenticated().then((value) {
+      value != null
+          ? Navigator.of(context)
+              .pushReplacementNamed('/home', arguments: value)
+          : Navigator.of(context).pushReplacementNamed('/login');
     });
   }
 

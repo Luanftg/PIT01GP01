@@ -8,7 +8,7 @@ class CustomDropDownButton extends StatefulWidget {
     required this.list,
   }) : super(key: key);
 
-  static String dropDownValue = 'Vermelho';
+  static String? dropDownValue;
   @override
   State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
 }
@@ -16,8 +16,11 @@ class CustomDropDownButton extends StatefulWidget {
 class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<Object>(
+    return DropdownButton(
       value: CustomDropDownButton.dropDownValue,
+      hint: widget.list.isEmpty
+          ? const CircularProgressIndicator()
+          : Text(widget.list[0]),
       items: widget.list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
