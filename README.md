@@ -18,13 +18,6 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 
 <https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4>
 
-![Alt text](Sprints/Sprint_III_screens/1673659176362.jpg)
-![Alt text](Sprints/Sprint_III_screens/1673659176319.jpg)
-![Alt text](Sprints/Sprint_III_screens/1673659176691.jpg)
-![Alt text](Sprints/Sprint_III_screens/1673659176651.jpg)
-![Alt text](Sprints/Sprint_III_screens/1673659176565.jpg)
-![Alt text](Sprints/Sprint_III_screens/1673659176442.jpg)
-
 - **Entregas:**
 - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
 - [x] Sprint I ![Sprint I](Sprints/sprintI.png)
