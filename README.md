@@ -1,4 +1,4 @@
-# Finances Group :chart:
+# Finances Group :chart
 
 ## PIT01GP1 - Projeto Integrador do Curso de Flutter
 
@@ -6,13 +6,17 @@
 
 Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoais.
 
-- *SPRINT I*
+- *SPRINT I* - **:star: HomePage**
 
 <https://user-images.githubusercontent.com/51548623/199126921-9910605f-7132-4856-93fb-44b50c9f5f95.mp4>
 
-- *SPRINT II*
+- *SPRINT II* - **:star: State Managment**
 
 <https://user-images.githubusercontent.com/51548623/206007012-12474703-7f0f-455a-8cb5-9e53a824fb5c.mp4>
+
+- *SPRINT III* - **:star: Firebase Authentication e Cloud Firestore**
+
+<https://user-images.githubusercontent.com/51548623/212443715-c246378c-ccf5-4f73-a84f-ab1c2b659a13.mp4>
 
 - **Entregas:**
 - [x] Sprint 0 ![Sprint 0](Sprints/sprint0.png)
@@ -32,7 +36,7 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 
 ## Soluções
 
-**Implementações da Sprint III**
+### Implementações da Sprint III
   
 - [x] CRUD de Movimentação financeira utilizando o [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/)
 - [x] Fluxo de Authenticação utilizando o [Firebase Authentication](https://firebase.google.com/docs/auth)
