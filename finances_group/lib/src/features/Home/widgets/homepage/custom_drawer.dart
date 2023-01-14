@@ -47,7 +47,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ListTile(
             title: Text('Investimentos', style: CustomAppTextTheme.body),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/simulator');
+            },
           ),
           ListTile(
             title: Text('Configurações', style: CustomAppTextTheme.body),
