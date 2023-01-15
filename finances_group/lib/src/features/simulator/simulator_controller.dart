@@ -10,7 +10,6 @@ import '../../models/valor_simulado.dart';
 
 class SimulatorController extends ValueNotifier<SimulatorState> {
   final SimulatorRepository _simulatorRepository;
-  // final AuthRepository _authRepository;
   final AuthService _authRepository;
 
   SimulatorController(this._simulatorRepository, this._authRepository)
@@ -18,6 +17,7 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
 
   ValueNotifier<ValorFuturo?> valorFuturo = ValueNotifier(null);
   ValueNotifier<ValorSimulado?> valorSimulado = ValueNotifier(null);
+
   String riskLabel = '';
   double riskValue = 0;
   String year = '';
@@ -47,23 +47,26 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
 
   Future<void> fetchSimulator() async {
     value = SimulatorLoadingState();
-    // final userId = _authRepository.usuario?.uid;
+
     final userId = _authRepository.currentUser?.uid;
     final result = await _simulatorRepository.getList(userId ?? '');
     if (result.isNotEmpty) {
-      this.valorSimulado.value = result.first;
-      setRisk(this.valorSimulado.value?.month ?? 12);
+      valorSimulado.value = result.first;
+      setRisk(valorSimulado.value?.month ?? 12);
       setFutureValue();
-      value = SimulatorSucessState(this.valorSimulado.value!);
+      value = SimulatorSucessState(valorSimulado.value!);
+      return;
+    } else {
+      var valorSimulado = ValorSimulado(
+          initialValue: 0,
+          month: 12,
+          mounthValue: 0,
+          taxaAA: 13.5,
+          userId: userId!);
+      value = SimulatorSucessState(valorSimulado);
+      // valorSimulado.value = result.first;
+      this.valorSimulado.value = valorSimulado;
     }
-
-    var valorSimulado = ValorSimulado(
-        initialValue: 0,
-        mounthValue: 0,
-        month: 12,
-        taxaAA: 13.5,
-        userId: userId!);
-    value = SimulatorSucessState(valorSimulado);
   }
 
   static double valorFuturoDosAportesMensais(
@@ -124,22 +127,24 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
 
   void changeRisk(double value) {
     riskValue = value;
-    var valorSimuladoController = valorSimulado.value!;
+    var month = valorSimulado.value?.month ?? 12;
     if (riskValue == 0) {
       riskLabel = 'Conservador - 1 ano';
-      valorSimuladoController.month = 12;
+      valorSimulado.value?.month = 12;
       setFutureValue();
-      year = (ano + valorSimuladoController.month / 12).toStringAsFixed(0);
+      year = (ano + month / 12).toStringAsFixed(0);
     } else if (riskValue == 1) {
       riskLabel = 'Moderado - 5 anos';
-      valorSimuladoController.month = 60;
+      valorSimulado.value?.month = 60;
+      month = 60;
       setFutureValue();
-      year = (ano + valorSimuladoController.month / 12).toStringAsFixed(0);
+      year = (ano + month / 12).toStringAsFixed(0);
     } else {
       riskLabel = 'Arriscado - 10 anos';
-      valorSimuladoController.month = 120;
+      month = 120;
+      valorSimulado.value?.month = 120;
       setFutureValue();
-      year = (ano + valorSimuladoController.month / 12).toStringAsFixed(0);
+      year = (ano + month / 12).toStringAsFixed(0);
     }
   }
 
@@ -154,11 +159,12 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
   }
 
   void setFutureValue() {
-    valorFuturo.value = SimulatorController.pegaValorFuturoERendimentoTotal(
+    var valorFuturo = SimulatorController.pegaValorFuturoERendimentoTotal(
         valorSimulado.value?.initialValue ?? 0,
         valorSimulado.value?.mounthValue ?? 0,
-        valorSimulado.value?.taxaAA ?? 0,
-        valorSimulado.value?.month ?? 0);
-    balance = valorFuturo.value?.totalValorFuturo ?? 0;
+        valorSimulado.value?.taxaAA ?? 13.5,
+        valorSimulado.value?.month ?? 12);
+    this.valorFuturo.value = valorFuturo;
+    balance = this.valorFuturo.value?.totalValorFuturo ?? 0;
   }
 }
