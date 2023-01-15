@@ -25,11 +25,29 @@ class AppCustomColors {
     ],
   );
 
+  static const LinearGradient cyanPurple = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      cyan,
+      secondary,
+    ],
+  );
+
   static const LinearGradient cyanGreen = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
       cyan,
+      primary,
+    ],
+  );
+
+  static const LinearGradient purpleGreen = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      secondary,
       primary,
     ],
   );

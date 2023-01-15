@@ -17,6 +17,7 @@ class CustomAppTextTheme {
   static TextStyle headline2 = const TextStyle(
     color: AppCustomColors.secondary,
     fontSize: 24,
+    fontWeight: FontWeight.bold,
   );
 
   static TextStyle body = const TextStyle(
@@ -25,7 +26,7 @@ class CustomAppTextTheme {
       fontWeight: FontWeight.normal);
 
   static TextStyle button = const TextStyle(
-    color: AppCustomColors.dark,
+    color: AppCustomColors.cyan,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
