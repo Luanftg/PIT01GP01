@@ -9,6 +9,8 @@ class SimulatorRepositoryImp implements SimulatorRepository {
   @override
   Future<List<ValorSimulado>> getList(String userId) async {
     final result = await storage
+        .collection('users')
+        .doc(userId)
         .collection('simulator')
         .where('userId', isEqualTo: userId)
         .get();
@@ -22,6 +24,8 @@ class SimulatorRepositoryImp implements SimulatorRepository {
   @override
   Future<void> addOrUpdateSimulatorValue(ValorSimulado valorSimulado) async {
     final result = await storage
+        .collection('users')
+        .doc(valorSimulado.userId)
         .collection('simulator')
         .where('userId', isEqualTo: valorSimulado.userId)
         .get();
@@ -29,11 +33,17 @@ class SimulatorRepositoryImp implements SimulatorRepository {
     if (result.docs.isNotEmpty) {
       final docId = result.docs.first.id;
       await storage
+          .collection('users')
+          .doc(valorSimulado.userId)
           .collection('simulator')
           .doc(docId)
           .set(valorSimulado.toMap());
     } else {
-      await storage.collection('simulator').add(valorSimulado.toMap());
+      await storage
+          .collection('users')
+          .doc(valorSimulado.userId)
+          .collection('simulator')
+          .add(valorSimulado.toMap());
     }
   }
 }
