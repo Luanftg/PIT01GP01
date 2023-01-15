@@ -96,7 +96,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                           Text(
                             riskLabel,
                             style: CustomAppTextTheme.label
-                                .copyWith(color: Colors.green.shade400),
+                                .copyWith(color: AppCustomColors.secondary),
                           ),
                         ],
                       ),
@@ -136,12 +136,12 @@ class _SimulatorPageState extends State<SimulatorPage> {
                             semanticFormatterCallback: (double value) {
                               return '${value.round().toStringAsFixed(2)} reais';
                             },
-                            activeColor: AppCustomColors.primary,
+                            activeColor: AppCustomColors.secondary,
                             label:
                                 valorSimulado?.initialValue.round().toString(),
                             value: valorSimulado?.initialValue ?? 0,
                             onChanged: (double value) {
-                              _simulatorController.changeInitialValue;
+                              _simulatorController.changeInitialValue(value);
                             }),
                       ),
                       Row(
@@ -155,7 +155,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                           Text(
                             'R\$ ${valorSimulado?.mounthValue.round()}',
                             style: CustomAppTextTheme.label
-                                .copyWith(color: Colors.green.shade400),
+                                .copyWith(color: AppCustomColors.secondary),
                           ),
                         ],
                       ),
@@ -177,24 +177,27 @@ class _SimulatorPageState extends State<SimulatorPage> {
                     ]),
                   ),
                   Container(
+                    decoration: const BoxDecoration(
+                        gradient: AppCustomColors.purpleGreen),
                     padding: const EdgeInsetsDirectional.all(32),
-                    color: AppCustomColors.foreGround,
+                    //color: AppCustomColors.foreGround,
                     child: Column(children: [
                       Text('Em $year, você terá:',
                           style: CustomAppTextTheme.blackCaption),
                       const SizedBox(height: 16),
                       Text('R\$ ${balance.toStringAsFixed(2)}',
-                          style: CustomAppTextTheme.blackCaption
-                              .copyWith(color: AppCustomColors.primary)),
+                          style: CustomAppTextTheme.headline2),
                       const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Prazo:', style: CustomAppTextTheme.button),
+                          Text('Prazo:',
+                              style: CustomAppTextTheme.blackCaption),
                           const SizedBox(width: 8),
-                          Text('Rendimento:', style: CustomAppTextTheme.button),
+                          Text('Rendimento:',
+                              style: CustomAppTextTheme.blackCaption),
                           const SizedBox(width: 8),
-                          Text('Taxa:', style: CustomAppTextTheme.button),
+                          Text('Taxa:', style: CustomAppTextTheme.blackCaption),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -202,21 +205,25 @@ class _SimulatorPageState extends State<SimulatorPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('${valorSimulado?.month} meses',
-                              style: CustomAppTextTheme.button),
+                              style: CustomAppTextTheme.blackCaption),
                           valorFuturo == null
                               ? const Text('--')
                               : Text(
                                   'R\$ ${valorFuturo?.rendimentoTotal.toStringAsFixed(2)}',
-                                  style: CustomAppTextTheme.button),
+                                  style: CustomAppTextTheme.blackCaption
+                                      .copyWith(fontSize: 16)),
                           Text('${valorSimulado?.taxaAA.toStringAsFixed(2)} %',
-                              style: CustomAppTextTheme.button),
+                              style: CustomAppTextTheme.blackCaption),
                         ],
                       ),
                       const SizedBox(height: 32),
                       Text('Faça seu dinheiro render de verdade!',
-                          style: CustomAppTextTheme.button),
+                          style: CustomAppTextTheme.blackCaption),
                       const SizedBox(height: 32),
                       ElevatedButton(
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                AppCustomColors.secondary)),
                         onPressed: () async {
                           await _simulatorController.addOrUpdateSimulator(
                             valorSimulado?.initialValue ?? 0,
