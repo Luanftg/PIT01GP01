@@ -1,5 +1,6 @@
 import 'package:finances_group/src/data/repositories/repository.dart';
-import 'package:finances_group/src/data/services/auth.service.dart';
+import 'package:finances_group/src/data/services/auth_service.dart';
+
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
