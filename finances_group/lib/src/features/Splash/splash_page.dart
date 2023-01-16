@@ -1,3 +1,4 @@
+import 'package:finances_group/src/data/services/auth.service.dart';
 import 'package:finances_group/src/features/splash/splash_controller.dart';
 
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
@@ -11,7 +12,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final SplashController controller = SplashController();
+  final SplashController controller =
+      SplashController(authService: AuthService());
   @override
   void initState() {
     super.initState();
