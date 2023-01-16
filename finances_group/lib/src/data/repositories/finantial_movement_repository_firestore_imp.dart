@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
 
@@ -78,19 +76,24 @@ class FinantialMovementRepositoryFirestoreImp
 
   @override
   Future<List<FinantialMovement>> findAll() async {
-    var mapedList = await db
-        .collection(users)
-        .doc(_getUserId)
-        .collection(finantialMovement)
-        .get();
+    try {
+      var mapedList = await db
+          .collection(users)
+          .doc(_getUserId)
+          .collection(finantialMovement)
+          .get();
 
-    if (mapedList.docs.isEmpty) {
-      return [];
+      if (mapedList.docs.isEmpty) {
+        return [];
+      }
+      var fmList = mapedList.docs
+          .map((e) => FinantialMovement.fromMap(e.data()))
+          .toList();
+      return fmList;
+    } catch (e) {
+      throw Exception(
+          "[ERRO ao tentar obter todas as Movimentações Financeiras do FireBase] -> ${e.toString()}");
     }
-    var fmList =
-        mapedList.docs.map((e) => FinantialMovement.fromMap(e.data())).toList();
-    log('************************FINDALL*******************');
-    return fmList;
   }
 
   @override
