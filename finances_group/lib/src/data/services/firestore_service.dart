@@ -13,34 +13,49 @@ class FireStoreService {
   static const String users = 'users';
 
   static Future<void> registerUser(UserModel usermodel) async {
-    usermodel.id = _auth.currentUser?.uid;
-    await db.collection(users).doc(usermodel.id).set(usermodel.toMap());
+    try {
+      usermodel.id = _auth.currentUser?.uid;
+      await db.collection(users).doc(usermodel.id).set(usermodel.toMap());
+    } catch (e) {
+      throw Exception("[Erro ao salvar um usuario no Firebase]");
+    }
   }
 
   static Future<UserModel?> getUserById(String? id) async {
-    var documentSnapshot = await db.collection(users).doc(id).get();
-    if (documentSnapshot.exists) {
-      var usermodel = UserModel.fromMap(documentSnapshot.data()!);
-      return usermodel;
+    try {
+      var documentSnapshot = await db.collection(users).doc(id).get();
+      if (documentSnapshot.exists) {
+        var usermodel = UserModel.fromMap(documentSnapshot.data()!);
+        return usermodel;
+      }
+      return null;
+    } catch (e) {
+      throw Exception("[Erro ao obter um usuario no Firebase]");
     }
-    return null;
   }
 
   static Future<void> saveCategory(Category category) async {
-    await db.collection(categorias).add(category.toMap());
+    try {
+      await db.collection(categorias).add(category.toMap());
+    } catch (e) {
+      throw Exception("[Erro ao salvar uma categoira no Firebase]");
+    }
   }
 
   static Future<List<String>> fetchCategories() async {
-    var listaDeMapDeCategoria = await db.collection(categorias).get();
-    log('*********FETCH CATEGORIES***************');
-    if (listaDeMapDeCategoria.docs.isEmpty) {
-      return [];
-    }
-    List<String> listaDeCategoria = [];
+    try {
+      var listaDeMapDeCategoria = await db.collection(categorias).get();
+      if (listaDeMapDeCategoria.docs.isEmpty) {
+        return [];
+      }
+      List<String> listaDeCategoria = [];
 
-    for (var element in listaDeMapDeCategoria.docs) {
-      listaDeCategoria.add(element["label"]);
+      for (var element in listaDeMapDeCategoria.docs) {
+        listaDeCategoria.add(element["label"]);
+      }
+      return listaDeCategoria;
+    } catch (e) {
+      throw Exception("[Erro na busca por categorias]");
     }
-    return listaDeCategoria;
   }
 }
