@@ -1,4 +1,4 @@
-import 'package:finances_group/src/data/services/auth.service.dart';
+import 'package:finances_group/src/data/services/auth_service.dart';
 import 'package:finances_group/src/models/user_model.dart';
 
 class RegisterController {
