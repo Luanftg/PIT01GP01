@@ -9,9 +9,11 @@ class FinantialMovementRepositoryFirestoreImp
   static const String finantialMovement = "finantialMovement";
   static const String users = 'users';
 
-  static final db = FirebaseFirestore.instance;
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore db;
+  final FirebaseAuth firebaseAuth;
   String userId = '';
+
+  FinantialMovementRepositoryFirestoreImp(this.db, this.firebaseAuth);
 
   String get _getUserId {
     userId = firebaseAuth.currentUser?.uid ?? '';

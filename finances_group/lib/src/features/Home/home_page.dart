@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
 import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/features/home/home_state.dart';
@@ -11,6 +12,7 @@ import 'package:finances_group/src/features/home/widgets/homepage/custom_list_vi
 import 'package:finances_group/src/features/home/widgets/homepage/title_app_bar.dart';
 
 import 'package:finances_group/src/features/add_finantial_movement/add_finantial_movement_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -26,8 +28,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomeController controller =
-      HomeController(FinantialMovementRepositoryFirestoreImp());
+  HomeController controller = HomeController(
+      FinantialMovementRepositoryFirestoreImp(
+          FirebaseFirestore.instance, FirebaseAuth.instance));
 
   @override
   void initState() {

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
 
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/user_model.dart';
@@ -15,8 +17,9 @@ class ActionAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        LoginController(repository: FinantialMovementRepositoryFirestoreImp());
+    final controller = LoginController(
+        repository: FinantialMovementRepositoryFirestoreImp(
+            FirebaseFirestore.instance, FirebaseAuth.instance));
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [

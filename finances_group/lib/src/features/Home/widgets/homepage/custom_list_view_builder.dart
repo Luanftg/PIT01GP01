@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
 import 'package:finances_group/src/features/home/home_controller.dart';
 
 import 'package:finances_group/src/models/user_model.dart';
 
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,8 +23,9 @@ class CustomListViewBuilder extends StatefulWidget {
 class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
   final DateFormat formater = DateFormat('yyyy-MM-dd');
 
-  final HomeController _controller =
-      HomeController(FinantialMovementRepositoryFirestoreImp());
+  final HomeController _controller = HomeController(
+      FinantialMovementRepositoryFirestoreImp(
+          FirebaseFirestore.instance, FirebaseAuth.instance));
 
   @override
   void initState() {
