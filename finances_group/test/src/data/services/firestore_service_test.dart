@@ -1,12 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finances_group/src/data/services/firestore_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class FireBaseAuthMock extends Mock implements FirebaseAuth {}
+
+class UserCredentialMock extends Mock implements UserCredential {}
+
+class FirestoreMock extends Mock implements FirebaseFirestore {}
+
+class UserMock extends Mock implements User {}
 
 void main() {
-  setUp(() {
-    // final db = FirebaseFirestore.instance;
-    // final FirebaseAuth _auth = FirebaseAuth.instance;
-    // const String categorias = 'categories';
-    // const String users = 'users';
-  });
+  // late final FireStoreService fireStoreService;
+  // late final FirestoreMock db;
+  // late final FireBaseAuthMock _auth;
+
+  // const String categorias = 'categories';
+  // const String users = 'users';
+
+  // setUp(() {
+  //   db = FirestoreMock();
+  //   _auth = FireBaseAuthMock();
+  //   fireStoreService = FireStoreService();
+  // });
   group('[Method]: static Future<void> registerUser(UserModel usermodel)', () {
     test('should save a [UserModel] on firebase', () {});
     test('should return a [Exception] when catch [FirebaseError]', () {});
