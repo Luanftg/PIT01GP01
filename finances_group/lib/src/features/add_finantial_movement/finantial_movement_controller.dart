@@ -19,9 +19,9 @@ class FinantialMovementController {
     return await FireStoreService.fetchCategories();
   }
 
-  Future<bool> create(
+  Future<void> create(
       FinantialMovement finantialMovement, UserModel userModel) async {
-    var result = await _repository.create(finantialMovement);
+    await _repository.create(value: finantialMovement);
 
     if (userModel.finantialMovementList == null) {
       List<FinantialMovement> list = [];
@@ -30,8 +30,6 @@ class FinantialMovementController {
     } else {
       userModel.finantialMovementList!.add(finantialMovement);
     }
-
-    return result ? true : false;
   }
 
   Future<List<FinantialMovement>> findAll() async {

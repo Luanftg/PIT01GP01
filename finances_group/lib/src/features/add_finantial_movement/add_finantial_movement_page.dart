@@ -141,9 +141,9 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                     final DateFormat formater =
                         DateFormat('yyyy-MM-dd HH:MM:ss');
                     var finantialMovement = FinantialMovement(
+                      widget.finantialMovement?.id ?? '',
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
-                      id: widget.finantialMovement?.id,
                       userID: widget.userLogged?.id.toString() ?? '',
                       isIncome: CustomSwitch.valueSwitch,
                       paymentDate: formater.format(DateTime.now()),
