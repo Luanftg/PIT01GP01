@@ -47,6 +47,8 @@ dependencies:
   cloud_firestore: ^4.3.1
   firebase_core: ^2.4.1
   mocktail: ^0.3.0
+  uuid: ^3.0.7
+  fake_cloud_firestore: ^2.3.0+3
 
 dev_dependencies:
   flutter_test:
