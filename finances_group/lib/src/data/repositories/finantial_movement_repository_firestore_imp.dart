@@ -21,56 +21,25 @@ class FinantialMovementRepositoryFirestoreImp
   }
 
   @override
-  Future<bool> create(FinantialMovement value) async {
-    if (_getUserId.isNotEmpty) {
-      try {
-        var colectionReference =
-            db.collection(users).doc(_getUserId).collection(finantialMovement);
-
-        bool fmExist;
-        var docRef = await colectionReference.get();
-        if (docRef.docs.isEmpty) {
-          fmExist = false;
-        } else {
-          fmExist =
-              docRef.docs.every((element) => element.data()["id"] == value.id);
-        }
-
-        if (fmExist) {
-          //EDITA
-          var result = await update(value);
-          return result ? true : false;
-        }
-
-        //Salva
-        var newDocRef = await colectionReference.add(value.toMap());
-        var fmWithId = await newDocRef.get();
-        value.id = fmWithId.id;
-        var result = await update(value);
-        return result ? true : false;
-      } catch (e) {
-        throw Exception(e.toString());
-      }
+  Future<void> create({required FinantialMovement value}) async {
+    try {
+      await db.collection(finantialMovement).doc(value.id).set(value.toMap());
+    } catch (e) {
+      throw Exception(e.toString());
     }
-    return false;
+    // }
   }
 
   @override
-  Future<bool> delete(String id) async {
+  Future<void> delete(String id) async {
     try {
-      var docRef = db
-          .collection(users)
-          .doc(_getUserId)
-          .collection(finantialMovement)
-          .doc(id);
+      var docRef = db.collection(finantialMovement).doc(id);
       var doc = await docRef.get();
 
       var result = doc.exists;
       if (result) {
         await docRef.delete();
       }
-
-      return result;
     } catch (e) {
       throw Exception("[ERRO no DELETE do FireBase] -> ${e.toString()}");
     }
@@ -80,9 +49,8 @@ class FinantialMovementRepositoryFirestoreImp
   Future<List<FinantialMovement>> findAll() async {
     try {
       var mapedList = await db
-          .collection(users)
-          .doc(_getUserId)
           .collection(finantialMovement)
+          .where("userID", isEqualTo: _getUserId)
           .get();
 
       if (mapedList.docs.isEmpty) {
@@ -101,12 +69,7 @@ class FinantialMovementRepositoryFirestoreImp
   @override
   Future<FinantialMovement?> findOne(String id) async {
     try {
-      var docSnap = await db
-          .collection(users)
-          .doc(_getUserId)
-          .collection(finantialMovement)
-          .doc(id)
-          .get();
+      var docSnap = await db.collection(finantialMovement).doc(id).get();
       if (docSnap.exists) {
         var fmMap = docSnap.data();
         var fm = FinantialMovement.fromMap(fmMap!);
@@ -119,18 +82,9 @@ class FinantialMovementRepositoryFirestoreImp
   }
 
   @override
-  Future<bool> update(FinantialMovement value) async {
-    if (value.id == null) {
-      return false;
-    }
+  Future<void> update(FinantialMovement value) async {
     try {
-      await db
-          .collection(users)
-          .doc(_getUserId)
-          .collection(finantialMovement)
-          .doc(value.id)
-          .set(value.toMap());
-      return true;
+      await db.collection(finantialMovement).doc(value.id).set(value.toMap());
     } catch (e) {
       throw Exception('[Erro no UPDATE do Firebase] -> ${e.toString()}');
     }
