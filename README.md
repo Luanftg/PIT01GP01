@@ -102,3 +102,5 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [organizze](https://www.organizze.com.br/)
 - [mobills](https://www.mobills.com.br/)
 - [FireBase - docs](https://firebase.google.com/docs/)
+- [Fake FirebaseFirestor - test - pub.dev](https://pub.dev/packages/fake_cloud_firestore/install)
+- [Mocktail - test - pub.dev](https://pub.dev/packages/mocktail)
