@@ -1,22 +1,12 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
-//class FirebaseFirestoreMock extends Mock implements FirebaseFirestore {}
-
-class FirebaseAuthMock extends Mock implements FirebaseAuth {}
-
-class UserCredentialMock extends Mock implements UserCredential {}
-
-class UserMock extends Mock implements User {}
 
 void main() {
   late FakeFirebaseFirestore db;
-  late FirebaseAuthMock firebaseAuth;
-  late FinantialMovementRepositoryFirestoreImp fMRepositoryFirestoreImp;
+  late FinantialMovementRepositoryFirestore fMRepositoryFirestoreImp;
 
   final fm = {
     "description": 'Energia',
@@ -35,9 +25,7 @@ void main() {
 
   setUp(() {
     db = FakeFirebaseFirestore();
-    firebaseAuth = FirebaseAuthMock();
-    fMRepositoryFirestoreImp =
-        FinantialMovementRepositoryFirestoreImp(db, firebaseAuth);
+    fMRepositoryFirestoreImp = FinantialMovementRepositoryFirestore(db);
   });
   group('[Method]: Future<void> create(FinantialMovement value)', () {
     test(
@@ -46,8 +34,6 @@ void main() {
       await fMRepositoryFirestoreImp.create(value: finantialMovement);
 
       var snapshot = await fMRepositoryFirestoreImp.db
-          // .collection('users')
-          // .doc(finantialMovement.userID)
           .collection('finantialMovement')
           .get();
       var result = snapshot.size;
@@ -56,17 +42,6 @@ void main() {
     });
   });
   // test('should return [Exception] if there was a error on firebase', () async {
-  //   when(
-  //     () => fMRepositoryFirestoreImp.create(value: any(named: 'value')),
-  //   ).thenThrow(Exception());
-
-  //   await fMRepositoryFirestoreImp.create(value: finantialMovement);
-
-  //   expect(
-  //       () => fMRepositoryFirestoreImp.create(
-  //             value: finantialMovement,
-  //           ),
-  //       throwsException);
   // });
 
   group('[Method]: Future<void> delete(String id)', () {
@@ -75,7 +50,8 @@ void main() {
         () async {
       await fMRepositoryFirestoreImp.create(value: finantialMovement);
       await fMRepositoryFirestoreImp.delete(finantialMovement.id);
-      var fmList = await fMRepositoryFirestoreImp.findAll();
+      var fmList =
+          await fMRepositoryFirestoreImp.findAll(finantialMovement.userID);
       expect(fmList, isEmpty);
     });
     // test('should return [Exception] if there was a error on firebase', () {});
@@ -84,17 +60,17 @@ void main() {
   group('[Method]: Future<List<FinantialMovement>> findAll()', () {
     test('should return [List<FinantialMovement>] if sucess.', () async {
       await fMRepositoryFirestoreImp.create(value: finantialMovement);
-      var fmList = await fMRepositoryFirestoreImp.findAll();
+      var fmList =
+          await fMRepositoryFirestoreImp.findAll(finantialMovement.userID);
       expect(fmList.length, 1);
     });
     test('first time user logged = should return an empty List', () async {
       await fMRepositoryFirestoreImp.db
-          // .collection('users')
-          // .doc(finantialMovement.userID)
           .collection('finantialMovement')
           .doc(finantialMovement.id)
           .delete();
-      var fmList = await fMRepositoryFirestoreImp.findAll();
+      var fmList =
+          await fMRepositoryFirestoreImp.findAll(finantialMovement.userID);
       expect(fmList, isEmpty);
     });
 

@@ -1,24 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/repository.dart';
-
 import 'package:finances_group/src/models/finantial_movement.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class FinantialMovementRepositoryFirestoreImp
+class FinantialMovementRepositoryFirestore
     implements IRepository<FinantialMovement> {
   static const String finantialMovement = "finantialMovement";
   static const String users = 'users';
 
   final FirebaseFirestore db;
-  final FirebaseAuth firebaseAuth;
+  // final FirebaseAuth firebaseAuth;
   String userId = '';
 
-  FinantialMovementRepositoryFirestoreImp(this.db, this.firebaseAuth);
+  FinantialMovementRepositoryFirestore(this.db);
 
-  String get _getUserId {
-    userId = firebaseAuth.currentUser?.uid ?? '';
-    return userId;
-  }
+  // String get _getUserId {
+  //   userId = firebaseAuth.currentUser?.uid ?? '';
+  //   return userId;
+  // }
 
   @override
   Future<void> create({required FinantialMovement value}) async {
@@ -46,11 +44,11 @@ class FinantialMovementRepositoryFirestoreImp
   }
 
   @override
-  Future<List<FinantialMovement>> findAll() async {
+  Future<List<FinantialMovement>> findAll(String userId) async {
     try {
       var mapedList = await db
           .collection(finantialMovement)
-          .where("userID", isEqualTo: _getUserId)
+          .where("userID", isEqualTo: userId)
           .get();
 
       if (mapedList.docs.isEmpty) {
