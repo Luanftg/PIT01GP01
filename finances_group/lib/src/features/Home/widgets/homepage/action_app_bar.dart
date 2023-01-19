@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
-
+import 'package:finances_group/src/data/repositories/firebase_auth_repository.dart';
+import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../../../models/user_model.dart';
-import '../../../Login/login_controller.dart';
+import '../../../login/login_controller.dart';
 
 class ActionAppBar extends StatelessWidget {
   final UserModel? userLogged;
@@ -17,9 +16,9 @@ class ActionAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = LoginController(
-        repository: FinantialMovementRepositoryFirestoreImp(
-            FirebaseFirestore.instance, FirebaseAuth.instance));
+    final controller =
+        LoginController(FirebaseAuthRepository(FirebaseAuth.instance));
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -37,7 +36,7 @@ class ActionAppBar extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16),
           child: IconButton(
               onPressed: () {
-                controller.logout(userLogged!);
+                controller.logout();
                 Navigator.of(context).pushReplacementNamed('/login');
               },
               icon: const Icon(Icons.logout)),
