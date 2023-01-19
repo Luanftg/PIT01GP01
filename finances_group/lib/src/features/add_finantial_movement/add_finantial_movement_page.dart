@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore.dart';
 
 import 'package:finances_group/src/features/add_finantial_movement/finantial_movement_controller.dart';
 import 'package:finances_group/src/features/add_finantial_movement/widgets/custom_dropdown_button.dart';
@@ -8,7 +8,7 @@ import 'package:finances_group/src/models/category.dart';
 
 import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/shared/widgets/custom_text_form_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -31,8 +31,7 @@ class AddFinantialMovementPage extends StatefulWidget {
 
 class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   final FinantialMovementController controller = FinantialMovementController(
-      FinantialMovementRepositoryFirestoreImp(
-          FirebaseFirestore.instance, FirebaseAuth.instance));
+      FinantialMovementRepositoryFirestore(FirebaseFirestore.instance));
 
   var titleController = TextEditingController();
   var valueController = TextEditingController();
@@ -159,8 +158,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                     );
 
                     if (isFormValid ?? false) {
-                      await controller.create(
-                          finantialMovement, widget.userLogged!);
+                      await controller.create(finantialMovement);
 
                       if (!listaDeCategoria
                           .contains(finantialMovement.category.label)) {

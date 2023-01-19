@@ -4,7 +4,6 @@ import 'package:finances_group/src/data/services/firestore_service.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
 
 import '../../models/category.dart';
-import '../../models/user_model.dart';
 
 class FinantialMovementController {
   final IRepository<FinantialMovement> _repository;
@@ -19,21 +18,12 @@ class FinantialMovementController {
     return await FireStoreService.fetchCategories();
   }
 
-  Future<void> create(
-      FinantialMovement finantialMovement, UserModel userModel) async {
+  Future<void> create(FinantialMovement finantialMovement) async {
     await _repository.create(value: finantialMovement);
-
-    if (userModel.finantialMovementList == null) {
-      List<FinantialMovement> list = [];
-      list.add(finantialMovement);
-      userModel.finantialMovementList = list;
-    } else {
-      userModel.finantialMovementList!.add(finantialMovement);
-    }
   }
 
-  Future<List<FinantialMovement>> findAll() async {
-    var result = await _repository.findAll();
+  Future<List<FinantialMovement>> findAll(String userId) async {
+    var result = await _repository.findAll(userId);
     return result;
   }
 
