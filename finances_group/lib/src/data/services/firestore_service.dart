@@ -12,7 +12,7 @@ class FireStoreService {
 
   static Future<void> registerUser(UserModel usermodel) async {
     try {
-      usermodel.id = _auth.currentUser?.uid;
+      usermodel.id = _auth.currentUser?.uid ?? '';
       await db.collection(users).doc(usermodel.id).set(usermodel.toMap());
     } catch (e) {
       throw Exception("[Erro ao salvar um usuario no Firebase]");
