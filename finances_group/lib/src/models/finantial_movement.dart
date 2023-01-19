@@ -23,7 +23,7 @@ class FinantialMovement {
     required this.category,
     this.paymentDate,
   }) {
-    if (id == '') {
+    if (id.isEmpty) {
       id = uuid.v1();
     }
   }
