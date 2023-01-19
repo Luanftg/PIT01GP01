@@ -104,3 +104,5 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [FireBase - docs](https://firebase.google.com/docs/)
 - [Fake FirebaseFirestor - test - pub.dev](https://pub.dev/packages/fake_cloud_firestore/install)
 - [Mocktail - test - pub.dev](https://pub.dev/packages/mocktail)
+
+[Image Picker - Pub DEV](https://medium.com/unitechie/flutter-tutorial-image-picker-from-camera-gallery-c27af5490b74)
