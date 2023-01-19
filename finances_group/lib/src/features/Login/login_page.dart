@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
-import 'package:finances_group/src/features/Login/login_controller.dart';
+import 'package:finances_group/src/data/repositories/firebase_auth_repository.dart';
+import 'package:finances_group/src/features/login/login_controller.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -20,17 +20,21 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final controller = LoginController(
-      repository: FinantialMovementRepositoryFirestoreImp(
-          FirebaseFirestore.instance, FirebaseAuth.instance));
+  final controller =
+      LoginController(FirebaseAuthRepository(FirebaseAuth.instance));
 
   final loginKey = GlobalKey();
 
-  LoginState get state => controller.state;
+  // LoginState get state => controller.state;
 
   @override
   void initState() {
     super.initState();
+    // controller.addListener(() {
+    //   if (mounted) {
+    //     setState(() {});
+    //   }
+    // });
     _setStatusbarColor();
   }
 
@@ -71,20 +75,20 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: <Object>() async {
-                        await controller.logar(
+                        await controller.login(
                           emailController.text,
                           passwordController.text,
                         );
 
-                        if (state is LoginStateLoading) {
+                        if (controller.value is LoginStateLoading) {
                           const Center(child: CircularProgressIndicator());
                         }
-                        if (state is LoginStateSucces) {
+                        if (controller.value is LoginStateSucces) {
                           return navigator.pushNamed('/home',
-                              arguments:
-                                  (state as LoginStateSucces).userLogged);
+                              arguments: (controller.value as LoginStateSucces)
+                                  .userModel);
                         }
-                        if (state is LoginStateError) {
+                        if (controller.value is LoginStateError) {
                           showDialog(
                               context: context,
                               builder: (context) {
