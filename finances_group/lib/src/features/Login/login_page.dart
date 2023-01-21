@@ -25,16 +25,10 @@ class _LoginPageState extends State<LoginPage> {
 
   final loginKey = GlobalKey();
 
-  // LoginState get state => controller.state;
-
   @override
   void initState() {
     super.initState();
-    // controller.addListener(() {
-    //   if (mounted) {
-    //     setState(() {});
-    //   }
-    // });
+
     _setStatusbarColor();
   }
 
@@ -81,7 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                         );
 
                         if (controller.value is LoginStateLoading) {
-                          const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                         if (controller.value is LoginStateSucces) {
                           return navigator.pushNamed('/home',
