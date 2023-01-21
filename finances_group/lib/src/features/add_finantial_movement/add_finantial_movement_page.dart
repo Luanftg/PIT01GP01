@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finances_group/src/data/repositories/category_repository_firestore.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore.dart';
 
 import 'package:finances_group/src/features/add_finantial_movement/finantial_movement_controller.dart';
@@ -31,7 +32,9 @@ class AddFinantialMovementPage extends StatefulWidget {
 
 class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   final FinantialMovementController controller = FinantialMovementController(
-      FinantialMovementRepositoryFirestore(FirebaseFirestore.instance));
+    FinantialMovementRepositoryFirestore(FirebaseFirestore.instance),
+    CategoryRepositoryFirestore(db: FirebaseFirestore.instance),
+  );
 
   var titleController = TextEditingController();
   var valueController = TextEditingController();
