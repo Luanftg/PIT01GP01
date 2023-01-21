@@ -8,15 +8,10 @@ class FinantialMovementRepositoryFirestore
   static const String users = 'users';
 
   final FirebaseFirestore db;
-  // final FirebaseAuth firebaseAuth;
+
   String userId = '';
 
   FinantialMovementRepositoryFirestore(this.db);
-
-  // String get _getUserId {
-  //   userId = firebaseAuth.currentUser?.uid ?? '';
-  //   return userId;
-  // }
 
   @override
   Future<void> create({required FinantialMovement value}) async {
@@ -25,7 +20,6 @@ class FinantialMovementRepositoryFirestore
     } catch (e) {
       throw Exception(e.toString());
     }
-    // }
   }
 
   @override
