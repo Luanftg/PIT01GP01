@@ -15,27 +15,29 @@ class FirebaseAuthRepository implements AuthRepository {
   @override
   Future<UserModel?> login(LoginModel loginModel) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
           email: loginModel.email, password: loginModel.password!);
-      final user = _firebaseAuth.currentUser!;
-      var userModel = UserModel(
-          id: user.uid,
-          email: loginModel.email,
-          isLogged: true,
-          name: user.displayName ?? '');
-      return userModel;
+      final user = userCredential.user;
+      if (user != null) {
+        var userModel = UserModel(
+            id: user.uid,
+            email: loginModel.email,
+            isLogged: true,
+            name: user.displayName ?? '');
+        return userModel;
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         throw AuthException('Email não encontrado. Cadastre-se.');
       } else if (e.code == 'wrong-password') {
         throw AuthException('Senha incorreta. Tente novamente');
       }
-      return null;
     }
+    return null;
   }
 
   @override
-  void logout() async {
+  Future<void> logout() async {
     await _firebaseAuth.signOut();
   }
 
