@@ -4,6 +4,6 @@ abstract class AuthRepository {
   Future<UserModel?> login(LoginModel loginModel);
   Future<void> register(RegisterModel registerModel);
   bool isUserLogged();
-  void logout();
+  Future<void> logout();
   UserModel? isAuthenticated();
 }
