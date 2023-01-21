@@ -54,7 +54,12 @@ void main() {
           await fMRepositoryFirestoreImp.findAll(finantialMovement.userID);
       expect(fmList, isEmpty);
     });
-    // test('should return [Exception] if there was a error on firebase', () {});
+    // test('should return [Exception] if there was a error on firebase',
+    //     () async {
+
+    //   expect(() => fMRepositoryFirestoreImp.create(value: finantialMovement),
+    //       throwsException);
+    // });
   });
 
   group('[Method]: Future<List<FinantialMovement>> findAll()', () {
