@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -34,17 +33,7 @@ class Category {
       image: map['image'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Category.fromJson(String source) =>
-      Category.fromMap(json.decode(source));
-
   Color gerarCor() {
     return Colors.primaries[Random().nextInt(Colors.primaries.length)];
   }
-
-  @override
-  String toString() =>
-      'Category(label: $label, color: $color, image: $image??' ')';
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:uuid/uuid.dart';
 
 const uuid = Uuid();
@@ -49,16 +47,6 @@ class UserModel {
       photoURL: map['photoURL'],
       isLogged: map['isLogged'] ?? false,
     );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, password: $password, photoURL: $photoURL, isLogged: $isLogged)';
   }
 }
 

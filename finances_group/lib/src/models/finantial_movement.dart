@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:finances_group/src/models/category.dart';
 import 'package:uuid/uuid.dart';
 
@@ -54,9 +52,4 @@ class FinantialMovement {
       paymentDate: map['paymentDate'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory FinantialMovement.fromJson(String source) =>
-      FinantialMovement.fromMap(json.decode(source));
 }

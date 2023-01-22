@@ -10,10 +10,5 @@ final userLogged = UserModel(email: 'luanfonseca@email.com');
 void main() {
   testWidgets('add finantial movement page ...', (tester) async {
     // TODO: Implement test
-    //   await tester.pumpWidget(AddFinantialMovementPage(
-    //     title: 'Salvar',
-    //     userLogged: userLogged,
-    //   ));
-    //   expect(find.byType(ElevatedButton), findsOneWidget);
   });
 }
