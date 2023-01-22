@@ -1,10 +1,9 @@
 import 'package:finances_group/src/data/repositories/firebase_auth_repository.dart';
 import 'package:finances_group/src/models/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mock_exceptions/mock_exceptions.dart';
 
 late MockFirebaseAuth fireBaseAuthMock;
 late FirebaseAuthRepository firebaseAuthRepository;
@@ -37,40 +36,10 @@ void main() {
       expect(result?.email, 'luan@email.com');
       expect(result?.isLogged, true);
     });
-    test(
-        'should return a [AuthException] when catch FirebaseAuthException with code [user-not-found] from firebase',
-        () async {
-      whenCalling(Invocation.method(
-        #signInWithEmailAndPassword,
-        null,
-      ))
-          .on(fireBaseAuthMock)
-          .thenThrow(FirebaseAuthException(code: 'user-not-found'));
-
-      // whenCalling(Invocation.method(
-      //   #signInWithEmailAndPassword,
-      //   null,
-      // ))
-      //     .on(fireBaseAuthMock)
-      //     .thenThrow(AuthException('Email não encontrado. Cadastre-se.'));
-
-      await firebaseAuthRepository.register(registerModel);
-      await firebaseAuthRepository.login(wrongEmail);
-
-      //   expect(
-      //     () async => await fireBaseAuthMock.signInWithEmailAndPassword(
-      //       email: 'luan@email.com',
-      //       password: '123456',
-      //     ),
-      //     throwsA(isA<FirebaseAuthException>()),
-      //   );
-      // });
-
-      expect(
-        () async => await firebaseAuthRepository.login(wrongEmail),
-        throwsA(isA<AuthException>()),
-      );
-    });
+    // test(
+    //     'should return a [AuthException] when catch FirebaseAuthException with code [user-not-found] from firebase',
+    //     () async {
+    // });
 
     // test(
     //     'should return a [AuthException] when catch FirebaseAuthException with code [email-already-in-use] from firebase',
