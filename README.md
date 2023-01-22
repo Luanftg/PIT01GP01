@@ -1,4 +1,4 @@
-# Finances Group :chart:
+# :chart: Finances Group
 
 ## PIT01GP1 - Projeto Integrador do Curso de Flutter
 
@@ -28,7 +28,7 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [x] Sprint II ![Sprint II](Sprints/sprintII.png)
 - [x] Sprint III ![Sprint III](Sprints/sprintIII.png)
 *OBS: Os testes foram passados para a **Sprint IV***
-- [x] Sprint III ![Sprint III](Sprints/sprintIV.png)
+- [x] Sprint IV ![Sprint III](Sprints/sprintIV.png)
 
 [Link da Apresentação PROZ Educação](https://docs.google.com/presentation/d/181Vlhx1l7lmpuS8htd34nlJ9vLXomLDjK2Sc5mJm4JY/edit#slide=id.g1395cdef0a2_0_83 )
 
