@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -6,13 +5,12 @@ import 'package:flutter/material.dart';
 class Category {
   final String label;
   late final Color color;
-  //final Color color;
+
   final String? image;
 
   Category({
     this.image,
     required this.label,
-    //required this.color,
   }) {
     color = gerarCor();
   }
@@ -21,7 +19,7 @@ class Category {
     final result = <String, dynamic>{};
 
     result.addAll({'label': label});
-    result.addAll({'color': color.value});
+
     if (image != null) {
       result.addAll({'image': image});
     }
@@ -32,21 +30,10 @@ class Category {
   factory Category.fromMap(Map<String, dynamic> map) {
     return Category(
       label: map['label'] ?? '',
-      //color: Color(map['color']),
       image: map['image'] ?? '',
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Category.fromJson(String source) =>
-      Category.fromMap(json.decode(source));
-
   Color gerarCor() {
     return Colors.primaries[Random().nextInt(Colors.primaries.length)];
   }
-
-  @override
-  String toString() =>
-      'Category(label: $label, color: $color, image: $image??' ')';
 }

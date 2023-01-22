@@ -1,32 +1,30 @@
-import 'package:finances_group/src/data/repositories/repository.dart';
-import 'package:finances_group/src/data/services/auth.service.dart';
-import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/data/repositories/auth_repository.dart';
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/features/login/login_state.dart';
+import 'package:flutter/material.dart';
 
-class LoginController {
-  late LoginState state;
-  final IRepository<FinantialMovement> repository;
-  final authService = AuthService();
+class LoginController extends ValueNotifier<LoginState> {
+  // late LoginState value;
 
-  LoginController({required this.repository});
+  final AuthRepository _authRepository;
 
-  Future<void> logar(String email, String password) async {
-    state = LoginStateLoading();
+  LoginController(this._authRepository) : super(LoginStateInit());
+
+  Future<void> login(String email, String password) async {
+    value = LoginStateLoading();
+    final userLogin = LoginModel(email: email, password: password);
     try {
-      var userLoged = await authService.login(email, password);
+      var userLoged = await _authRepository.login(userLogin);
       if (userLoged == null) {
-        state = LoginStateError('Credenciais inválidas');
+        value = LoginStateError('Credenciais inválidas');
       }
-      var fmList = await repository.findAll();
-      userLoged!.finantialMovementList = fmList;
-      state = LoginStateSucces(userLoged);
+      value = LoginStateSucces(userLoged!);
     } catch (e) {
-      state = LoginStateError('Credenciais inválidas');
+      value = LoginStateError('Erro ao realizar o login. Tente novamente!');
     }
   }
 
-  void logout(UserModel userModel) {
-    authService.logout();
+  void logout() {
+    _authRepository.logout();
   }
 }

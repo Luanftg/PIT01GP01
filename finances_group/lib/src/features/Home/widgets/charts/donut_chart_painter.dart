@@ -128,13 +128,6 @@ class DonutChartPainter extends CustomPainter {
     });
   }
 
-  void drawLabels2(
-    Canvas canvas,
-    Offset startPosition,
-    double spaceBetween,
-    DataItem element,
-  ) {}
-
   TextPainter measureText(
       String text, TextStyle style, double maxWidth, TextAlign align) {
     final span = TextSpan(text: text, style: style);

@@ -1,4 +1,4 @@
-import 'package:finances_group/src/models/user_model.dart';
+import 'package:finances_group/src/models/finantial_movement.dart';
 
 abstract class HomeState {}
 
@@ -13,11 +13,11 @@ class HomeStateError implements HomeState {
 }
 
 class HomeStateSucess implements HomeState {
-  final UserModel userLogged;
-  HomeStateSucess(this.userLogged);
+  List<FinantialMovement> finantialMovementList;
+  HomeStateSucess(this.finantialMovementList);
 }
 
 class HomeStateWelcome implements HomeState {
-  final UserModel userLogged;
-  HomeStateWelcome(this.userLogged);
+  List<FinantialMovement> finantialMovementList = [];
+  HomeStateWelcome();
 }

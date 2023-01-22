@@ -1,7 +1,7 @@
 abstract class IRepository<T> {
-  Future<bool> create(T value);
+  Future<void> create({required T value});
   Future<T?> findOne(String id);
-  Future<List<T>> findAll();
-  Future<bool> delete(String id);
-  Future<bool> update(T value);
+  Future<List<T>> findAll(String userID);
+  Future<void> delete(String id);
+  Future<void> update(T value);
 }

@@ -6,6 +6,10 @@
 
 Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoais.
 
+- *SPRINT IV* - **:star: Testes de Unidade**
+
+![Alt text](Sprints/flutter-coverage.png)
+
 - *SPRINT III* - **:star: Firebase Authentication e Cloud Firestore**
 
 <https://user-images.githubusercontent.com/51548623/212443715-c246378c-ccf5-4f73-a84f-ab1c2b659a13.mp4>
@@ -24,6 +28,7 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [x] Sprint II ![Sprint II](Sprints/sprintII.png)
 - [x] Sprint III ![Sprint III](Sprints/sprintIII.png)
 *OBS: Os testes foram passados para a **Sprint IV***
+- [x] Sprint III ![Sprint III](Sprints/sprintIV.png)
 
 [Link da Apresentação PROZ Educação](https://docs.google.com/presentation/d/181Vlhx1l7lmpuS8htd34nlJ9vLXomLDjK2Sc5mJm4JY/edit#slide=id.g1395cdef0a2_0_83 )
 
@@ -35,6 +40,11 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [Nicolas Kormann](https://github.com/nicolasKormann)
 
 ## Soluções
+
+### Implementações da Sprint IV
+
+- A implementação de testes revelou a necessidade de refatoração do projeto, no intuito de otimizar o desacoplamento das classes priorizando a independencia das unidades para teste.
+- Os teste foram realizados nos repositórios que são responsáveis pela manipulação das entidades/modelos trafegadas pelo app.
 
 ### Implementações da Sprint III
   
@@ -82,13 +92,13 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 
 ### Idéias para as próximas Implementações de Funcionalidades
 
-- :star: ***Lembrete de Registro de Movimentações***
+- [ ] :star: ***Lembrete de Registro de Movimentações***
 ![Alt text](Sprints/exemplo_lembrete_diario.jpg)
 
-- :star: ***Simulador de Valor Futuro***
+- [x] :star: ***Simulador de Valor Futuro***
 ![Alt text](Sprints/exemplo_monetus.jpg)
 
-- :star: ***Calculadora do milhão***
+- [ ] :star: ***Calculadora do milhão***
 ![Alt text](Sprints/exemplo_calc_do_milhao.jpg)
 
 #### Protótipo com ideia inicial
@@ -102,3 +112,7 @@ Desenvolvimento de uma aplicação mobile para gerenciamento de finanças pessoa
 - [organizze](https://www.organizze.com.br/)
 - [mobills](https://www.mobills.com.br/)
 - [FireBase - docs](https://firebase.google.com/docs/)
+- [Fake FirebaseFirestor - test - pub.dev](https://pub.dev/packages/fake_cloud_firestore/install)
+- [Mocktail - test - pub.dev](https://pub.dev/packages/mocktail)
+- [firebase_auth_mocks 0.10.3](https://pub.dev/packages/firebase_auth_mocks)
+- [Image Picker - Pub DEV](https://medium.com/unitechie/flutter-tutorial-image-picker-from-camera-gallery-c27af5490b74)
