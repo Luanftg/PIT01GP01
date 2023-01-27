@@ -1,8 +1,10 @@
-import 'package:finances_group/src/data/services/auth.service.dart';
+import 'package:finances_group/src/data/repositories/firebase_auth_repository.dart';
 import 'package:finances_group/src/features/simulator/simulator_controller.dart';
 import 'package:finances_group/src/features/simulator/simulator_repository._imp.dart';
 import 'package:finances_group/src/features/simulator/simulator_state.dart';
 import 'package:finances_group/src/shared/design/theme/text_theme.dart';
+import 'package:finances_group/src/shared/utils/currency.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/valor_futuro.dart';
@@ -17,8 +19,8 @@ class SimulatorPage extends StatefulWidget {
 }
 
 class _SimulatorPageState extends State<SimulatorPage> {
-  final SimulatorController _simulatorController =
-      SimulatorController(SimulatorRepositoryImp(), AuthService());
+  final SimulatorController _simulatorController = SimulatorController(
+      SimulatorRepositoryImp(), FirebaseAuthRepository(FirebaseAuth.instance));
 
   double get riskValue => _simulatorController.riskValue;
   String get riskLabel => _simulatorController.riskLabel;
@@ -53,6 +55,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Simulador'),
         backgroundColor: AppCustomColors.dark,
       ),
       backgroundColor: AppCustomColors.dark,
@@ -77,7 +80,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                   Padding(
                     padding: const EdgeInsets.all(32),
                     child: Column(children: [
-                      Text('Simule o seu futuro',
+                      Text('Simule um valor futuro',
                           style: CustomAppTextTheme.largeCaption),
                       const SizedBox(height: 32, width: 32),
                       Text(
@@ -122,7 +125,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                           ),
                           const SizedBox(width: 16),
                           Text(
-                            'R\$ ${valorSimulado?.initialValue.round().toStringAsFixed(2)}',
+                            'R\$ ${Currency.moneyFormat(valorSimulado?.initialValue.round().toStringAsFixed(2) ?? '')}',
                             style: CustomAppTextTheme.label
                                 .copyWith(color: AppCustomColors.primary),
                           ),
@@ -153,7 +156,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'R\$ ${valorSimulado?.mounthValue.round()}',
+                            'R\$ ${Currency.moneyFormat(valorSimulado?.mounthValue.round().toStringAsFixed(2) ?? '')}',
                             style: CustomAppTextTheme.label
                                 .copyWith(color: AppCustomColors.secondary),
                           ),
@@ -165,7 +168,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                             max: 200,
                             min: 0.0,
                             semanticFormatterCallback: (double value) {
-                              return '${value.round()} reais';
+                              return '${Currency.moneyFormat(value.round().toString())} reais';
                             },
                             activeColor: AppCustomColors.primary,
                             label: '${valorSimulado?.mounthValue.round()}',
@@ -177,15 +180,17 @@ class _SimulatorPageState extends State<SimulatorPage> {
                     ]),
                   ),
                   Container(
-                    decoration: const BoxDecoration(
-                        gradient: AppCustomColors.purpleGreen),
+                    // decoration: const BoxDecoration(
+                    //      gradient: AppCustomColors.cyanPurple,
+                    //     ),
                     padding: const EdgeInsetsDirectional.all(32),
-                    //color: AppCustomColors.foreGround,
+                    color: AppCustomColors.foreGround,
                     child: Column(children: [
                       Text('Em $year, você terá:',
                           style: CustomAppTextTheme.blackCaption),
                       const SizedBox(height: 16),
-                      Text('R\$ ${balance.toStringAsFixed(2)}',
+                      Text(
+                          'R\$ ${Currency.moneyFormat(balance.toStringAsFixed(2))}',
                           style: CustomAppTextTheme.headline2),
                       const SizedBox(height: 16),
                       Row(
@@ -209,7 +214,7 @@ class _SimulatorPageState extends State<SimulatorPage> {
                           valorFuturo == null
                               ? const Text('--')
                               : Text(
-                                  'R\$ ${valorFuturo?.rendimentoTotal.toStringAsFixed(2)}',
+                                  'R\$ ${Currency.moneyFormat(valorFuturo?.rendimentoTotal.toStringAsFixed(2) ?? '')}',
                                   style: CustomAppTextTheme.blackCaption
                                       .copyWith(fontSize: 16)),
                           Text('${valorSimulado?.taxaAA.toStringAsFixed(2)} %',
