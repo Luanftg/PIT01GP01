@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:finances_group/src/data/services/auth.service.dart';
+import 'package:finances_group/src/data/repositories/firebase_auth_repository.dart';
 import 'package:finances_group/src/features/simulator/simulator_repository.dart';
 import 'package:finances_group/src/features/simulator/simulator_state.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import '../../models/valor_simulado.dart';
 
 class SimulatorController extends ValueNotifier<SimulatorState> {
   final SimulatorRepository _simulatorRepository;
-  final AuthService _authRepository;
+  final FirebaseAuthRepository _authRepository;
 
   SimulatorController(this._simulatorRepository, this._authRepository)
       : super(SimulatorInitialState());
@@ -33,7 +33,7 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
     double taxaAA,
   ) async {
     value = SimulatorLoadingState();
-    final userId = _authRepository.usuario?.uid;
+    final userId = _authRepository.isAuthenticated()?.id;
     final valorSimulado = ValorSimulado(
       initialValue: initialValue,
       mounthValue: mounthValue,
@@ -48,7 +48,7 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
   Future<void> fetchSimulator() async {
     value = SimulatorLoadingState();
 
-    final userId = _authRepository.currentUser?.uid;
+    final userId = _authRepository.isAuthenticated()?.id;
     final result = await _simulatorRepository.getList(userId ?? '');
     if (result.isNotEmpty) {
       valorSimulado.value = result.first;
@@ -64,7 +64,6 @@ class SimulatorController extends ValueNotifier<SimulatorState> {
           taxaAA: 13.5,
           userId: userId!);
       value = SimulatorSucessState(valorSimulado);
-      // valorSimulado.value = result.first;
       this.valorSimulado.value = valorSimulado;
     }
   }
