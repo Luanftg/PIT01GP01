@@ -1,45 +1,48 @@
 import 'package:finances_group/src/data/repositories/repository.dart';
-import 'package:finances_group/src/data/services/firestore_service.dart';
-
 import 'package:finances_group/src/models/finantial_movement.dart';
 
 import '../../models/category.dart';
-import '../../models/user_model.dart';
 
 class FinantialMovementController {
-  final IRepository<FinantialMovement> _repository;
+  final IRepository<FinantialMovement> _finantialMovementRepository;
+  final IRepository<Category> _categoryRepository;
 
-  FinantialMovementController(this._repository);
+  FinantialMovementController(
+    this._finantialMovementRepository,
+    this._categoryRepository,
+  );
 
   Future<void> saveCategory(Category category) async {
-    await FireStoreService.saveCategory(category);
+    await _categoryRepository.create(value: category);
   }
 
   Future<List<String>> fetchCategories() async {
-    return await FireStoreService.fetchCategories();
-  }
+    try {
+      final listaDeCategoria = await _categoryRepository.findAll('');
+      if (listaDeCategoria.isEmpty) {
+        return [];
+      }
+      List<String> listaDeString = [];
 
-  Future<bool> create(
-      FinantialMovement finantialMovement, UserModel userModel) async {
-    var result = await _repository.create(finantialMovement);
-
-    if (userModel.finantialMovementList == null) {
-      List<FinantialMovement> list = [];
-      list.add(finantialMovement);
-      userModel.finantialMovementList = list;
-    } else {
-      userModel.finantialMovementList!.add(finantialMovement);
+      for (var categoria in listaDeCategoria) {
+        listaDeString.add(categoria.label);
+      }
+      return listaDeString;
+    } catch (e) {
+      throw Exception("[Erro na busca por categorias]");
     }
-
-    return result ? true : false;
   }
 
-  Future<List<FinantialMovement>> findAll() async {
-    var result = await _repository.findAll();
+  Future<void> create(FinantialMovement finantialMovement) async {
+    await _finantialMovementRepository.create(value: finantialMovement);
+  }
+
+  Future<List<FinantialMovement>> findAll(String userId) async {
+    var result = await _finantialMovementRepository.findAll(userId);
     return result;
   }
 
   Future<void> delete(String id) async {
-    await _repository.delete(id);
+    await _finantialMovementRepository.delete(id);
   }
 }

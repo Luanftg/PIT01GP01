@@ -7,8 +7,8 @@ class LoginStateInit extends LoginState {}
 class LoginStateLoading extends LoginState {}
 
 class LoginStateSucces extends LoginState {
-  final UserModel userLogged;
-  LoginStateSucces(this.userLogged);
+  final UserModel userModel;
+  LoginStateSucces(this.userModel);
 }
 
 class LoginStateError extends LoginState {

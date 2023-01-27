@@ -16,7 +16,4 @@ class DataItem {
     return DataItem(
         value: fm.value, label: fm.category.label, color: fm.category.color);
   }
-
-  @override
-  String toString() => 'DataItem(value: $value, label: $label, color: $color)';
 }

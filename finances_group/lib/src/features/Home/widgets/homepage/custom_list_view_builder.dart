@@ -1,18 +1,22 @@
-import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore_imp.dart';
-import 'package:finances_group/src/features/home/home_controller.dart';
-
-import 'package:finances_group/src/models/user_model.dart';
-
-import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CustomListViewBuilder extends StatefulWidget {
-  final UserModel userLogged;
+import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore.dart';
+import 'package:finances_group/src/features/home/home_controller.dart';
+import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/models/user_model.dart';
+import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 
-  const CustomListViewBuilder({Key? key, required this.userLogged})
-      : super(key: key);
+class CustomListViewBuilder extends StatefulWidget {
+  final List<FinantialMovement> finantialMovementList;
+  final UserModel userModel;
+
+  const CustomListViewBuilder({
+    Key? key,
+    required this.finantialMovementList,
+    required this.userModel,
+  }) : super(key: key);
 
   @override
   State<CustomListViewBuilder> createState() => _CustomListViewBuilderState();
@@ -21,8 +25,8 @@ class CustomListViewBuilder extends StatefulWidget {
 class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
   final DateFormat formater = DateFormat('yyyy-MM-dd');
 
-  final HomeController _controller =
-      HomeController(FinantialMovementRepositoryFirestoreImp());
+  final HomeController _controller = HomeController(
+      FinantialMovementRepositoryFirestore(FirebaseFirestore.instance));
 
   @override
   void initState() {
@@ -31,13 +35,13 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    var finaltialMovementList = widget.userLogged.finantialMovementList;
+    var finaltialMovementList = widget.finantialMovementList;
     return ListView.builder(
-        itemCount: finaltialMovementList?.length,
+        itemCount: finaltialMovementList.length,
         shrinkWrap: true,
         physics: const ClampingScrollPhysics(),
         itemBuilder: (context, snapshot) {
-          if (finaltialMovementList?.isNotEmpty ?? false) {
+          if (finaltialMovementList.isNotEmpty) {
             return Dismissible(
               key: Key('item $snapshot'),
               confirmDismiss: (direction) async {
@@ -55,18 +59,17 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
                           ElevatedButton(
                             child: const Text("Sim"),
                             onPressed: () async {
-                              await _controller.delete(widget.userLogged
-                                      .finantialMovementList?[snapshot].id ??
-                                  '');
+                              await _controller.delete(
+                                  widget.finantialMovementList[snapshot].id);
                               scaffoldContext.showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                      'movimentação: ${widget.userLogged.finantialMovementList?[snapshot].description} removida!'),
+                                      'movimentação: ${widget.finantialMovementList[snapshot].description} removida!'),
                                 ),
                               );
 
                               navigatorContext.pushReplacementNamed('/home',
-                                  result: true, arguments: widget.userLogged);
+                                  result: true, arguments: widget.userModel);
                             },
                           ),
                           ElevatedButton(
@@ -80,9 +83,8 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
                 } else {
                   Navigator.of(context)
                       .pushNamed("/add-finantial-movement", arguments: {
-                    "finantialMovement":
-                        widget.userLogged.finantialMovementList?[snapshot],
-                    "userLoged": widget.userLogged
+                    "finantialMovement": widget.finantialMovementList[snapshot],
+                    "userLoged": widget.userModel
                   });
                   return false;
                 }
@@ -113,31 +115,24 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
                     vertical: 10.0, horizontal: 25.0),
                 child: ListTile(
                   leading: Image.asset(
-                    widget.userLogged.finantialMovementList?[snapshot].category
-                            .image! ??
-                        '',
+                    widget.finantialMovementList[snapshot].category.image!,
                   ),
                   title: Text(
-                    widget.userLogged.finantialMovementList?[snapshot]
-                            .description ??
-                        '',
+                    widget.finantialMovementList[snapshot].description,
                     style: TextStyle(
-                        color: widget.userLogged
-                            .finantialMovementList?[snapshot].category.color),
+                        color: widget
+                            .finantialMovementList[snapshot].category.color),
                   ),
-                  subtitle: Text(widget.userLogged
-                          .finantialMovementList?[snapshot].paymentDate
-                          .toString() ??
-                      ''),
-                  trailing: (widget.userLogged.finantialMovementList?[snapshot]
-                              .isIncome ??
-                          false)
+                  subtitle: Text(widget
+                      .finantialMovementList[snapshot].paymentDate
+                      .toString()),
+                  trailing: (widget.finantialMovementList[snapshot].isIncome)
                       ? Text(
-                          '+ R\$ ${widget.userLogged.finantialMovementList?[snapshot].value.toString()}',
+                          '+ R\$ ${widget.finantialMovementList[snapshot].value.toString()}',
                           style: const TextStyle(color: AppCustomColors.cyan),
                         )
                       : Text(
-                          '- R\$ ${widget.userLogged.finantialMovementList?[snapshot].value.toString()}',
+                          '- R\$ ${widget.finantialMovementList[snapshot].value.toString()}',
                           style: const TextStyle(color: AppCustomColors.danger),
                         ),
                 ),

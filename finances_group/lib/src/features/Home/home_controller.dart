@@ -11,15 +11,15 @@ class HomeController extends ValueNotifier<HomeState> {
 
   final IRepository<FinantialMovement> _repository;
 
-  Future<void> fetchUserLogged(UserModel userModel) async {
+  Future<void> fetchFinantialMovement(UserModel userModel) async {
     value = HomeStateLoading();
     try {
-      var fmList = await _repository.findAll();
-      userModel.finantialMovementList = fmList;
-      if (userModel.finantialMovementList!.isNotEmpty) {
-        value = HomeStateSucess(userModel);
+      var fmList = await _repository.findAll(userModel.id);
+
+      if (fmList.isNotEmpty) {
+        value = HomeStateSucess(fmList);
       } else {
-        value = HomeStateWelcome(userModel);
+        value = HomeStateWelcome();
       }
     } catch (e) {
       value = HomeStateError(e.toString());

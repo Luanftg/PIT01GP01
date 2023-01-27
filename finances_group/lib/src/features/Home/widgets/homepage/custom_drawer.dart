@@ -20,10 +20,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
           UserAccountsDrawerHeader(
             decoration:
                 const BoxDecoration(color: AppCustomColors.darkSecondary),
-            accountName: Text(widget.userModel.name ?? '',
+            accountName: Text(widget.userModel.name,
                 style: CustomAppTextTheme.headline2),
             accountEmail: Text(
-              widget.userModel.email ?? '',
+              widget.userModel.email,
               style: CustomAppTextTheme.body,
             ),
             currentAccountPicture: CircleAvatar(

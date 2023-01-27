@@ -2,7 +2,6 @@ import 'package:finances_group/src/features/register/register_controller.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../shared/widgets/custom_text_form_field.dart';
 
@@ -34,19 +33,19 @@ class _RegisterPageState extends State<RegisterPage> {
     FlutterStatusbarcolor.setStatusBarColor(AppCustomColors.dark);
   }
 
-  final cpfFormater = MaskTextInputFormatter(
-    mask: '###.###.###-##',
-    filter: {
-      '#': RegExp(r'[0-9]'),
-    },
-  );
+  // final cpfFormater = MaskTextInputFormatter(
+  //   mask: '###.###.###-##',
+  //   filter: {
+  //     '#': RegExp(r'[0-9]'),
+  //   },
+  // );
 
-  final phoneFormater = MaskTextInputFormatter(
-    mask: '(##)# ####-####',
-    filter: {
-      '#': RegExp(r'[0-9]'),
-    },
-  );
+  // final phoneFormater = MaskTextInputFormatter(
+  //   mask: '(##)# ####-####',
+  //   filter: {
+  //     '#': RegExp(r'[0-9]'),
+  //   },
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -81,22 +80,22 @@ class _RegisterPageState extends State<RegisterPage> {
                       typeKeyboard: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                     ),
-                    CustomTextFormField(
-                      controller: phoneController,
-                      icon: Icons.phone,
-                      label: 'Celular',
-                      inputFormatters: [phoneFormater],
-                      typeKeyboard: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    CustomTextFormField(
-                      controller: cpfController,
-                      icon: Icons.numbers_outlined,
-                      label: 'CPF',
-                      inputFormatters: [cpfFormater],
-                      typeKeyboard: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                    ),
+                    // CustomTextFormField(
+                    //   controller: phoneController,
+                    //   icon: Icons.phone,
+                    //   label: 'Celular',
+                    //   inputFormatters: [phoneFormater],
+                    //   typeKeyboard: TextInputType.number,
+                    //   textInputAction: TextInputAction.next,
+                    // ),
+                    // CustomTextFormField(
+                    //   controller: cpfController,
+                    //   icon: Icons.numbers_outlined,
+                    //   label: 'CPF',
+                    //   inputFormatters: [cpfFormater],
+                    //   typeKeyboard: TextInputType.number,
+                    //   textInputAction: TextInputAction.next,
+                    // ),
                     CustomTextFormField(
                       controller: passwordController,
                       icon: Icons.key_outlined,
