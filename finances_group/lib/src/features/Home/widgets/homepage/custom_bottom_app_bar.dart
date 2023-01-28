@@ -1,18 +1,22 @@
-import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
+
+import 'package:finances_group/src/models/user_model.dart';
+import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   final FloatingActionButtonLocation fabLocation;
+  final UserModel userModel;
   final NotchedShape? shape;
   static final List<FloatingActionButtonLocation> centerLocations = [
     FloatingActionButtonLocation.centerDocked,
     FloatingActionButtonLocation.centerFloat,
   ];
   const CustomBottomAppBar({
-    super.key,
+    Key? key,
     required this.fabLocation,
+    required this.userModel,
     this.shape = const CircularNotchedRectangle(),
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,10 @@ class CustomBottomAppBar extends StatelessWidget {
             tooltip: 'Investimentos',
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed('/user-profile', arguments: userModel);
+            },
             icon: const Icon(Icons.settings),
             tooltip: 'Configurações',
           ),
