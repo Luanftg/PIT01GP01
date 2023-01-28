@@ -1,6 +1,7 @@
 import 'package:finances_group/src/features/Splash/splash_page.dart';
 import 'package:finances_group/src/features/add_finantial_movement/add_finantial_movement_page.dart';
 import 'package:finances_group/src/features/simulator/simulator_page.dart';
+import 'package:finances_group/src/features/user_profile/user_profile_page.dart';
 
 import 'package:finances_group/src/models/user_model.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
@@ -42,6 +43,9 @@ class FinanceApp extends StatelessWidget {
           );
         },
         '/simulator': (context) => const SimulatorPage(),
+        '/user-profile': (context) => UserProfilePage(
+            userModel:
+                (ModalRoute.of(context)!.settings.arguments) as UserModel),
       },
       theme: draculaTheme,
     );
