@@ -117,7 +117,8 @@ class _HomePageState extends State<HomePage> {
               centerTitle: false,
               toolbarHeight: 75,
               title: TitleAppBar(
-                  userImage: userModel.photoURL, userName: userModel.name),
+                userModel: userModel,
+              ),
               actions: [
                 ActionAppBar(
                   userLogged: userModel,
