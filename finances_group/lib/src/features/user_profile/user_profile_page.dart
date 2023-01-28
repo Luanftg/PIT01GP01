@@ -21,6 +21,8 @@ class UserProfilePage extends StatefulWidget {
 final nameController = TextEditingController();
 final emailController = TextEditingController();
 final passwordController = TextEditingController();
+final newPasswordController = TextEditingController();
+final confirmPasswordController = TextEditingController();
 
 final globalKey = GlobalKey<FormState>();
 
@@ -33,14 +35,14 @@ class _UserProfilePageState extends State<UserProfilePage> {
     super.initState();
     nameController.text = widget.userModel.name;
     emailController.text = widget.userModel.email;
-    // passwordController.text = widget.userModel.password ?? '';
+    passwordController.text = widget.userModel.password ?? '';
   }
 
   @override
   void dispose() {
     nameController.dispose();
     emailController.dispose();
-    // passwordController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -103,17 +105,35 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 CustomTextFormField(
                   icon: Icons.email,
                   label: 'Email',
+                  readOnly: true,
                   typeKeyboard: TextInputType.emailAddress,
                   controller: emailController,
                   textInputAction: TextInputAction.next,
                 ),
-                // CustomTextFormField(
-                //   icon: Icons.password,
-                //   label: 'Senha',
-                //   typeKeyboard: TextInputType.visiblePassword,
-                //   controller: passwordController,
-                //   textInputAction: TextInputAction.done,
-                // ),
+                CustomTextFormField(
+                  icon: Icons.password,
+                  label: 'Senha Atual',
+                  typeKeyboard: TextInputType.visiblePassword,
+                  controller: passwordController,
+                  isSecret: true,
+                  textInputAction: TextInputAction.done,
+                ),
+                CustomTextFormField(
+                  icon: Icons.password,
+                  label: 'Nova Senha',
+                  typeKeyboard: TextInputType.visiblePassword,
+                  controller: newPasswordController,
+                  isSecret: true,
+                  textInputAction: TextInputAction.done,
+                ),
+                CustomTextFormField(
+                  icon: Icons.password,
+                  label: 'Confirme a Senha',
+                  typeKeyboard: TextInputType.visiblePassword,
+                  isSecret: true,
+                  controller: confirmPasswordController,
+                  textInputAction: TextInputAction.done,
+                ),
                 const SizedBox(height: 32),
                 ElevatedButton(
                   onPressed: () async {
@@ -124,13 +144,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         await userProfileController
                             .updateUserPhotoUrl(widget.userModel.photoURL!);
                       }
+
                       await userProfileController
                           .updateUserName(nameController.text);
-
-                      // await userProfileController
-                      //     .updateUserPassword(passwordController.text);
-                      await userProfileController
-                          .updateUserEmail(emailController.text);
+                      if (confirmPasswordController.text ==
+                          newPasswordController.text) {
+                        await userProfileController.firebaseAuthRepository
+                            .login(
+                          LoginModel(
+                              email: emailController.text,
+                              password: passwordController.text),
+                        );
+                        await userProfileController
+                            .updateUserPassword(confirmPasswordController.text);
+                      }
                     }
                   },
                   child: Text(
