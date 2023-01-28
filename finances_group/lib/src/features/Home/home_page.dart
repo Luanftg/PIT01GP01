@@ -141,9 +141,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            bottomNavigationBar: const CustomBottomAppBar(
+            bottomNavigationBar: CustomBottomAppBar(
               fabLocation: FloatingActionButtonLocation.centerDocked,
-              shape: CircularNotchedRectangle(),
+              shape: const CircularNotchedRectangle(),
+              userModel: userModel,
             ),
             floatingActionButton: FloatingActionButton(
                 child: Container(
