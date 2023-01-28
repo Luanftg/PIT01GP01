@@ -45,6 +45,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
 
   @override
   void initState() {
+    super.initState();
     _fetchCategories();
     titleController.text = widget.finantialMovement?.description ?? '';
     valueController.text = (widget.finantialMovement?.value ?? '').toString();
@@ -52,7 +53,6 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
     if (mounted) {
       setState(() {});
     }
-    super.initState();
   }
 
   @override
