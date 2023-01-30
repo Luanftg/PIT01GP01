@@ -1,24 +1,51 @@
+import 'package:finances_group/src/models/finantial_movement.dart';
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomLinearChartPainter extends CustomPainter {
-  final List<double>? weekData;
-  final double minData;
-  final double maxData;
-  final double rangeData;
+  final List<FinantialMovement> dataset;
+
+  double minData = double.maxFinite;
+  double rangeData = 1.0;
+  double maxData = -double.maxFinite;
+  List<double> doubleList = [];
   double percentage;
+
   CustomLinearChartPainter(
-    this.weekData,
-    this.minData,
-    this.maxData,
-    this.rangeData,
     this.percentage,
+    this.dataset,
   );
+
+  void getList(List<FinantialMovement>? dataset) {
+    if (dataset != null && dataset.isNotEmpty) {
+      doubleList = [];
+      for (int index = 0; index < dataset.length; index++) {
+        doubleList.add(dataset[index].value);
+      }
+
+      doubleList = doubleList.take(7).toList();
+
+      for (var element in doubleList) {
+        minData = element < minData ? element : minData;
+        maxData = element > maxData ? element : maxData;
+      }
+      rangeData = maxData - minData;
+      if (rangeData == 0) {
+        rangeData = minData;
+        minData = 0.0;
+      }
+    } else {
+      rangeData = 0;
+      minData = 0;
+      maxData = 0;
+    }
+  }
 
   var chartWidth = 350.0;
   @override
   void paint(Canvas canvas, Size size) {
     var center = Offset(size.width / 2, size.height / 2);
+    getList(dataset);
     drawChart(canvas, center);
   }
 
@@ -101,7 +128,7 @@ class CustomLinearChartPainter extends CustomPainter {
   }
 
   void drawDataPoints(Canvas canvas, Paint dpPaint, Rect rect) {
-    if (weekData == null) return;
+    if (doubleList.isEmpty) return;
     var startX = rect.left;
     var startY = rect.bottom;
     // the radio is the number of y pixels per unit data
@@ -111,7 +138,8 @@ class CustomLinearChartPainter extends CustomPainter {
     path.moveTo(startX, startY);
     var x = rect.left;
     bool first = true;
-    for (var element in weekData!) {
+
+    for (var element in doubleList) {
       var y = (element - minData) * yRatio * percentage;
       if (first) {
         path.moveTo(x, rect.bottom - y);
