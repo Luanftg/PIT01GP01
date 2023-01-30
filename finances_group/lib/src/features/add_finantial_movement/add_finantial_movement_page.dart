@@ -169,7 +169,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                       value: double.tryParse(valueController.text) ?? 0,
                       userID: widget.userLogged?.id.toString() ?? '',
                       isIncome: CustomSwitch.valueSwitch.value,
-                      paymentDate: formater.format(DateTime.now()),
+                      paymentDate: dateController.text,
                       category: Category(
                         label: isNewCategory
                             ? categoryController.text
