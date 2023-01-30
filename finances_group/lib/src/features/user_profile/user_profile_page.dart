@@ -35,7 +35,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     super.initState();
     nameController.text = widget.userModel.name;
     emailController.text = widget.userModel.email;
-    passwordController.text = widget.userModel.password ?? '';
+    // passwordController.text = widget.userModel.password ?? '';
   }
 
   @override
