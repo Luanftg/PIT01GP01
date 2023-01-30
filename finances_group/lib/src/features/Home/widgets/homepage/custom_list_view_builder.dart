@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finances_group/src/shared/utils/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +24,7 @@ class CustomListViewBuilder extends StatefulWidget {
 }
 
 class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
-  final DateFormat formater = DateFormat('yyyy-MM-dd');
+  final DateFormat formater = DateFormat('dd/MM/yyyy');
 
   final HomeController _controller = HomeController(
       FinantialMovementRepositoryFirestore(FirebaseFirestore.instance));
@@ -128,11 +129,11 @@ class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
                       .toString()),
                   trailing: (widget.finantialMovementList[snapshot].isIncome)
                       ? Text(
-                          '+ R\$ ${widget.finantialMovementList[snapshot].value.toString()}',
+                          '+ R\$ ${Currency.moneyFormat(widget.finantialMovementList[snapshot].value.toStringAsFixed(2))}',
                           style: const TextStyle(color: AppCustomColors.cyan),
                         )
                       : Text(
-                          '- R\$ ${widget.finantialMovementList[snapshot].value.toString()}',
+                          '- R\$ ${Currency.moneyFormat(widget.finantialMovementList[snapshot].value.toStringAsFixed(2))}',
                           style: const TextStyle(color: AppCustomColors.danger),
                         ),
                 ),

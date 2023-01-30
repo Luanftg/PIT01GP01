@@ -6,22 +6,37 @@ class CustomSwitch extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  static bool valueSwitch = false;
+  static ValueNotifier<bool> valueSwitch = ValueNotifier(false);
   @override
   State<CustomSwitch> createState() => _CustomSwitchState();
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
   @override
+  void initState() {
+    super.initState();
+    CustomSwitch.valueSwitch.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Switch(
-        activeColor: AppCustomColors.cyan,
-        inactiveTrackColor: AppCustomColors.danger,
-        value: CustomSwitch.valueSwitch,
-        onChanged: (value) {
-          setState(() {
-            CustomSwitch.valueSwitch = value;
-          });
-        });
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text('Despesa'),
+        Switch(
+            activeColor: AppCustomColors.cyan,
+            inactiveTrackColor: AppCustomColors.danger,
+            value: CustomSwitch.valueSwitch.value,
+            onChanged: (value) {
+              CustomSwitch.valueSwitch.value = value;
+            }),
+        const Text('Receita'),
+      ],
+    );
   }
 }

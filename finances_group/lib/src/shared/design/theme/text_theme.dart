@@ -21,9 +21,16 @@ class CustomAppTextTheme {
   );
 
   static TextStyle body = const TextStyle(
-      color: AppCustomColors.foreGround,
-      fontSize: 16,
-      fontWeight: FontWeight.normal);
+    color: AppCustomColors.foreGround,
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
+
+  static TextStyle textMoney = const TextStyle(
+    color: AppCustomColors.dark,
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+  );
 
   static TextStyle button = const TextStyle(
     color: AppCustomColors.cyan,

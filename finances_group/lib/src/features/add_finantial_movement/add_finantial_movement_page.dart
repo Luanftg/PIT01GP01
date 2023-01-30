@@ -39,20 +39,23 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   var titleController = TextEditingController();
   var valueController = TextEditingController();
   var categoryController = TextEditingController();
+  var dateController = TextEditingController();
+  DateTime? dateTime;
   final globalKey = GlobalKey<FormState>();
   static bool isNewCategory = false;
   List<String> listaDeCategoria = [];
 
   @override
   void initState() {
+    super.initState();
     _fetchCategories();
     titleController.text = widget.finantialMovement?.description ?? '';
     valueController.text = (widget.finantialMovement?.value ?? '').toString();
     categoryController.text = widget.finantialMovement?.category.label ?? '';
+    dateController.text = widget.finantialMovement?.paymentDate ?? '';
     if (mounted) {
       setState(() {});
     }
-    super.initState();
   }
 
   @override
@@ -60,6 +63,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
     titleController.dispose();
     valueController.dispose();
     categoryController.dispose();
+    dateController.dispose();
     super.dispose();
   }
 
@@ -70,6 +74,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
 
   @override
   Widget build(BuildContext context) {
+    final DateFormat formater = DateFormat('dd/MM/yyyy');
     final registerContextNavigator = Navigator.of(context);
 
     return Scaffold(
@@ -81,15 +86,32 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('Despesa'),
-                    CustomSwitch(),
-                    Text('Receita'),
-                  ],
+                const CustomSwitch(),
+                const SizedBox(height: 16),
+                CustomTextFormField(
+                  icon: Icons.calendar_month,
+                  label: 'Data',
+                  readOnly: true,
+                  controller: dateController,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
+                ElevatedButton.icon(
+                  onPressed: () async {
+                    dateTime = await showDatePicker(
+                      initialDate: DateTime.now(),
+                      firstDate:
+                          DateTime.now().subtract(const Duration(days: 30)),
+                      lastDate: DateTime.now().add(const Duration(days: 30)),
+                      context: context,
+                    );
+                    dateController.text =
+                        formater.format(dateTime ?? DateTime.now());
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.calendar_month),
+                  label: const Text('Calendário'),
+                ),
+                const SizedBox(height: 16),
                 CustomTextFormField(
                   icon: Icons.text_fields_sharp,
                   label: 'Título',
@@ -97,7 +119,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                   textInputAction: TextInputAction.next,
                   typeKeyboard: TextInputType.name,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
                 CustomTextFormField(
                   icon: Icons.monetization_on_outlined,
                   label: 'Valor',
@@ -105,7 +127,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                   textInputAction: TextInputAction.next,
                   typeKeyboard: TextInputType.number,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
                 Visibility(
                   visible: isNewCategory,
                   child: CustomTextFormField(
@@ -116,7 +138,7 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                     typeKeyboard: TextInputType.name,
                   ),
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -140,21 +162,20 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                 ElevatedButton(
                   onPressed: () async {
                     bool? isFormValid = globalKey.currentState?.validate();
-                    final DateFormat formater =
-                        DateFormat('yyyy-MM-dd HH:MM:ss');
+
                     var finantialMovement = FinantialMovement(
                       widget.finantialMovement?.id ?? '',
                       description: titleController.text,
                       value: double.tryParse(valueController.text) ?? 0,
                       userID: widget.userLogged?.id.toString() ?? '',
-                      isIncome: CustomSwitch.valueSwitch,
+                      isIncome: CustomSwitch.valueSwitch.value,
                       paymentDate: formater.format(DateTime.now()),
                       category: Category(
                         label: isNewCategory
                             ? categoryController.text
                             : CustomDropDownButton.dropDownValue ??
                                 listaDeCategoria[0],
-                        image: CustomSwitch.valueSwitch
+                        image: CustomSwitch.valueSwitch.value
                             ? 'assets/income.png'
                             : 'assets/expense.png',
                       ),

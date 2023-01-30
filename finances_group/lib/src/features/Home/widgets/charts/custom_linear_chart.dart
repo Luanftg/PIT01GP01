@@ -14,13 +14,7 @@ class CustomLinearChart extends StatefulWidget {
 
 class _CustomLinearChartState extends State<CustomLinearChart> {
   var controller = LinearChartController();
-
-  double get minData => controller.minData;
-  double get rangeData => controller.rangeData;
-  double get maxData => controller.maxData;
   double get percentage => controller.percentage;
-
-  List<double> get listOfDouble => controller.doubleList;
 
   @override
   void initState() {
@@ -31,7 +25,6 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
       }
     });
     controller.incrementPercentage();
-    controller.getList(widget.weekData);
   }
 
   @override
@@ -46,11 +39,8 @@ class _CustomLinearChartState extends State<CustomLinearChart> {
       margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
       child: CustomPaint(
         painter: CustomLinearChartPainter(
-          listOfDouble,
-          minData,
-          maxData,
-          rangeData,
           percentage,
+          widget.weekData ?? [],
         ),
       ),
     );

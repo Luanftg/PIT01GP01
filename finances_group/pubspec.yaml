@@ -50,6 +50,7 @@ dependencies:
   fake_cloud_firestore: ^2.3.0+3
   firebase_auth_mocks: ^0.10.3
   mock_exceptions: ^0.8.2
+  image_picker: ^0.8.6+1
 
 
 dev_dependencies:

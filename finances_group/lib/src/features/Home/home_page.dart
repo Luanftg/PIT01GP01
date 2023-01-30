@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finances_group/src/data/repositories/finantial_movement_repository_firestore.dart';
+import 'package:finances_group/src/features/add_finantial_movement/widgets/custom_switch.dart';
 import 'package:finances_group/src/features/home/home_controller.dart';
 import 'package:finances_group/src/features/home/home_state.dart';
 import 'package:finances_group/src/features/home/widgets/charts/custom_linear_chart.dart';
+
 import 'package:finances_group/src/features/home/widgets/charts/donut_chart_widget.dart';
 
 import 'package:finances_group/src/features/home/widgets/homepage/action_app_bar.dart';
@@ -10,8 +12,8 @@ import 'package:finances_group/src/features/home/widgets/homepage/custom_bottom_
 import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/custom_list_view_builder.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/title_app_bar.dart';
+import 'package:finances_group/src/shared/widgets/custom_icon_buttom_visibility.dart';
 
-import 'package:finances_group/src/features/add_finantial_movement/add_finantial_movement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
@@ -33,13 +35,18 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
-    _fetchFinantialMovement();
+    CustomSwitch.valueSwitch.addListener(() {
+      controller.fetchFinantialMovement();
+      if (mounted) {
+        setState(() {});
+      }
+    });
+    _cacheFinantialMoventList();
     _setStatusbarColor();
   }
 
-  _fetchFinantialMovement() async {
-    await controller.fetchFinantialMovement(widget.userLogged);
+  _cacheFinantialMoventList() async {
+    await controller.cacheFinantialMoventList(widget.userLogged.id);
   }
 
   _setStatusbarColor() {
@@ -59,12 +66,15 @@ class _HomePageState extends State<HomePage> {
 
           if (state is HomeStateSucess) {
             var finantialMovementList = state.finantialMovementList;
+
             child = Column(
               children: [
+                const CustomSwitch(),
+                //const CustomCardHomeWidget(),
                 const SizedBox(height: 150),
                 DonutChartWidget(dataset: finantialMovementList),
-                const SizedBox(height: 80),
-                //const CustomIconButtonVisibility(),
+                const SizedBox(height: 50),
+                const CustomIconButtonVisibility(),
                 const SizedBox(height: 200),
                 CustomLinearChart(weekData: finantialMovementList),
                 const SizedBox(height: 80),
@@ -77,15 +87,22 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (state is HomeStateWelcome) {
-            child = Center(
-              child: Dismissible(
-                key: GlobalKey(),
-                child: const Card(
-                  child: ListTile(
-                    title: Text('Bem vindo ao Finance App'),
-                    subtitle: Text(
-                        "Adicione uma movimentação financeira para começar!"),
-                  ),
+            child = SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  children: [
+                    const CustomSwitch(),
+                    Dismissible(
+                      key: GlobalKey(),
+                      child: const Card(
+                        child: ListTile(
+                          title: Text('Bem vindo ao Finance App'),
+                          subtitle: Text(
+                              "Adicione uma movimentação financeira para começar!"),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );
@@ -98,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   const Text('Erro ao ler informações do usuário.'),
                   TextButton(
                       onPressed: () async {
-                        await _fetchFinantialMovement();
+                        await _cacheFinantialMoventList();
                       },
                       child: const Text('Tentar Novamente'))
                 ],
@@ -117,7 +134,8 @@ class _HomePageState extends State<HomePage> {
               centerTitle: false,
               toolbarHeight: 75,
               title: TitleAppBar(
-                  userImage: userModel.photoURL, userName: userModel.name),
+                userModel: userModel,
+              ),
               actions: [
                 ActionAppBar(
                   userLogged: userModel,
@@ -140,9 +158,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            bottomNavigationBar: const CustomBottomAppBar(
+            bottomNavigationBar: CustomBottomAppBar(
               fabLocation: FloatingActionButtonLocation.centerDocked,
-              shape: CircularNotchedRectangle(),
+              shape: const CircularNotchedRectangle(),
+              userModel: userModel,
             ),
             floatingActionButton: FloatingActionButton(
                 child: Container(
@@ -155,14 +174,9 @@ class _HomePageState extends State<HomePage> {
                   child: const Icon(Icons.add),
                 ),
                 onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    builder: (context) => FractionallySizedBox(
-                      heightFactor: 0.8,
-                      child: AddFinantialMovementPage(
-                          userLogged: userModel, title: 'Adicionar'),
-                    ),
+                  Navigator.of(context).pushReplacementNamed(
+                    '/add-finantial-movement',
+                    arguments: {'title': 'Adicionar', 'userLoged': userModel},
                   );
                 }),
             floatingActionButtonLocation:
