@@ -40,20 +40,22 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   void dispose() {
-    nameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
+    // nameController.dispose();
+    // emailController.dispose();
+    // passwordController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final navigator = Navigator.of(context);
+    final scafoldContext = ScaffoldMessenger.of(context);
     final ImagePicker picker = ImagePicker();
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User Profile Page'),
+        title: const Text('Editar Informações do Usuário'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -64,6 +66,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 CircleAvatar(
                   radius: width * 0.2,
                   child: ClipOval(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: widget.userModel.photoURL?.isEmpty ?? true
                         ? Image.network(
                             "https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg",
@@ -72,7 +75,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                           )
                         : Image.file(
                             File(widget.userModel.photoURL ?? ''),
-                            fit: BoxFit.fitWidth,
+                            fit: BoxFit.cover,
                             width: width * 0.4,
                           ),
                   ),
@@ -116,7 +119,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   typeKeyboard: TextInputType.visiblePassword,
                   controller: passwordController,
                   isSecret: true,
-                  textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.next,
                 ),
                 CustomTextFormField(
                   icon: Icons.password,
@@ -124,7 +127,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   typeKeyboard: TextInputType.visiblePassword,
                   controller: newPasswordController,
                   isSecret: true,
-                  textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.next,
                 ),
                 CustomTextFormField(
                   icon: Icons.password,
@@ -134,7 +137,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   controller: confirmPasswordController,
                   textInputAction: TextInputAction.done,
                 ),
-                const SizedBox(height: 32),
+                const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: () async {
                     bool? isFormValid = globalKey.currentState?.validate();
@@ -152,12 +155,27 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         await userProfileController.firebaseAuthRepository
                             .login(
                           LoginModel(
-                              email: emailController.text,
-                              password: passwordController.text),
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ),
                         );
                         await userProfileController
                             .updateUserPassword(confirmPasswordController.text);
                       }
+
+                      passwordController.text = '';
+                      newPasswordController.text = '';
+                      confirmPasswordController.text = '';
+
+                      scafoldContext.showSnackBar(
+                        const SnackBar(
+                          content: Text('Informações Editadas com sucesso!'),
+                        ),
+                      );
+                      navigator.pushNamedAndRemoveUntil(
+                          '/home',
+                          arguments: widget.userModel,
+                          (route) => false);
                     }
                   },
                   child: Text(
