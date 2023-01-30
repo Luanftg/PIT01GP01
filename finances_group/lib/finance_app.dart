@@ -37,7 +37,7 @@ class FinanceApp extends StatelessWidget {
         '/add-finantial-movement': (context) {
           final args = ModalRoute.of(context)!.settings.arguments as Map?;
           return AddFinantialMovementPage(
-            title: 'Editar',
+            title: args?['title'] ?? 'Editar',
             finantialMovement: args?["finantialMovement"],
             userLogged: args?["userLoged"],
           );
