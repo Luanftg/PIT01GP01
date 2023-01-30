@@ -1,3 +1,4 @@
+import 'package:finances_group/src/features/home/widgets/charts/dounut_chart_controller.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButtonVisibility extends StatefulWidget {
@@ -10,20 +11,14 @@ class CustomIconButtonVisibility extends StatefulWidget {
 
 class _CustomIconButtonVisibilityState
     extends State<CustomIconButtonVisibility> {
-  late bool isObscure;
-
-  @override
-  void initState() {
-    isObscure = false;
-    super.initState();
-  }
+  bool get isObscure => DonutChartController.isObscure.value;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: (() {
         setState(() {
-          isObscure = !isObscure;
+          DonutChartController.changeIsObscure();
         });
       }),
       icon: isObscure
