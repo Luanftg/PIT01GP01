@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:finances_group/src/features/home/widgets/charts/dounut_chart_controller.dart';
 import 'package:finances_group/src/models/finantial_movement.dart';
+import 'package:finances_group/src/shared/utils/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,6 +32,9 @@ final labelStyle = TextStyle(
 class DonutChartPainter extends CustomPainter {
   final List<FinantialMovement>? dataset;
   final double fullAngle;
+  Set<String?> listOfCategories = {};
+
+  bool get isObscure => DonutChartController.isObscure.value;
   DonutChartPainter(this.dataset, this.fullAngle);
 
   @override
@@ -44,13 +49,14 @@ class DonutChartPainter extends CustomPainter {
     double incrementX = 25;
     double sum = 0.0;
     List<DataItem>? dataList = [];
+    List<DataItem>? newList = [];
     double totalSum = 0.0;
     if (dataset != null) {
       for (var index = 0; index < dataset!.length; index++) {
         totalSum += dataset![index].value;
         if (dataset![index].isIncome == false) {
           double number = dataset![index].value;
-          number = number * -1;
+          number = number * -1.0;
           sum += number;
         } else {
           sum += dataset![index].value;
@@ -60,13 +66,33 @@ class DonutChartPainter extends CustomPainter {
       dataList = List.generate(
         dataset!.length,
         (index) => DataItem(
-            value: dataset![index].value / totalSum,
-            label: dataset![index].category.label,
-            color: dataset![index].category.color),
+          value: dataset![index].value / totalSum,
+          label: dataset![index].category.label,
+          color: dataset![index].category.color,
+        ),
       );
     }
 
-    for (var element in dataList) {
+    listOfCategories =
+        List.generate(dataList.length, (index) => dataList?[index].label)
+            .toSet();
+
+    var list = listOfCategories.toList();
+    int c = 0;
+    double somaCategoria = 0.0;
+    for (c; c < list.length; c++) {
+      for (var i = 0; i < dataList.length; i++) {
+        if (dataList[i].label == list[c]) {
+          somaCategoria += dataList[i].value;
+        }
+      }
+
+      newList.add(DataItem(
+          value: somaCategoria, label: list[c]!, color: dataList[c].color));
+      somaCategoria = 0;
+    }
+
+    for (var element in newList) {
       final sweepAngle = element.value * fullAngle * pi / 180;
       drawSector(element, canvas, rect, startAngle, sweepAngle);
       drawLabels(canvas, center, radius, startAngle, sweepAngle, element.label,
@@ -74,13 +100,16 @@ class DonutChartPainter extends CustomPainter {
       incrementX += 70;
       startAngle += sweepAngle;
     }
+    var textSum = sum < 0 ? sum * -1.0 : sum;
     drawTextCentered(
-        canvas,
-        center,
-        'Saldo geral\nR\$ ${sum.toStringAsFixed(2).replaceFirst('.', ',')}',
-        midTextStyle,
-        radius * 0.6,
-        (Size size) {});
+      isObscure: isObscure,
+      canvas,
+      center,
+      'Saldo geral\nR\$ ${Currency.moneyFormat(textSum.toStringAsFixed(2))}',
+      midTextStyle,
+      radius * 0.6,
+      (Size size) {},
+    );
   }
 
   void drawSector(
@@ -120,7 +149,8 @@ class DonutChartPainter extends CustomPainter {
 
     final position = center + Offset(dx, dy);
 
-    drawTextCentered(canvas, position, label, labelStyle, 100, (Size size) {
+    drawTextCentered(isObscure: false, canvas, position, label, labelStyle, 100,
+        (Size size) {
       final rect = Rect.fromCenter(
           center: position, width: size.width + 5, height: size.height + 5);
       final rrect = RRect.fromRectAndRadius(rect, const Radius.circular(5));
@@ -139,7 +169,10 @@ class DonutChartPainter extends CustomPainter {
 
   Size drawTextCentered(Canvas canvas, Offset position, String text,
       TextStyle style, double maxWidth, Function(Size size) bgCb,
-      [bool? isObscure]) {
+      {bool? isObscure}) {
+    if (isObscure ?? false) {
+      text = 'Saldo geral\nR\$ ***';
+    }
     final textPainter = measureText(text, style, maxWidth, TextAlign.center);
     final pos =
         position + Offset(-textPainter.width / 2, -textPainter.height / 2);

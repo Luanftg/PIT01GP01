@@ -1,28 +1,53 @@
 import 'package:finances_group/src/shared/design/colors/app_custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppTextTheme {
   CustomAppTextTheme._();
 
-  static TextStyle headline1 = TextStyle(
+  static TextStyle headline1 = const TextStyle(
       color: AppCustomColors.secondary,
-      fontFamily: GoogleFonts.abrilFatface().fontFamily,
       fontSize: 28,
+      fontWeight: FontWeight.bold);
+
+  static TextStyle largeCaption = const TextStyle(
+      color: AppCustomColors.foreGround,
+      fontSize: 30,
       fontWeight: FontWeight.bold);
 
   static TextStyle headline2 = const TextStyle(
     color: AppCustomColors.secondary,
     fontSize: 24,
+    fontWeight: FontWeight.bold,
   );
 
   static TextStyle body = const TextStyle(
-      color: AppCustomColors.foreGround,
-      fontSize: 16,
-      fontWeight: FontWeight.normal);
+    color: AppCustomColors.foreGround,
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
+
+  static TextStyle textMoney = const TextStyle(
+    color: AppCustomColors.dark,
+    fontSize: 18,
+    fontWeight: FontWeight.normal,
+  );
 
   static TextStyle button = const TextStyle(
-      color: AppCustomColors.dark, fontSize: 14, fontWeight: FontWeight.bold);
+    color: AppCustomColors.cyan,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+  static TextStyle blackCaption = const TextStyle(
+    color: AppCustomColors.dark,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
+
+  static TextStyle label = const TextStyle(
+    color: AppCustomColors.grayLight,
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+  );
 
   static TextStyle caption = const TextStyle(
       color: AppCustomColors.grayLight,
