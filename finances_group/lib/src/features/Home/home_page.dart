@@ -69,8 +69,25 @@ class _HomePageState extends State<HomePage> {
 
             child = Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        controller.decrementMonth();
+                      },
+                      child: const Icon(Icons.arrow_back_ios_new),
+                    ),
+                    Text(controller.labelMonth),
+                    OutlinedButton(
+                      onPressed: () {
+                        controller.incrementMonth();
+                      },
+                      child: const Icon(Icons.arrow_forward_ios),
+                    ),
+                  ],
+                ),
                 const CustomSwitch(),
-                //const CustomCardHomeWidget(),
                 const SizedBox(height: 150),
                 DonutChartWidget(dataset: finantialMovementList),
                 const SizedBox(height: 50),
@@ -87,18 +104,37 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (state is HomeStateWelcome) {
-            child = SingleChildScrollView(
-              child: Center(
+            child = Center(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            controller.decrementMonth();
+                          },
+                          child: const Icon(Icons.arrow_back_ios_new),
+                        ),
+                        Text(controller.labelMonth),
+                        OutlinedButton(
+                          onPressed: () {
+                            controller.incrementMonth();
+                          },
+                          child: const Icon(Icons.arrow_forward_ios),
+                        ),
+                      ],
+                    ),
                     const CustomSwitch(),
                     Dismissible(
                       key: GlobalKey(),
-                      child: const Card(
+                      child: Card(
                         child: ListTile(
-                          title: Text('Bem vindo ao Finance App'),
-                          subtitle: Text(
-                              "Adicione uma movimentação financeira para começar!"),
+                          title: Text(
+                              'Você não possui ${CustomSwitch.valueSwitch.value ? 'Receita' : 'Despesa'} cadastrada para este mês.'),
+                          subtitle: const Text(
+                              "Adicione uma Receita ou uma Despesa para começar!"),
                         ),
                       ),
                     ),
