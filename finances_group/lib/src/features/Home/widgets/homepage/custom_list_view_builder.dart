@@ -24,7 +24,7 @@ class CustomListViewBuilder extends StatefulWidget {
 }
 
 class _CustomListViewBuilderState extends State<CustomListViewBuilder> {
-  final DateFormat formater = DateFormat('dd-MM-yyyy');
+  final DateFormat formater = DateFormat('dd/MM/yyyy');
 
   final HomeController _controller = HomeController(
       FinantialMovementRepositoryFirestore(FirebaseFirestore.instance));
