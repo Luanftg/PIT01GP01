@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                   child: const Icon(Icons.add),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(
+                  Navigator.of(context).pushNamed(
                     '/add-finantial-movement',
                     arguments: {'title': 'Adicionar', 'userLoged': userModel},
                   );
