@@ -47,11 +47,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
           ListTile(
             title: Text(
-              'Principal',
+              'Boas Vindas',
               style: CustomAppTextTheme.body,
             ),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed('/on-boarding', arguments: widget.userModel);
+            },
           ),
           ListTile(
             title: Text('Investimentos', style: CustomAppTextTheme.body),

@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: CircularProgressIndicator());
                         }
                         if (controller.value is LoginStateSucces) {
-                          return navigator.pushNamed('/home',
+                          return navigator.pushNamed('/on-boarding',
                               arguments: (controller.value as LoginStateSucces)
                                   .userModel);
                         }
