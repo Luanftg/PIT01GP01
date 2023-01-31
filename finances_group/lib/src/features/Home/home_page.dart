@@ -218,8 +218,6 @@ class _HomePageState extends State<HomePage> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
           );
-        }
-        //},
-        );
+        });
   }
 }
