@@ -22,16 +22,16 @@ class ActionAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Container(
-          margin: const EdgeInsets.only(right: 16),
-          decoration: const BoxDecoration(
-              color: AppCustomColors.darkSecondary,
-              borderRadius: BorderRadius.all(Radius.circular(100))),
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications),
-          ),
-        ),
+        // Container(
+        //   margin: const EdgeInsets.only(right: 16),
+        //   decoration: const BoxDecoration(
+        //       color: AppCustomColors.darkSecondary,
+        //       borderRadius: BorderRadius.all(Radius.circular(100))),
+        //   child: IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(Icons.notifications),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(right: 16),
           child: IconButton(
