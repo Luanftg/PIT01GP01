@@ -20,6 +20,12 @@ class CustomAppTextTheme {
     fontWeight: FontWeight.bold,
   );
 
+  static TextStyle headlineStep = const TextStyle(
+    color: AppCustomColors.secondary,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
   static TextStyle body = const TextStyle(
     color: AppCustomColors.foreGround,
     fontSize: 20,
