@@ -39,6 +39,28 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final navigator = Navigator.of(context);
+    // var showDialogContext = showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return AlertDialog(
+    //         title: const Text('Ops, algo deu errado'),
+    //         icon: const Icon(Icons.error),
+    //         backgroundColor: AppCustomColors.danger,
+    //         shape: RoundedRectangleBorder(
+    //           borderRadius: BorderRadius.circular(10),
+    //         ),
+    //         contentPadding: const EdgeInsets.all(10),
+    //         content: SizedBox(
+    //           height: 100,
+    //           child: Row(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             children: const [
+    //               Text('Credenciais Inválidas!'),
+    //             ],
+    //           ),
+    //         ),
+    //       );
+    //     });
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -79,7 +101,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: CircularProgressIndicator());
                         }
                         if (controller.value is LoginStateSucces) {
-                          return navigator.pushNamed('/home',
+                          // return navigator.pushNamed('/home',
+                          //     arguments: (controller.value as LoginStateSucces)
+                          //         .userModel);
+                          return navigator.pushNamed('/on-boarding',
                               arguments: (controller.value as LoginStateSucces)
                                   .userModel);
                         }
@@ -107,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               });
+                          // showDialogContext;
                         }
                       },
                       child: const Text('Entrar'),
