@@ -25,6 +25,7 @@ final ThemeData draculaTheme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: AppCustomColors.dark,
   ),
+  appBarTheme: const AppBarTheme(centerTitle: true),
   dividerColor: AppCustomColors.divider,
   listTileTheme: const ListTileThemeData(
     iconColor: AppCustomColors.secondary,
