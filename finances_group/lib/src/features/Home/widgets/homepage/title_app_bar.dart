@@ -22,7 +22,7 @@ class TitleAppBar extends StatelessWidget {
           child: GestureDetector(
             onTap: () => {Scaffold.of(context).openDrawer()},
             child: CircleAvatar(
-              radius: 24,
+              radius: 26,
               child: ClipOval(
                 child: userModel.photoURL?.isEmpty ?? true
                     ? Image.network(
@@ -46,7 +46,7 @@ class TitleAppBar extends StatelessWidget {
           maxLines: 2,
           textHeightBehavior: const TextHeightBehavior(),
           style: CustomAppTextTheme.body.copyWith(
-            fontSize: 16,
+            fontSize: 18,
           ),
         ),
       ],
