@@ -12,6 +12,7 @@ import 'package:finances_group/src/features/home/widgets/homepage/custom_bottom_
 import 'package:finances_group/src/features/home/widgets/homepage/custom_drawer.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/custom_list_view_builder.dart';
 import 'package:finances_group/src/features/home/widgets/homepage/title_app_bar.dart';
+import 'package:finances_group/src/shared/design/theme/text_theme.dart';
 import 'package:finances_group/src/shared/widgets/custom_icon_buttom_visibility.dart';
 
 import 'package:flutter/material.dart';
@@ -73,16 +74,15 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     OutlinedButton(
-                      onPressed: () {
-                        controller.decrementMonth();
-                      },
+                      onPressed: controller.decrementMonth,
                       child: const Icon(Icons.arrow_back_ios_new),
                     ),
-                    Text(controller.labelMonth),
+                    Text(
+                      controller.labelMonth,
+                      style: CustomAppTextTheme.body,
+                    ),
                     OutlinedButton(
-                      onPressed: () {
-                        controller.incrementMonth();
-                      },
+                      onPressed: controller.incrementMonth,
                       child: const Icon(Icons.arrow_forward_ios),
                     ),
                   ],
@@ -117,7 +117,8 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: const Icon(Icons.arrow_back_ios_new),
                         ),
-                        Text(controller.labelMonth),
+                        Text(controller.labelMonth,
+                            style: CustomAppTextTheme.body),
                         OutlinedButton(
                           onPressed: () {
                             controller.incrementMonth();
@@ -132,9 +133,11 @@ class _HomePageState extends State<HomePage> {
                       child: Card(
                         child: ListTile(
                           title: Text(
-                              'Você não possui ${CustomSwitch.valueSwitch.value ? 'Receita' : 'Despesa'} cadastrada para este mês.'),
-                          subtitle: const Text(
-                              "Adicione uma Receita ou uma Despesa para começar!"),
+                            'Você não possui ${CustomSwitch.valueSwitch.value ? 'Receita' : 'Despesa'} cadastrada para este mês.',
+                          ),
+                          subtitle: Text(
+                            "Adicione uma ${CustomSwitch.valueSwitch.value ? 'Receita' : 'Despesa'} para começar!",
+                          ),
                         ),
                       ),
                     ),
