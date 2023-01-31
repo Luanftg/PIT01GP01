@@ -1,5 +1,6 @@
 import 'package:finances_group/src/features/Splash/splash_page.dart';
 import 'package:finances_group/src/features/add_finantial_movement/add_finantial_movement_page.dart';
+import 'package:finances_group/src/features/on-boarding/on_boarding_page.dart';
 import 'package:finances_group/src/features/simulator/simulator_page.dart';
 import 'package:finances_group/src/features/user_profile/user_profile_page.dart';
 
@@ -44,6 +45,9 @@ class FinanceApp extends StatelessWidget {
         },
         '/simulator': (context) => const SimulatorPage(),
         '/user-profile': (context) => UserProfilePage(
+            userModel:
+                (ModalRoute.of(context)!.settings.arguments) as UserModel),
+        '/on-boarding': (context) => OnBoardingPage(
             userModel:
                 (ModalRoute.of(context)!.settings.arguments) as UserModel),
       },
