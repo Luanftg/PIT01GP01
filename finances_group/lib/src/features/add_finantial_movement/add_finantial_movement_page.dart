@@ -43,12 +43,20 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   DateTime? dateTime;
   final globalKey = GlobalKey<FormState>();
   static bool isNewCategory = false;
-  List<String> listaDeCategoria = [];
+  List<String> listaDeReceita = [];
+  List<String> listaDeDEspesa = [];
 
   @override
   void initState() {
     super.initState();
     _fetchCategories();
+    CustomSwitch.valueSwitch.addListener(() {
+      listaDeReceita = controller.fetchCategories(true);
+      listaDeDEspesa = controller.fetchCategories(false);
+      if (mounted) {
+        setState(() {});
+      }
+    });
     titleController.text = widget.finantialMovement?.description ?? '';
     valueController.text = (widget.finantialMovement?.value ?? '').toString();
     categoryController.text = widget.finantialMovement?.category.label ?? '';
@@ -68,7 +76,9 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
   }
 
   void _fetchCategories() async {
-    listaDeCategoria = await controller.fetchCategories();
+    await controller.cacheCategory();
+    listaDeReceita = controller.fetchCategories(true);
+    listaDeDEspesa = controller.fetchCategories(false);
     if (mounted) setState(() {});
   }
 
@@ -144,7 +154,10 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                   children: [
                     Visibility(
                       visible: !isNewCategory,
-                      child: CustomDropDownButton(list: listaDeCategoria),
+                      child: CustomDropDownButton(
+                          list: CustomSwitch.valueSwitch.value
+                              ? listaDeReceita
+                              : listaDeDEspesa),
                     ),
                     const SizedBox(width: 16),
                     ElevatedButton(
@@ -173,21 +186,29 @@ class _AddFinantialMovementPageState extends State<AddFinantialMovementPage> {
                       category: Category(
                         label: isNewCategory
                             ? categoryController.text
-                            : CustomDropDownButton.dropDownValue ??
-                                listaDeCategoria[0],
+                            : CustomDropDownButton.dropDownValue ?? 'Extra',
                         image: CustomSwitch.valueSwitch.value
                             ? 'assets/income.png'
                             : 'assets/expense.png',
+                        isIncome: CustomSwitch.valueSwitch.value,
                       ),
                     );
 
                     if (isFormValid ?? false) {
                       await controller.create(finantialMovement);
 
-                      if (!listaDeCategoria
-                          .contains(finantialMovement.category.label)) {
-                        await controller
-                            .saveCategory(finantialMovement.category);
+                      if (CustomSwitch.valueSwitch.value) {
+                        if (!listaDeReceita
+                            .contains(finantialMovement.category.label)) {
+                          await controller
+                              .saveCategory(finantialMovement.category);
+                        }
+                      } else {
+                        if (!listaDeDEspesa
+                            .contains(finantialMovement.category.label)) {
+                          await controller
+                              .saveCategory(finantialMovement.category);
+                        }
                       }
                       registerContextNavigator.pushNamed(
                         '/home',

@@ -68,7 +68,7 @@ class DonutChartPainter extends CustomPainter {
         (index) => DataItem(
           value: dataset![index].value / totalSum,
           label: dataset![index].category.label,
-          color: dataset![index].category.color,
+          color: dataset![index].category.color!,
         ),
       );
     }

@@ -6,9 +6,9 @@ import 'package:finances_group/src/models/category.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_exceptions/mock_exceptions.dart';
 
-final categoryA = Category(label: 'Casa');
-final categoryB = Category(label: 'Transporte');
-final categoryC = Category(label: 'Energia');
+final categoryA = Category(label: 'Casa', isIncome: false);
+final categoryB = Category(label: 'Transporte', isIncome: false);
+final categoryC = Category(label: 'Energia', isIncome: false);
 
 void main() {
   late FakeFirebaseFirestore db;

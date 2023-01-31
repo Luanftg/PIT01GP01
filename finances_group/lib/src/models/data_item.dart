@@ -14,6 +14,9 @@ class DataItem {
 
   factory DataItem.fromFinantialMovement(FinantialMovement fm) {
     return DataItem(
-        value: fm.value, label: fm.category.label, color: fm.category.color);
+      value: fm.value,
+      label: fm.category.label,
+      color: fm.category.color!,
+    );
   }
 }

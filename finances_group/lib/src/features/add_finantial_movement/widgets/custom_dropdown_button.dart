@@ -18,9 +18,7 @@ class _CustomDropDownButtonState extends State<CustomDropDownButton> {
   Widget build(BuildContext context) {
     return DropdownButton(
       value: CustomDropDownButton.dropDownValue,
-      hint: widget.list.isEmpty
-          ? const CircularProgressIndicator()
-          : Text(widget.list[0]),
+      hint: widget.list.isEmpty ? const Text('') : Text(widget.list[0]),
       items: widget.list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

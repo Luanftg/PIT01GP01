@@ -6,6 +6,7 @@ import '../../models/category.dart';
 class FinantialMovementController {
   final IRepository<FinantialMovement> _finantialMovementRepository;
   final IRepository<Category> _categoryRepository;
+  List<Category> cachedCategoryList = [];
 
   FinantialMovementController(
     this._finantialMovementRepository,
@@ -16,21 +17,50 @@ class FinantialMovementController {
     await _categoryRepository.create(value: category);
   }
 
-  Future<List<String>> fetchCategories() async {
+  Future<void> cacheCategory() async {
     try {
-      final listaDeCategoria = await _categoryRepository.findAll('');
-      if (listaDeCategoria.isEmpty) {
-        return [];
-      }
-      List<String> listaDeString = [];
-
-      for (var categoria in listaDeCategoria) {
-        listaDeString.add(categoria.label);
-      }
-      return listaDeString;
+      cachedCategoryList = await _categoryRepository.findAll('');
+      // fetchCategories();
     } catch (e) {
       throw Exception("[Erro na busca por categorias]");
     }
+  }
+
+  List<String> fetchCategories(bool isIncome) {
+    // try {
+    //   final listaDeCategoria = await _categoryRepository.findAll('');
+    //   if (listaDeCategoria.isEmpty) {
+    //     return [];
+    //   }
+    //   List<String> listaDeString = [];
+
+    //   for (var categoria in listaDeCategoria) {
+    //     listaDeString.add(categoria.label);
+    //   }
+    //   return listaDeString;
+    // } catch (e) {
+    //   throw Exception("[Erro na busca por categorias]");
+    // }
+
+    // List<Category> listaDeReceita = [];
+    // List<Category> listaDeDespesa = [];
+    List<Category> listaDeCategoria = [];
+    List<String> listaDeString = [];
+
+    // listaDeDespesa = cachedCategoryList
+    //     .where((element) => element.isIncome == false)
+    //     .toList();
+    // listaDeReceita = cachedCategoryList
+    //     .where((element) => element.isIncome == true)
+    //     .toList();
+    listaDeCategoria = cachedCategoryList
+        .where((element) => element.isIncome == isIncome)
+        .toList();
+
+    listaDeString = List.generate(
+        listaDeCategoria.length, (index) => listaDeCategoria[index].label);
+
+    return listaDeString;
   }
 
   Future<void> create(FinantialMovement finantialMovement) async {
